@@ -2,23 +2,24 @@
 
 Catálogo virtual de productos y sistema de gestión de servicios para la tienda de mascotas SplashPaws.
 
-## Objetos
+## Objetos Ej.
 
 **Obj productos**
-producto = {
-    id:,
-    urlImagen: "",
-    nombre:"",
-    descripcion:"",
-    precio:"",
-    stock:"",
-    categoria:"",
-    especie:""
-}
+producto = 
+  {
+    id: 123,
+    urlImagen: "/#",
+    nombre: "Chunky",
+    descripcion: "Recomendado para mascotas",
+    precio: "$48.000",
+    stock: 20,
+    categoria: "Alimento",
+    especie: "Perro"
+  }
 
 **Obj citas pendientes**
 citaPendiente = {
-    id: "",
+    id: "1",
     propietario: {
         nombre: "Lis Sharik Agudelo", 
         teléfono:"3023678714"
