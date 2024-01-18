@@ -1,4 +1,4 @@
-`hsl(212, 92%, 45%)*_ INDEX.HTML NO SE TOCA  _* redirige al main.html`
+``#ffffff`*_ INDEX.HTML NO SE TOCA  _* redirige al main.html`
 
 # SplashPaws
 
