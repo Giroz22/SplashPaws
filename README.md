@@ -1,3 +1,5 @@
+*_`hsl(212, 92%, 45%)` INDEX.HTML NO SE TOCA  _* redirige al main.html
+
 # SplashPaws
 
 Catálogo virtual de productos y sistema de gestión de servicios para la tienda de mascotas SplashPaws.
@@ -14,4 +16,4 @@ producto = {
     categoria:"",
     especie:""
 }
-
+ 
