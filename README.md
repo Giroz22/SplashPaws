@@ -1,4 +1,4 @@
-`*_ INDEX.HTML NO SE TOCA  _* redirige al main.html`
+#ffffff`*_ INDEX.HTML NO SE TOCA  _* redirige al main.html`
 
 # SplashPaws
 
