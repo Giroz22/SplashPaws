@@ -1,6 +1,346 @@
+@import url('https://fonts.googleapis.com/css2?family=Lemon&family=Nunito:wght@200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --fontDefault: font-family: "Nunito", sans-serif;
+  --fontBanners:font-family: 'Lemon', serif;
+  --darkPurple: #250141;
+  --veryDarkPurple: #090011;
+  --white: #f2f2f2;
+  --blue: #0072d8;
+  --blueLight: #6ba5f2;
+
+}
+
+/* Styles generals */
 * {
-  margin: 0;
   padding: 0;
+  margin: 0;
   box-sizing: border-box;
+  font-family: "Nunito", sans-serif;
+  font-size: 16px;
   text-decoration: none;
+  letter-spacing: 0.5px;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+}
+
+h2{
+  font-size: 32px;
+  font-weight: 800;
+}
+
+h3{
+  font-size: 24px;
+  font-weight: 400;
+}
+
+body::-webkit-scrollbar {
+    width: 12px;  
+    position: absolute;             /* width of the entire scrollbar */
+  }
+  
+  body::-webkit-scrollbar-track {
+    background: #979797;        /* color of the tracking area */
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background: #311d41;        /* color of the tracking area */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid #979797;  /* creates padding around scroll thumb */
+  }
+
+/* ============== HEADER ============== */
+header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  transition: .2s;
+
+}
+header nav {
+  width: 95%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+header .nav_responsive {
+  display: none;
+}
+
+header nav img {
+  max-width: 120px;
+}
+
+header nav a {
+  color: var(--white);
+  font-weight: 800;
+  transition: 0.2s;
+  &:hover {
+    color: #b2b2b2;
+  }
+}
+
+header nav .options {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20%;
+}
+
+header nav .login {
+  width: 20%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 30px;
+  background-color: var(--darkPurple);
+}
+
+header nav .login .line {
+  width: 0.2%;
+  height: 50%;
+  background-color: #f2f2f2;
+}
+
+header nav .login .lenguage {
+  width: 44%;
+  height: 65%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  background-color: var(--white);
+  transition: 0.2s;
+  &:hover {
+    background-color: #e5e4e4;
+  }
+}
+header nav .login .lenguage button {
+  all: unset;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+header nav .login .lenguage img {
+  max-width: 25px;
+}
+
+/* ============== FOOTER ============== */
+
+footer {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 40px;
+  font-weight: 100;
+  color: var(--white);
+  padding: 40px 0;
+  background-color: var(--veryDarkPurple);
+}
+footer img {
+  max-width: 250px;
+  margin-left: 40px;
+}
+
+footer .footer_content {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+footer .footer_content i {
+  font-size: 24px;
+}
+
+footer .footer_content a {
+  color: var(--white);
+  transition: 0.3s;
+  &:hover {
+    color: #b2b2b2;
+  }
+}
+
+footer .footer_content .about {
+  width: 30%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  text-align: justify;
+}
+
+footer .social {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 60px;
+}
+
+footer .social .social_media {
+  display: flex;
+  gap: 20px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+footer .social .social_media .social_content {
+  display: flex;
+  gap: 10px;
+}
+footer .footer_content .map_content iframe {
+  max-width: 350px;
+  height: 200px;
+}
+
+
+
+/* ============ RESPONSIVE 768px ============*/
+@media (max-width: 768px) {
+  /* ============== HEADER RESPONSIVE ============== */
+
+  header nav,
+  header .nav_responsive .nav_responsive_content {
+    display: none;
+  }
+
+  header .nav_responsive {
+    width: 100%;
+    top: 0;
+    display: flex;
+    justify-content: space-evenly;
+    position: fixed;
+    gap: 15%;
+    transition: .2s;
+
+  }
+
+  header #btn_hamburguer {
+    all: unset;
+
+  }
+
+  header .nav_responsive label i {
+    font-size: 40px;
+    border: 1px solid #250141;
+    border-radius: 10px;
+    color: var(--darkPurple);
+    cursor: pointer;
+
+  }
+
+  header #btn_hamburguer:checked ~ .nav_responsive_content {
+    display: flex;
+  }
+
+  header .nav_responsive .nav_responsive_content {
+    top: 100%;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--white);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0px;
+    position: absolute;
+
+  }
+
+  header .nav_responsive .nav_responsive_content .options {
+    flex-direction: column;
+    margin-top: 10%;
+    margin-bottom: 20%;
+
+    gap: 60px;
+
+  }
+  header .nav_responsive .nav_responsive_content .options a{
+    color: #250141;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10%;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #250141 ;
+    &:hover{
+      color: #b2b2b2;
+    }
+  }
+
+  header .nav_responsive .nav_responsive_content .login {
+    width: 50%;
+  }
+
+  header .nav_responsive .nav_responsive_content .lenguage {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  header .nav_responsive .nav_responsive_content .lenguage button {
+    all: unset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 40px;
+    cursor: pointer;
+    border-radius: 50px;
+    background-color: #b2b2b2;
+    gap: 10%;
+  }
+
+  header .nav_responsive .nav_responsive_content .lenguage button img {
+    max-width: 35px;
+  }
+
+  /* ============== FOOTER RESPONSIVE ============== */
+
+  footer {
+    justify-content: center;
+    align-items: center;
+  }
+  footer img{
+    margin: 0;
+
+  }
+  footer .footer_content {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+
+  }
+
+  footer .footer_content .about {
+    width: 80%;
+    align-items: center;
+  }
+
+  footer .footer_content .social {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  footer .footer_content .social .social_media {
+    align-items: center;
+  }
+  footer .footer_content .map_content iframe {
+    max-width: 100%;
+  }
 }
