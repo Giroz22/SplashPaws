@@ -1,0 +1,63 @@
+@import url(../../../../normalize.css);
+
+main {
+  width: 100%;
+  text-align: center;
+  padding: 0 6%;
+}
+
+/* =====Tabla datos===== */
+.dtos-container {
+  width: 100%;
+  min-width: 100%;
+
+  display: flex;
+  align-items: center;
+}
+
+#tbl-dtos {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--darkPurple);
+}
+
+#tbl-dtos thead {
+  font-weight: bold;
+  border-bottom: 1px solid var(--darkPurple);
+}
+
+#tbl-dtos td {
+  padding: 10px;
+}
+
+/* ===== Botones =====*/
+#tbl-dtos tbody tr td .btn {
+  border-style: solid;
+  border-width: 1px;
+  padding: 3px 8px;
+  border-radius: 10px;
+  transition: 0.5s;
+}
+
+#tbl-dtos tbody tr td .btn:hover {
+  cursor: pointer;
+  color: var(--white);
+}
+
+#btn-confirmar {
+  border-color: #008f39;
+  color: #008f39;
+  &:hover {
+    background: #008f39;
+    /* box-shadow: 0px 0px 5px 1px #008f39; */
+  }
+}
+
+#btn-cancelar {
+  border-color: #cb3234;
+  color: #cb3234;
+  &:hover {
+    background: #cb3234;
+    /* box-shadow: 0px 0px 5px 1px #cb3234; */
+  }
+}
