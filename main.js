@@ -49,8 +49,8 @@ function generatorHeader(
 ) {
   content.innerHTML = `
     <nav class="navbar">
-    <a href="../../../../index.html">
-      <img src="../../../media/imgs/logo_Splash_Paws.png" alt="" />
+    <a href="../main/html/main.html">
+      <img src="../../media/imgs/logo_Splash_Paws.png" alt="" />
     </a>
 
     <label for="hamburguer"><i class="bi bi-list"></i></label>
@@ -92,8 +92,8 @@ function generatorHeaderModal(
 ) {
   content.innerHTML = `
   <nav class="navbar">
-  <a href="../../../../index.html">
-    <img src="../../../media/imgs/logo_Splash_Paws.png" alt="" />
+  <a href="../main/html/main.html">
+    <img src="../../media/imgs/logo_Splash_Paws.png" alt="" />
   </a>
 
   <label for="hamburguer"><i class="bi bi-list"></i></label>
@@ -249,7 +249,7 @@ function generatorFooter(content) {
   content.innerHTML = `
   <a href="#">
   <img
-    src="../../../media/imgs/logo_Splash_Paws_2_blanco.png"
+    src="../../media/imgs/logo_Splash_Paws_2_blanco.png"
     alt="logo2"
   />
 </a>
