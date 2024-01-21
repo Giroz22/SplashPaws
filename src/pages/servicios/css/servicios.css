@@ -1,33 +1,105 @@
 @import url(../../../../normalize.css);
 
-main {
-  width: 100%;
-  text-align: center;
-  padding: 0 6%;
+:root {
+  --pendiente: #ffa031;
+  --bannios: #77dcff;
+  --guarderia: #83ff7e;
 }
 
-/* =====Tabla datos===== */
-.dtos-container {
+main {
   width: 100%;
-  min-width: 100%;
+  height: 100vh;
+  text-align: center;
+  padding: 2% 3%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
+/* ===== Menu =====   */
+.menu-container {
+  height: 10%;
+}
+.menu-container a {
+  flex: 1;
+}
+.menu-container a:hover {
+  font-weight: bold;
+}
+
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.menu-container .menu {
+  width: 100%;
   display: flex;
   align-items: center;
 }
 
+/* =====Tabla datos===== */
+
 #tbl-dtos {
   width: 100%;
-  border-collapse: collapse;
   color: var(--darkPurple);
-}
-
-#tbl-dtos thead {
-  font-weight: bold;
-  border-bottom: 1px solid var(--darkPurple);
 }
 
 #tbl-dtos td {
   padding: 10px;
+}
+
+/* thead */
+#tbl-dtos thead {
+  font-weight: bold;
+  border-bottom: 1px solid var(--darkPurple);
+  border: 1px solid var(--darkPurple);
+  background-color: var(--white);
+}
+
+#tbl-dtos thead {
+}
+
+#tbl-dtos thead tr td:last-child {
+  border-radius: 0px 10px 0px 0px;
+}
+
+#row-info {
+  transition: 0.5s;
+}
+
+#row-servicios td {
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+#row-servicios td:hover {
+  color: var(--black);
+
+  &:nth-child(1) {
+    background-color: var(--pendiente);
+    border-color: var(--pendiente);
+  }
+  &:nth-child(2) {
+    background-color: var(--bannios);
+    border-color: var(--bannios);
+  }
+  &:nth-child(3) {
+    background-color: var(--guarderia);
+    border-color: var(--guarderia);
+  }
+}
+
+#row-opc {
+  transition: 0.5s;
+}
+/* tbody */
+.dtos-container {
+  width: 100%;
+  min-width: 100%;
+  height: 80%;
 }
 
 /* ===== Botones =====*/

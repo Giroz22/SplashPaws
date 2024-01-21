@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Servicios</title>
+    <link rel="stylesheet" href="../css/servicios.css" />
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <section class="menu-container">
+        <h2 class="titulo">Citas</h2>
+        <div class="menu"></div>
+      </section>
+      <section class="dtos-container">
+        <table id="tbl-dtos">
+          <thead>
+            <tr id="row-servicios">
+              <td servicio="pendiente">Pendientes</td>
+              <td servicio="bannio">Baños</td>
+              <td servicio="guarderia">Guarderia</td>
+            </tr>
+            <tr id="row-opc">
+              <td>Baños</td>
+              <td>Pendientes</td>
+              <td>En proceso</td>
+              <td>Cancelado</td>
+            </tr>
+            <tr id="row-info">
+              <td>ID</td>
+              <td>Nombre propietario</td>
+              <td>Teléfono</td>
+              <td>Nombre de la mascota</td>
+              <td>Especie</td>
+              <td>Fecha</td>
+              <td>Hora</td>
+              <td>Servicio</td>
+              <td colspan="2">Estado</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Lis Sharik Agudelo</td>
+              <td>3023678714</td>
+              <td>Athala</td>
+              <td>Gato</td>
+              <td>13/01/2024</td>
+              <td>10:19</td>
+              <td>Baño</td>
+              <td>
+                <a id="btn-confirmar" class="btn"
+                  ><i class="bi bi-check2"></i
+                ></a>
+              </td>
+              <td>
+                <a id="btn-cancelar" class="btn"><i class="bi bi-x-lg"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+    <script src="../js/tabla.js"></script>
+    <script src="../js/servicios.js" type="module"></script>
+  </body>
+</html>
