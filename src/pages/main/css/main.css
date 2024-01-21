@@ -1,5 +1,29 @@
-.swiper {
-    width: 100vw;
-    height: 100vh;
-    background: midnightblue;
+/* @import url('../../../../normalize.css'); */
+/* Styles banner */
+body {
+    position: relative;
+    max-width: 100vw;
+    max-height: 100vh;
 }
+
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+}
+
+
+/* Styles Catalogue */
