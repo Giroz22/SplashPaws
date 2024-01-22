@@ -80,17 +80,17 @@ button {
   margin-right: 5px;
   padding: 0 8%;
 }
-.opc-servicios-container {
+.opcs-servicio-container {
   grid-area: opciones;
   text-align: center;
 }
 .titulo-container,
-.opc-servicios-container {
+.opcs-servicio-container {
   background-color: var(--darkPurple);
   color: var(--white);
 }
 
-.opc-servicios-container ul {
+.opcs-servicio-container ul {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,7 +101,7 @@ button {
   margin: 0 10px;
 }
 
-.opc-servicios-container ul li {
+.opcs-servicio-container ul li {
   flex: 1;
   border-bottom: 2px solid transparent;
   transition: 0.5s;

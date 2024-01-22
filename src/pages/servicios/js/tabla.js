@@ -1,40 +1,76 @@
 //===== Selectores =====
-const tabla = document.querySelector("#tbl-dtos");
+//Barra herramientas
+//1. Servicios
+const btnPendientes = document.querySelector("#btnPendientes");
+const btnBannios = document.querySelector("#btnBannios");
+const btnGuarderia = document.querySelector("#btnGuarderia");
 
-const rowServicios = tabla.querySelector("#row-servicios");
+//2. Opciones servicio
+const titulo = document.querySelector(".titulo-container .titulo");
+const divOpcServicio = document.querySelector(".opcs-servicio-container");
+const ulPendientes = divOpcServicio.querySelector("ul");
 
-const rowOpc = tabla.querySelector("#row-opc");
-
-const rowHeadInfo = tabla.querySelector("#row-info");
+//3. Acciones servicio
 
 //===== Eventos =====
-rowServicios.addEventListener("click", (e) => {
-  let tdServicio = e.target;
-
-  switch (tdServicio.getAttribute("servicio")) {
-    case "pendiente":
-      cambiarColortd(tdServicio, "#ffa031");
-
-      break;
-
-    case "bannio":
-      cambiarColortd(tdServicio, "#77dcff");
-      break;
-
-    case "guarderia":
-      cambiarColortd(tdServicio, "#83ff7e");
-      break;
-
-    default:
-      break;
-  }
+document.addEventListener("DOMContentLoaded", () => {
+  btnPendientes.click();
 });
 
-function cambiarColortd(td, color) {
-  td.parentElement.querySelectorAll("td").forEach((elemenTD) => {
-    elemenTD.style.background = "#f2f2f2";
+btnPendientes.addEventListener("click", (event) => {
+  ulPendientes.innerHTML = "";
+
+  titulo.textContent = "Pendientes";
+});
+
+btnBannios.addEventListener("click", () => {
+  titulo.textContent = "Baños";
+
+  const listaOpc = [
+    { descripcion: "Todos", handler: listarPorEstado },
+    { descripcion: "Pendientes", handler: listarPorEstado },
+    { descripcion: "Proceso", handler: listarPorEstado },
+    { descripcion: "Cancelados", handler: listarPorEstado },
+  ];
+  llenarUlServicio(listaOpc);
+});
+
+btnGuarderia.addEventListener("click", () => {
+  titulo.textContent = "Guarderia";
+
+  const listaOpc = [
+    { descripcion: "Todos", handler: listarPorEstado },
+    { descripcion: "En Guarderia", handler: listarPorEstado },
+    { descripcion: "Cancelados", handler: listarPorEstado },
+  ];
+  llenarUlServicio(listaOpc);
+});
+
+//===== Funciones =====
+function llenarUlServicio(listaOpc) {
+  //Se limpia la lista de opciones
+  ulPendientes.innerHTML = "";
+
+  //Se recorren las opciones enviadas como parametro
+  listaOpc.forEach((opc) => {
+    //Se crea, se agrega funcionalidad y se envia la opcion al contenedor
+    const li = document.createElement("li");
+    li.style.cursor = "pointer";
+    li.textContent = opc.descripcion;
+    li.addEventListener("click", () => {
+      opc.handler(opc.descripcion);
+    });
+    ulPendientes.appendChild(li);
   });
-  td.style.background = color;
-  rowOpc.style.background = color;
-  rowHeadInfo.style.background = color;
+}
+
+/**
+ *  Lista los datos de los clientes por estado
+ * @param estado (Filtro que define que datos traer)
+ */
+function listarPorEstado(estado) {
+  estado = estado.toLowerCase();
+
+  //Filtrar
+  console.log("Filtrar por", estado);
 }
