@@ -1,14 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Lemon&family=Nunito:wght@200;300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lemon&family=Nunito:wght@200;300;400;500;600;700;800;900&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
 
 :root {
-  --fontDefault: font-family: "Nunito", sans-serif;
-  --fontBanners:font-family: 'Lemon', serif;
+  --fontDefault: "Nunito", sans-serif;
+  --fontBanners: "Lemon", serif;
   --darkPurple: #250141;
   --veryDarkPurple: #090011;
   --white: #f2f2f2;
   --blue: #0072d8;
   --blueLight: #6ba5f2;
-
+  --darkBlue: #010744;
 }
 
 /* Styles generals */
@@ -19,122 +20,257 @@
   font-family: "Nunito", sans-serif;
   font-size: 16px;
   text-decoration: none;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
 }
 
-body {
-  position: relative;
-  overflow-x: hidden;
+a {
+  text-decoration: none;
 }
 
-h2{
+h1 {
+  font-size: 50px;
+  font-weight: 800;
+  color: var(--darkPurple);
+}
+
+h2 {
   font-size: 32px;
   font-weight: 800;
 }
 
-h3{
+h3 {
   font-size: 24px;
-  font-weight: 400;
+  font-weight: 800;
+}
+
+.btn {
+  padding: 5px 50px;
+  font-weight: 100;
+  background-color: var(--darkPurple);
+  color: var(--white);
+  border-radius: 50px;
+  border: 1.5px solid var(--darkPurple);
+  &:hover {
+    background-color: #e0e0e0;
+    border: 1.5px solid var(--darkPurple);
+    color: var(--darkPurple);
+  }
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow-x: hidden;
 }
 
 body::-webkit-scrollbar {
-    width: 12px;  
-    position: absolute;             /* width of the entire scrollbar */
-  }
-  
-  body::-webkit-scrollbar-track {
-    background: #979797;        /* color of the tracking area */
-  }
-  
-  body::-webkit-scrollbar-thumb {
-    background: #311d41;        /* color of the tracking area */
-    border-radius: 20px;       /* roundness of the scroll thumb */
-    border: 3px solid #979797;  /* creates padding around scroll thumb */
-  }
+  width: 12px;
+  position: absolute; /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background: #979797; /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #311d41; /* color of the tracking area */
+  border-radius: 20px; /* roundness of the scroll thumb */
+  border: 3px solid #979797; /* creates padding around scroll thumb */
+}
 
 /* ============== HEADER ============== */
 header {
   width: 100%;
+  height: 15%;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
-  transition: .2s;
+  position: absolute;
+}
+
+
+/* solucion funcion modal header */
+.modal-backdrop{
+  z-index: 0;
+}
+
+header .navbar {
+  width: 95%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15%;
+  
 
 }
-header nav {
-  width: 95%;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-}
-header .nav_responsive {
+
+header .navbar #hamburguer,
+header .navbar label {
   display: none;
 }
 
-header nav img {
-  max-width: 120px;
+header .navbar img {
+  width: 120px;
 }
 
-header nav a {
+header .navbar a {
+  font-weight: 600;
   color: var(--white);
-  font-weight: 800;
-  transition: 0.2s;
+  transition: 0.3s;
   &:hover {
-    color: #b2b2b2;
+    color: var(--blueLight);
   }
 }
 
-header nav .options {
-  width: 40%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20%;
-}
-
-header nav .login {
-  width: 20%;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  border-radius: 30px;
-  background-color: var(--darkPurple);
-}
-
-header nav .login .line {
-  width: 0.2%;
-  height: 50%;
-  background-color: #f2f2f2;
-}
-
-header nav .login .lenguage {
-  width: 44%;
-  height: 65%;
+header .navbar .navegation {
+  width: 35%;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 50px;
-  background-color: var(--white);
-  transition: 0.2s;
-  &:hover {
-    background-color: #e5e4e4;
-  }
+  gap: 15%;
 }
-header nav .login .lenguage button {
-  all: unset;
+
+header .navbar .navegation .form_modal {
   width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
 
+header .navbar .navegation .modal-content {
+  border-radius: 40px;
+  padding: 20px;
+  border: 1px solid var(--darkPurple);
+}
+header .navbar .navegation .modal-content .btn-close {
+  font-size: 24px;
+}
+
+header .navbar .navegation .form_modal .box_input {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+header .navbar .navegation .form_modal .box_input span {
+  font-weight: 800;
+  color: var(--darkPurple);
+}
+
+header .navbar .navegation .form_modal .box_input input {
+  all: unset;
+  width: 70%;
+  padding: 3px 15px 3px 20px;
+
+  border: 1px solid var(--darkPurple);
+  border-radius: 50px;
+  color: var(--darkPurple);
+  &:focus {
+    border: 2px solid var(--blue);
+  }
+
+  &::placeholder {
+    color: #25014198;
+  }
+}
+header .navbar .navegation .form_modal .box_input select {
+  all: unset;
+  width: 70%;
+  padding: 3px 15px 3px 20px;
+  border: 1px solid var(--darkPurple);
+  border-radius: 50px;
+  color: var(--darkPurple);
+  background-image: url("https://cdn-user-icons.flaticon.com/86009/86009986/1705787770600.svg?token=exp=1705788687~hmac=946ac2aefa8b579a40b5e93d8e6cc449");
+  background-repeat: no-repeat, repeat;
+  background-position: right 0.7em top 50%, 0 0;
+  background-size: 0.8em auto, 100%;
+
+  &:focus {
+    border: 2px solid var(--blue);
+  }
+}
+header .navbar .navegation .form_modal .box_input button {
+  width: 81%;
+  height: 40px;
+  font-size: 18px;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
-  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: 0.3s;
 }
 
-header nav .login .lenguage img {
-  max-width: 25px;
+header .navbar .navegation .form_modal .box_input .cancel {
+  background-color: #ff0000;
+  color: var(--white);
+  font-weight: 600;
+  & i {
+    color: var(--white);
+    font-size: 18px;
+  }
+  &:hover {
+    background-color: #ff00008a;
+  }
+}
+
+header .navbar .navegation .form_modal .box_input .check {
+  background-color: #009a24;
+  color: var(--white);
+  font-weight: 600;
+  & i {
+    color: var(--white);
+    font-size: 24px;
+  }
+
+  &:hover {
+    background-color: #009a249b;
+  }
+}
+
+header .navbar .login {
+  width: 20%;
+  height: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5%;
+  border-radius: 50px;
+  background-color: var(--darkPurple);
+}
+
+header .navbar .login .line {
+  width: 2px;
+  height: 65%;
+  background-color: var(--white);
+}
+header .navbar .login button {
+  padding: 2px 10px;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  transition: 0.3s;
+  background-color: #fcfcfc;
+  border: none;
+  &:hover {
+    background-color: #e5e5e5;
+    color: var(--darkPurple);
+  }
+}
+
+header .navbar .login button img {
+  width: 25px;
 }
 
 /* ============== FOOTER ============== */
@@ -203,6 +339,8 @@ footer .social .social_media {
 
 footer .social .social_media .social_content {
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 10px;
 }
 footer .footer_content .map_content iframe {
@@ -210,104 +348,94 @@ footer .footer_content .map_content iframe {
   height: 200px;
 }
 
-
-
 /* ============ RESPONSIVE 768px ============*/
 @media (max-width: 768px) {
   /* ============== HEADER RESPONSIVE ============== */
+  header {
+    height: 10%;
+    
+   
+  }
+  header .navbar {
+    width: 100%;
+    gap: 40%;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin-top: 40px;
+  }
+  header .navbar label {
+    display: flex;
+    cursor: pointer;
+  }
+  header .navbar a {
+    color: var(--darkPurple);
+  }
 
-  header nav,
-  header .nav_responsive .nav_responsive_content {
+  header .navbar .navegation,
+  header .navbar .login {
     display: none;
   }
 
-  header .nav_responsive {
-    width: 100%;
-    top: 0;
-    display: flex;
-    justify-content: space-evenly;
-    position: fixed;
-    gap: 15%;
-    transition: .2s;
-
-  }
-
-  header #btn_hamburguer {
-    all: unset;
-
-  }
-
-  header .nav_responsive label i {
-    font-size: 40px;
-    border: 1px solid #250141;
-    border-radius: 10px;
+  header .navbar label i {
     color: var(--darkPurple);
-    cursor: pointer;
-
+    font-size: 35px;
+    padding: 0px 10px 0px 10px;
+    border: 1px solid var(--darkPurple);
+    border-radius: 10px;
   }
 
-  header #btn_hamburguer:checked ~ .nav_responsive_content {
+  header .navbar #hamburguer:checked ~ .navegation {
     display: flex;
-  }
-
-  header .nav_responsive .nav_responsive_content {
-    top: 100%;
     width: 100%;
     height: 100vh;
-    background-color: var(--white);
-    flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    gap: 0px;
+    flex-direction: column;
+    top: 120%;
+    padding-top: 80px;
     position: absolute;
 
+    background-color: var(--white);
   }
-
-  header .nav_responsive .nav_responsive_content .options {
+  header .navbar #hamburguer:checked ~ .login {
+    display: flex;
+  }
+  header .navbar .navegation .form_modal {
     flex-direction: column;
-    margin-top: 10%;
-    margin-bottom: 20%;
-
-    gap: 60px;
-
+    align-items: flex-start;
   }
-  header .nav_responsive .nav_responsive_content .options a{
-    color: #250141;
+
+  header .navbar .navegation .form_modal .box_input {
     width: 100%;
-    text-align: center;
-    margin-bottom: 10%;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #250141 ;
-    &:hover{
-      color: #b2b2b2;
-    }
   }
 
-  header .nav_responsive .nav_responsive_content .login {
-    width: 50%;
+  header .navbar .navegation .form_modal .box_input input,
+  header .navbar .navegation .form_modal .box_input select {
+    width: 90%;
   }
-
-  header .nav_responsive .nav_responsive_content .lenguage {
+  header .navbar .navegation .form_modal .box_input .cancel,
+  header .navbar .navegation .form_modal .box_input .check {
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-top: 10px;
+  }
+  header .navbar .login {
+    position: absolute;
+    width: 80%;
+    top: 800%;
+    flex-direction: column;
+
+    background: transparent;
+    gap: 90px;
   }
 
-  header .nav_responsive .nav_responsive_content .lenguage button {
-    all: unset;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 4px 40px;
-    cursor: pointer;
-    border-radius: 50px;
-    background-color: #b2b2b2;
-    gap: 10%;
+  header .navbar .login .line {
+    display: none;
   }
 
-  header .nav_responsive .nav_responsive_content .lenguage button img {
-    max-width: 35px;
+  header .navbar .login button {
+    background: var(--darkPurple);
+    color: var(--white);
+    padding: 5px 20px;
   }
 
   /* ============== FOOTER RESPONSIVE ============== */
@@ -316,15 +444,13 @@ footer .footer_content .map_content iframe {
     justify-content: center;
     align-items: center;
   }
-  footer img{
+  footer img {
     margin: 0;
-
   }
   footer .footer_content {
     flex-direction: column;
     align-items: center;
     gap: 40px;
-
   }
 
   footer .footer_content .about {
