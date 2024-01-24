@@ -181,13 +181,14 @@ main {
 
 @media (max-width: 768px) {
   main {
-    height: 110%;
+    height: 120%;
   }
 
   /* ========= Banner 1 ========= */
   main .banner_1 {
     flex-direction: column;
     background-size: cover;
+
     background-attachment: fixed;
   }
 
@@ -211,6 +212,7 @@ main {
   /* ========= Banner 2 ========= */
 
   main .banner_2 {
+    height: 100%;
     justify-content: flex-start;
     align-items: flex-start;
     background-size: cover;
@@ -228,11 +230,13 @@ main {
   }
 
   .banner_2 .banner_content_2 {
-    width: 100%;
+    width: 90%;
     justify-content: center;
     align-items: center;
     text-align: center;
     margin: auto;
+    padding: auto 70px;
+  
   }
 
   .banner_2 .banner_content_2 p {
