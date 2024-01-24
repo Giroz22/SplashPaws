@@ -43,6 +43,10 @@ h3 {
   font-weight: 800;
 }
 
+.modal-backdrop{
+  z-index: 2;
+}
+
 .btn {
   padding: 5px 50px;
   font-weight: 100;
@@ -82,22 +86,16 @@ body::-webkit-scrollbar-thumb {
 /* ============== HEADER ============== */
 header {
   width: 100%;
-  height: 15%;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
 }
 
-
-/* solucion funcion modal header */
-.modal-backdrop{
-  z-index: 0;
-}
-
 header .navbar {
   width: 95%;
-  height: 100%;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -131,7 +129,18 @@ header .navbar .navegation {
   align-items: center;
   gap: 15%;
 }
+header .navbar .navegation .login_responsive{
+  display: none;
+}
 
+/* CAMBIAN DE COLOR LA BARRA DE NAVEGACION */
+
+/* header .navbar .navegation a{
+  color: var(--darkPurple);
+  &:hover {
+    color: var(--blueLight);
+  }
+} */
 header .navbar .navegation .form_modal {
   width: 100%;
   height: 100%;
@@ -238,8 +247,9 @@ header .navbar .navegation .form_modal .box_input .check {
 }
 
 header .navbar .login {
-  width: 20%;
-  height: 45%;
+  width: auto;
+  height: auto;
+  padding: 6px 30px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -249,8 +259,8 @@ header .navbar .login {
 }
 
 header .navbar .login .line {
-  width: 2px;
-  height: 65%;
+  width: 22px;
+  height: 30px;
   background-color: var(--white);
 }
 header .navbar .login button {
@@ -358,10 +368,16 @@ footer .footer_content .map_content iframe {
   }
   header .navbar {
     width: 100%;
+    height: auto;
     gap: 40%;
     flex-wrap: wrap;
-    align-items: flex-start;
-    margin-top: 40px;
+   
+    
+    margin-top: 4rem;
+    
+  }
+  header .navbar .navegation,header .navbar .login{
+    display: none;
   }
   header .navbar label {
     display: flex;
@@ -369,11 +385,6 @@ footer .footer_content .map_content iframe {
   }
   header .navbar a {
     color: var(--darkPurple);
-  }
-
-  header .navbar .navegation,
-  header .navbar .login {
-    display: none;
   }
 
   header .navbar label i {
@@ -384,6 +395,15 @@ footer .footer_content .map_content iframe {
     border-radius: 10px;
   }
 
+  header .navbar #hamburguer:checked ~ .navegation .login_responsive{
+    all: unset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 4rem;
+  }
+
   header .navbar #hamburguer:checked ~ .navegation {
     display: flex;
     width: 100%;
@@ -391,15 +411,14 @@ footer .footer_content .map_content iframe {
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    top: 120%;
+    top: 6rem;
     padding-top: 80px;
     position: absolute;
-
+    z-index: 1;
     background-color: var(--white);
+    
   }
-  header .navbar #hamburguer:checked ~ .login {
-    display: flex;
-  }
+ 
   header .navbar .navegation .form_modal {
     flex-direction: column;
     align-items: flex-start;
@@ -418,14 +437,15 @@ footer .footer_content .map_content iframe {
     width: 100%;
     margin-top: 10px;
   }
+
   header .navbar .login {
     position: absolute;
     width: 80%;
-    top: 800%;
+    top: auto;
     flex-direction: column;
-
     background: transparent;
-    gap: 90px;
+    gap: 5rem;
+    
   }
 
   header .navbar .login .line {
