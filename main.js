@@ -36,7 +36,7 @@ function generarID() {
   Ejemplo:
     generatorHeaderModal(header,"Tienda","Contactos","#","#","Ingresar","#")
 */
-function generatorHeader(
+export function generatorHeader(
   content,
   link1,
   link2,
@@ -60,6 +60,18 @@ function generatorHeader(
       <a href=${url1}>${link1}</a>
       <a href=${url2}>${link2}</a>
       <a href=${url3}>${link3}</a>
+      <div class="login login_responsive">
+            <a href=${urlLogin}>${nameLogin}</a>
+            <div class="line"></div>
+            <button id="btn btn_leguage">
+              <img
+                src="https://cdn-icons-png.flaticon.com/128/197/197593.png"
+                alt="spain_lenguage"
+                id="spain_lenguage"
+              />
+              Español
+            </button>
+          </div>
     </div>
 
     <div class="login">
@@ -81,7 +93,7 @@ function generatorHeader(
 }
 
 //Lo mismo que la funcion anterior solo que omiti el agendar cita y lo queme directamente
-function generatorHeaderModal(
+export function generatorHeaderModal(
   content,
   link1,
   link2,
@@ -92,160 +104,173 @@ function generatorHeaderModal(
 ) {
   content.innerHTML = `
   <nav class="navbar">
-  <a href="../main/html/main.html">
-    <img src="../../../media/imgs/logo_Splash_Paws.png" alt="" />
-  </a>
-
-  <label for="hamburguer"><i class="bi bi-list"></i></label>
-  <input type="checkbox" id="hamburguer" />
-
-  <div class="navegation">
-    <a href=${url1}>${link1}</a>
-    <!-- Button trigger modal -->
-    <a
-      href="#"
-      type="button"
-      data-bs-toggle="modal"
-      data-bs-target="#staticBackdrop"
-    >
-      Agendar cita
-    </a>
-
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="staticBackdrop"
-      data-bs-backdrop="absolute"
-      data-bs-keyboard="false"
-      tabindex="-1"
-      aria-labelledby="staticBackdropLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="staticBackdropLabel">
-              Agendar cita
-            </h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+        <a href="../main/html/main.html">
+          <img src="../../../media/imgs/logo_Splash_Paws.png" alt="Logo SplashPaws" />
+        </a>
+      
+        <label for="hamburguer"><i class="bi bi-list"></i></label>
+        <input type="checkbox" id="hamburguer" />
+      
+        <div class="navegation">
+          <a href=${url1}>${link1}</a>
+          <!-- Button trigger modal -->
+          <a
+            href="#"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+          >
+            Agendar cita
+          </a>
+      
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="staticBackdrop"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-xl">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                    Agendar cita
+                  </h1>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body form_modal">
+                  <div class="box_input">
+                    <span>Nombre del propietario</span>
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="name_person"
+                      placeholder="Nombre del propietario"
+                      required
+                    />
+                  </div>
+      
+                  <div class="box_input">
+                    <span>Nombre de la mascota</span>
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="name_pet"
+                      placeholder="Nombre de la mascota"
+                      required
+                    />
+                  </div>
+      
+                  <div class="box_input">
+                    <span>Tamaño de la mascota</span>
+                    <select id="pet_size">
+                      <option selected>Selecciona un tamaño</option>
+                      <option value="pequeño">Pequeño</option>
+                      <option value="mediano">Madiano</option>
+                      <option value="grande">Grande</option>
+                    </select>
+                  </div>
+      
+                  <div class="box_input">
+                    <span>Teléfono del propietario</span>
+                    <input
+                      class="form-control"
+                      type="tel"
+                      id="phonenumber"
+                      placeholder="Teléfono del propietario"
+                      required
+                    />
+                  </div>
+      
+                  <div class="box_input">
+                    <span>Fecha</span>
+                    <input
+                      class="form-control"
+                      type="date"
+                      id="date"
+                      required
+                    />
+                  </div>
+      
+                  <div class="box_input">
+                    <span>Hora</span>
+                    <input
+                      class="form-control"
+                      type="time"
+                      id="time"
+                      required
+                    />
+                  </div>
+      
+                  <div class="box_input">
+                    <span>Servico</span>
+                    <select id="pet_service">
+                      <option selected>Selecciona un servicio</option>
+                      <option value="baño">Baño</option>
+                      <option value="guarderia" disabled>Guarderia</option>
+                    </select>
+                  </div>
+      
+                  <div class="box_input">
+                    <button class="check">
+                      <i class="bi bi-check2"></i> Confirmar cita
+                    </button>
+                  </div>
+      
+                  <div class="box_input">
+                    <button
+                      type="button"
+                      class="cancel"
+                    >
+                      <i class="bi bi-x-lg"></i>Cancelar cita
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="modal-body form_modal">
-            <div class="box_input">
-              <span>Nombre del propietario</span>
-              <input
-                class="form-control"
-                type="text"
-                id="name_person"
-                placeholder="Nombre del propietario"
-                required
+    
+          <a href=${url2}>${link2}</a>
+          <div class="login login_responsive">
+            <a href=${urlLogin}>${nameLogin}</a>
+            <div class="line"></div>
+            <button id="btn btn_leguage">
+              <img
+                src="https://cdn-icons-png.flaticon.com/128/197/197593.png"
+                alt="spain_lenguage"
+                id="spain_lenguage"
               />
-            </div>
-
-            <div class="box_input">
-              <span>Nombre de la mascota</span>
-              <input
-                class="form-control"
-                type="text"
-                id="name_pet"
-                placeholder="Nombre de la mascota"
-                required
-              />
-            </div>
-
-            <div class="box_input">
-              <span>Tamaño de la mascota</span>
-              <select id="pet_size">
-                <option selected>Selecciona un tamaño</option>
-                <option value="pequeño">Pequeño</option>
-                <option value="mediano">Madiano</option>
-                <option value="grande">Grande</option>
-              </select>
-            </div>
-
-            <div class="box_input">
-              <span>Teléfono del propietario</span>
-              <input
-                class="form-control"
-                type="tel"
-                id="phonenumber"
-                placeholder="Teléfono del propietario"
-                required
-              />
-            </div>
-
-            <div class="box_input">
-              <span>Fecha</span>
-              <input
-                class="form-control"
-                type="date"
-                id="date"
-                required
-              />
-            </div>
-
-            <div class="box_input">
-              <span>Hora</span>
-              <input
-                class="form-control"
-                type="time"
-                id="time"
-                required
-              />
-            </div>
-
-            <div class="box_input">
-              <span>Servico</span>
-              <select id="pet_service">
-                <option selected>Selecciona un servicio</option>
-                <option value="baño">Baño</option>
-                <option value="guarderia" disabled>Guarderia</option>
-              </select>
-            </div>
-
-            <div class="box_input">
-              <button class="check">
-                <i class="bi bi-check2"></i> Confirmar cita
-              </button>
-            </div>
-
-            <div class="box_input">
-              <button
-                type="button"
-                class="cancel"
-              >
-                <i class="bi bi-x-lg"></i>Cancelar cita
-              </button>
-            </div>
+              Español
+            </button>
           </div>
+
         </div>
-      </div>
-    </div>
-
-    <a href=${url2}>${link2}</a>
-  </div>
-
-  <div class="login">
-    <a href=${urlLogin}>${nameLogin}</a>
-    <div class="line"></div>
-    <button id="btn btn_leguage">
-      <img
-        src="https://cdn-icons-png.flaticon.com/128/197/197593.png"
-        alt="spain_lenguage"
-        id="spain_lenguage"
-      />
-      Español
-    </button>
-  </div>
-</nav>
+      
+        <div class="login">
+        <a href=${urlLogin}>${nameLogin}</a>
+          <div class="line"></div>
+          <button id="btn btn_leguage">
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/197/197593.png"
+              alt="spain_lenguage"
+              id="spain_lenguage"
+            />
+            Español
+          </button>
+        </div>
+      </nav>
   `;
 }
 
-function generatorFooter(content) {
+export function generatorFooter(content) {
   content.innerHTML = `
   <a href="#">
   <img
