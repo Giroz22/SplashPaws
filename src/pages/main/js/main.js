@@ -1,6 +1,10 @@
+import {generatorHeaderModal} from '../../../../main.js'
+import {generatorFooter} from '../../../../main.js'
+
+
 // import Swiper from 'swiper';
 
-swiper = new Swiper(".mySwiper", {
+let swiper = new Swiper(".mySwiper", {
   spaceBetween: 30,
   centeredSlides: true,
   autoplay: {

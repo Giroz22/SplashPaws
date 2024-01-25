@@ -38,6 +38,22 @@
 
 /* Styles Catalogue */
 
+.btn {
+  font-weight: 600;
+  margin-top: 7%;
+}
+
+.btn_blue{
+    margin-top: 2%;
+    background-color: var(--darkBlue);
+    border: 1px solid var(--darkBlue);
+  
+    &:hover {
+      border: 1px solid var(--darkBlue);
+      background-color: #e0e0e0;
+      color: var(--darkBlue);
+    }
+  }
 
 /* ================ Styles Banners ================*/
 
@@ -55,7 +71,9 @@ main {
 
  main p {
     color: var(--white);
+    font-size: 1.1rem;
     font-weight: 100;
+    text-shadow: 1px 1px 1px var(--darkBlue);
   }
   
   main .banner_1 {
@@ -92,23 +110,7 @@ main {
     font-size: 50px;
     color: var(--darkPurple);
   }
-  .btn {
-    font-weight: 600;
-    margin-top: 7%;
-  }
-  
-  .btn_blue{
-      margin-top: 2%;
-      background-color: var(--darkBlue);
-      border: 1px solid var(--darkBlue);
-    
-      &:hover {
-        border: 1px solid var(--darkBlue);
-        background-color: #e0e0e0;
-        color: var(--darkBlue);
-      }
-    }
-  
+ 
   /* ========= BANNER 2 ========= */
   .login button{
     background-color: aqua;
@@ -174,3 +176,95 @@ main {
       font-size: 50px;
   }
   
+
+/* ========== RESPONSIVE ========== */
+
+@media (max-width: 768px) {
+  main {
+    height: 120%;
+  }
+
+  /* ========= Banner 1 ========= */
+  main .banner_1 {
+    flex-direction: column;
+    background-size: cover;
+
+    background-attachment: fixed;
+  }
+
+  .banner_content {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 10rem;
+  }
+  .banner_content img {
+    width: 350px;
+  }
+
+  .banner_content p {
+    text-align: justify;
+  }
+  .banner_content a {
+    margin: auto;
+  }
+
+  /* ========= Banner 2 ========= */
+
+  main .banner_2 {
+    height: 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-size: cover;
+    background-position: 70% 20%;
+    background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 79, 0.725),
+      rgba(0, 0, 79, 0.725)
+     ),  
+     url('https://img.freepik.com/foto-gratis/perro-lindo-alto-angulo-banera_52683-92732.jpg');
+     background-repeat: no-repeat;
+     background-size: cover;
+     background-position: center;
+     background-attachment: fixed;
+  }
+
+  .banner_2 .banner_content_2 {
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    padding: auto 70px;
+  
+  }
+
+  .banner_2 .banner_content_2 p {
+    text-align: left;
+  }
+
+  /* ========= Banner 2 ========= */
+
+  main .banner_3{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: aqua;
+  }
+
+  main .banner_3 .banner_content{
+    width: 90%;
+   
+  }
+
+
+
+}
+
+
+  
+
+
+
+
+
