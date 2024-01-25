@@ -1,20 +1,27 @@
-//Importaciones
-import { traerPendientes } from "../models/pendientesModel.js";
-import { mostrarDatosTbl } from "./serviciosView.js";
+// =====Importaciones =====
+import { traerTodosServiciosPendientes } from "../models/pendientesModel.js";
+import { tabla, mostrarDatosTbl } from "./serviciosView.js";
 
-//Selectores
+// ===== Selectores =====
 const btnPendientes = document.querySelector("#btnPendientes");
 const titulo = document.querySelector(".titulo-container .titulo");
 const divOpcServicio = document.querySelector(".opcs-servicio-container");
 const ulPendientes = divOpcServicio.querySelector("ul");
 
-//Eventos
+// =====Eventos =====
 document.addEventListener("DOMContentLoaded", () => {
   btnPendientes.click();
 });
 
-btnPendientes.addEventListener("click", (e) => {
+btnPendientes.addEventListener("click", () => {
   ulPendientes.innerHTML = "";
   titulo.textContent = "Pendientes";
-  traerPendientes().then((datos) => mostrarDatosTbl(datos));
+  traerTodosServiciosPendientes().then((datos) =>
+    mostrarDatosTbl(datos, handleBtnsDetalle)
+  );
 });
+
+//===== Funciones =====
+function handleBtnsDetalle(evento) {
+  console.log(evento.target);
+}
