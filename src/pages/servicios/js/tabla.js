@@ -1,7 +1,9 @@
+import * as bannioCRUD from "./bannioCRUD.js";
+import * as guarderiaCRUD from "./guarderiaCRUD.js";
+
 //===== Selectores =====
 //Barra herramientas
 //1. Servicios
-const btnPendientes = document.querySelector("#btnPendientes");
 const btnBannios = document.querySelector("#btnBannios");
 const btnGuarderia = document.querySelector("#btnGuarderia");
 
@@ -13,24 +15,30 @@ const ulPendientes = divOpcServicio.querySelector("ul");
 //3. Acciones servicio
 
 //===== Eventos =====
-document.addEventListener("DOMContentLoaded", () => {
-  btnPendientes.click();
-});
-
-btnPendientes.addEventListener("click", (event) => {
-  ulPendientes.innerHTML = "";
-
-  titulo.textContent = "Pendientes";
-});
 
 btnBannios.addEventListener("click", () => {
   titulo.textContent = "Baños";
 
   const listaOpc = [
-    { descripcion: "Todos", handler: listarPorEstado },
-    { descripcion: "Pendientes", handler: listarPorEstado },
-    { descripcion: "Proceso", handler: listarPorEstado },
-    { descripcion: "Cancelados", handler: listarPorEstado },
+    { descripcion: "Todos", handler: bannioCRUD.traerDatos },
+    {
+      descripcion: "Pendientes",
+      handler: () => {
+        bannioCRUD.filtrarPorEstado("pendiente");
+      },
+    },
+    {
+      descripcion: "Proceso",
+      handler: () => {
+        bannioCRUD.filtrarPorEstado("proceso");
+      },
+    },
+    {
+      descripcion: "Cancelados",
+      handler: () => {
+        bannioCRUD.filtrarPorEstado("cancelados");
+      },
+    },
   ];
   llenarUlServicio(listaOpc);
 });
@@ -39,9 +47,22 @@ btnGuarderia.addEventListener("click", () => {
   titulo.textContent = "Guarderia";
 
   const listaOpc = [
-    { descripcion: "Todos", handler: listarPorEstado },
-    { descripcion: "En Guarderia", handler: listarPorEstado },
-    { descripcion: "Cancelados", handler: listarPorEstado },
+    {
+      descripcion: "Todos",
+      handler: guarderiaCRUD.traerDatos,
+    },
+    {
+      descripcion: "En Guarderia",
+      handler: () => {
+        guarderiaCRUD.filtrarPorEstado("guarderia");
+      },
+    },
+    {
+      descripcion: "Cancelados",
+      handler: () => {
+        guarderiaCRUD.filtrarPorEstado("cancelados");
+      },
+    },
   ];
   llenarUlServicio(listaOpc);
 });
@@ -58,7 +79,7 @@ function llenarUlServicio(listaOpc) {
     li.style.cursor = "pointer";
     li.textContent = opc.descripcion;
     li.addEventListener("click", () => {
-      opc.handler(opc.descripcion);
+      opc.handler();
     });
     ulPendientes.appendChild(li);
   });
