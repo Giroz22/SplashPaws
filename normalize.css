@@ -43,8 +43,8 @@ h3 {
   font-weight: 800;
 }
 
-.modal-backdrop{
-  z-index: 2;
+.modal-backdrop {
+  z-index: 0;
 }
 
 .btn {
@@ -100,8 +100,6 @@ header .navbar {
   justify-content: center;
   align-items: center;
   gap: 15%;
-  
-
 }
 
 header .navbar #hamburguer,
@@ -129,7 +127,7 @@ header .navbar .navegation {
   align-items: center;
   gap: 15%;
 }
-header .navbar .navegation .login_responsive{
+header .navbar .navegation .login_responsive {
   display: none;
 }
 
@@ -155,94 +153,33 @@ header .navbar .navegation .modal-content {
   border-radius: 40px;
   padding: 20px;
   border: 1px solid var(--darkPurple);
-}
-header .navbar .navegation .modal-content .btn-close {
-  font-size: 24px;
-}
-
-header .navbar .navegation .form_modal .box_input {
-  width: 30%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 5px;
-}
-
-header .navbar .navegation .form_modal .box_input span {
-  font-weight: 800;
-  color: var(--darkPurple);
-}
-
-header .navbar .navegation .form_modal .box_input input {
-  all: unset;
-  width: 70%;
-  padding: 3px 15px 3px 20px;
-
-  border: 1px solid var(--darkPurple);
-  border-radius: 50px;
-  color: var(--darkPurple);
-  &:focus {
-    border: 2px solid var(--blue);
+  & input,
+  & input::placeholder,
+  & select {
+    color: var(--darkPurple);
+    border-radius: 20px;
   }
 
-  &::placeholder {
-    color: #25014198;
+  & span {
+    color: var(--darkPurple);
+    font-weight: 800;
   }
 }
-header .navbar .navegation .form_modal .box_input select {
-  all: unset;
-  width: 70%;
-  padding: 3px 15px 3px 20px;
-  border: 1px solid var(--darkPurple);
-  border-radius: 50px;
-  color: var(--darkPurple);
-  background-image: url("https://cdn-user-icons.flaticon.com/86009/86009986/1705787770600.svg?token=exp=1705788687~hmac=946ac2aefa8b579a40b5e93d8e6cc449");
-  background-repeat: no-repeat, repeat;
-  background-position: right 0.7em top 50%, 0 0;
-  background-size: 0.8em auto, 100%;
-
-  &:focus {
-    border: 2px solid var(--blue);
-  }
-}
-header .navbar .navegation .form_modal .box_input button {
-  width: 81%;
-  height: 40px;
-  font-size: 18px;
+header .navbar .navegation .modal-content .contenedor_buttom{
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  border: none;
-  border-radius: 5px;
-  transition: 0.3s;
 }
-
-header .navbar .navegation .form_modal .box_input .cancel {
-  background-color: #ff0000;
-  color: var(--white);
-  font-weight: 600;
-  & i {
-    color: var(--white);
-    font-size: 18px;
-  }
+header .navbar .navegation .modal-content .btn_submit {
+  width: 30%;
+  background-color: #317f43;
+  font-weight: 500;
+  border: 1px solid #317f43;
   &:hover {
-    background-color: #ff00008a;
-  }
-}
-
-header .navbar .navegation .form_modal .box_input .check {
-  background-color: #009a24;
-  color: var(--white);
-  font-weight: 600;
-  & i {
-    color: var(--white);
-    font-size: 24px;
-  }
-
-  &:hover {
-    background-color: #009a249b;
+    color: #008000;
+    background-color: transparent;
+    border: 1px solid #317f43;
   }
 }
 
@@ -363,20 +300,17 @@ footer .footer_content .map_content iframe {
   /* ============== HEADER RESPONSIVE ============== */
   header {
     height: 10%;
-    
-   
   }
   header .navbar {
     width: 100%;
     height: auto;
     gap: 40%;
     flex-wrap: wrap;
-   
-    
+
     margin-top: 4rem;
-    
   }
-  header .navbar .navegation,header .navbar .login{
+  header .navbar .navegation,
+  header .navbar .login {
     display: none;
   }
   header .navbar label {
@@ -395,7 +329,7 @@ footer .footer_content .map_content iframe {
     border-radius: 10px;
   }
 
-  header .navbar #hamburguer:checked ~ .navegation .login_responsive{
+  header .navbar #hamburguer:checked ~ .navegation .login_responsive {
     all: unset;
     display: flex;
     justify-content: center;
@@ -416,26 +350,24 @@ footer .footer_content .map_content iframe {
     position: absolute;
     z-index: 1;
     background-color: var(--white);
-    
   }
- 
+
   header .navbar .navegation .form_modal {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  header .navbar .navegation .form_modal .box_input {
+  header .navbar .navegation .form_modal  {
     width: 100%;
   }
 
-  header .navbar .navegation .form_modal .box_input input,
-  header .navbar .navegation .form_modal .box_input select {
+  header .navbar .navegation .form_modal  input,
+  header .navbar .navegation .form_modal  select {
     width: 90%;
   }
-  header .navbar .navegation .form_modal .box_input .cancel,
-  header .navbar .navegation .form_modal .box_input .check {
+  header .navbar .navegation .form_modal .btn_submit{
     width: 100%;
-    margin-top: 10px;
+    
   }
 
   header .navbar .login {
@@ -445,7 +377,6 @@ footer .footer_content .map_content iframe {
     flex-direction: column;
     background: transparent;
     gap: 5rem;
-    
   }
 
   header .navbar .login .line {
