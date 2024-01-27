@@ -1,31 +1,11 @@
-import {generatorHeaderModal} from '../../../../main.js'
-
-
-
-const employes = [
-    {
-        document: "1000111",
-        userName: "Lis Sharik",
-        password: "12345"
-    },
-    {
-        document: "10101",
-        userName: "Alejandro A",
-        password: "AAAAAA"
-    },
-    {
-        document: "123000025",
-        userName: "Alejandro G",
-        password: "12345"
-    }
-]
+import {generatorHeaderModal} from '../../../../main.js';
+import {alertaCorrecto} from '../../../../main.js';
+import {alertaError} from '../../../../main.js';
 
 const header = document.querySelector("header")
 const btnValidate = document.querySelector(".btn_login")
 const documentNumber = document.querySelector("#document_number");
 const password = document.querySelector("#password");
-let form = document.querySelector(".form_content")
-let alertError = document.querySelector(".alert")
 
 generatorHeaderModal(header, "Tienda", "Contactos", "#", "#", "Ingresar", "#");
 
@@ -39,11 +19,12 @@ btnValidate.addEventListener("click",(event)=>{
 
 async function employesData(){
     try {
-        const URL = "../../../data/empleados.json";
+        const URL = "http://localhost:3000/empleados";
         const answer = await fetch(URL);
         const dataEmployee = await answer.json();
 
         if(answer.status == 200){
+            console.log(dataEmployee);
             validateUser(documentNumber.value,password.value,dataEmployee)
         }
 
@@ -56,20 +37,14 @@ async function employesData(){
 
 
 function validateUser(documentNumber,password,data){
-   
-
-    const verificacion = data.some(employe => documentNumber == employe.document && password == employe.password)
+    const verificacion = data.some(employe => documentNumber == employe.documento && password == employe.contraseña)
     console.log(verificacion);
 
     if(verificacion === true){
-        // Redireccionamiento
+        alertaCorrecto("Ingresando al sistema")
     }else{
-        alertError.textContent = "Número de documento o contraseña son incorrectos"
-        setTimeout(()=>{
-            alertError.textContent = ""
-        },4000)
+        alertaError("Número de documento o contraseña no son validos")
         return
     }
     
 }
-
