@@ -4,7 +4,7 @@
  * @param {Valor maximo a generar} max
  * @returns Número aleatorio entre el rango de parametros ingrezados
  */
-function generarNumRandom(min, max) {
+export function generarNumRandom(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
@@ -12,10 +12,9 @@ function generarNumRandom(min, max) {
  *
  * @returns Número de identificacion unico en formato de texto
  */
-function generarID() {
+export function generarID() {
   return String(Date.now() + generarNumRandom(1, 100));
 }
-
 
 /** 
 ====== Funcion para generar el header ====== 
@@ -147,92 +146,84 @@ export function generatorHeaderModal(
                   ></button>
                 </div>
                 <div class="modal-body form_modal">
-                  <div class="box_input">
-                    <span>Nombre del propietario</span>
-                    <input
-                      class="form-control"
-                      type="text"
-                      id="name_person"
-                      placeholder="Nombre del propietario"
-                      required
-                    />
+                <form class="row g-3 needs-validation .form_modal" novalidate>
+                <!--  Fila 1 -->
+                <div class="col-md-4">
+                  <span for="nombre_propietario" class="form-label">Nombre del propietario</span>
+                  <input type="text" class="form-control" placeholder="Ingresa el nombre" id="nombre_propietario" required>
+                  <div class="invalid-feedback">
+                    Ingresa un nombre
                   </div>
+                </div>
+
+                <div class="col-md-4">
+                  <span for="nombre_mascota" class="form-label">Nombre de la mascota</span>
+                  <input type="text" class="form-control" placeholder="Ingresa el nombre" id="nombre_mascota" required>
+                  <div class="invalid-feedback">
+                    Ingresa un nombre
+                  </div>
+
+                </div>
+                <div class="col-md-4">
+                  <span for="especie" class="form-label">Especie de la mascota</span>
+                  <select class="form-select" id="especie" required>
+                    <option selected disabled value="">Selecciona una especie</option>
+                    <option value="gato">Gato</option>
+                    <option value="perro">Perro</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    Selecciona una especie
+                  </div>
+                </div>
+                <!--  Fila 2 -->
+          
+                
+                <div class="col-md-4">
+                  <span for="telefono" class="form-label">Teléfono del propietario</span>
+                  <input type="tel" maxlength="15" minlength="10" class="form-control" id="telefono" placeholder="Ingresa un número de teléfono" required>
+                  <div class="invalid-feedback">
+                    Ingresa un teléfono
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <span for="fecha" class="form-label">Fecha</span>
+                  <input type="date" class="form-control" id="fecha" required>
+                  <div class="invalid-feedback">
+                    Selecciona una fecha
+                  </div>
+                </div>
+          
+                <!--  Fila 3 -->
+          
+                <div class="col-md-4">
+                  <span for="hora" class="form-label">Hora</span>
+                  <select class="form-select" id="hora" required>
+                    <option selected disabled value="">Selecciona una hora</option>
+                                     
+                  </select>
+                  <div class="invalid-feedback">
+                    Selecciona una hora
+                  </div>
+                </div>
+                
+                <div class="col-md-4">
+                  <span for="servicio" class="form-label">Servicio</span>
+                  <select class="form-select" id="servicio" required>
+                    <option selected disabled value="">Selecciona un servicio</option>
+                    <option value="baño">Baño</option>
+                    <option value="guarderia">Guarderia</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    Selecciona un servicio
+                  </div>
+                </div>
+                
+                <div class="contenedor_buttom ">
+                  <button class="btn btn_submit" type="submit">Agendar cita</button>
+                </div>
+              </form>
       
-                  <div class="box_input">
-                    <span>Nombre de la mascota</span>
-                    <input
-                      class="form-control"
-                      type="text"
-                      id="name_pet"
-                      placeholder="Nombre de la mascota"
-                      required
-                    />
-                  </div>
-      
-                  <div class="box_input">
-                    <span>Tamaño de la mascota</span>
-                    <select id="pet_size">
-                      <option selected>Selecciona un tamaño</option>
-                      <option value="pequeño">Pequeño</option>
-                      <option value="mediano">Madiano</option>
-                      <option value="grande">Grande</option>
-                    </select>
-                  </div>
-      
-                  <div class="box_input">
-                    <span>Teléfono del propietario</span>
-                    <input
-                      class="form-control"
-                      type="tel"
-                      id="phonenumber"
-                      placeholder="Teléfono del propietario"
-                      required
-                    />
-                  </div>
-      
-                  <div class="box_input">
-                    <span>Fecha</span>
-                    <input
-                      class="form-control"
-                      type="date"
-                      id="date"
-                      required
-                    />
-                  </div>
-      
-                  <div class="box_input">
-                    <span>Hora</span>
-                    <input
-                      class="form-control"
-                      type="time"
-                      id="time"
-                      required
-                    />
-                  </div>
-      
-                  <div class="box_input">
-                    <span>Servico</span>
-                    <select id="pet_service">
-                      <option selected>Selecciona un servicio</option>
-                      <option value="baño">Baño</option>
-                      <option value="guarderia" disabled>Guarderia</option>
-                    </select>
-                  </div>
-      
-                  <div class="box_input">
-                    <button class="check">
-                      <i class="bi bi-check2"></i> Confirmar cita
-                    </button>
-                  </div>
-      
-                  <div class="box_input">
-                    <button
-                      type="button"
-                      class="cancel"
-                    >
-                      <i class="bi bi-x-lg"></i>Cancelar cita
-                    </button>
-                  </div>
+                  
                 </div>
               </div>
             </div>
@@ -268,6 +259,198 @@ export function generatorHeaderModal(
         </div>
       </nav>
   `;
+  const form = document.querySelector("form");
+  const inputs = form.querySelectorAll("input");
+  const selects = document.querySelectorAll("select")
+  const selectContentHora = document.querySelector("#hora")
+  const btnClose = document.querySelector(".btn-close")
+
+  validarInputs(inputs)
+  validarSelects(selects,selectContentHora,8,16)
+
+  boostrapvalidator()
+  
+
+  const btnEnviar = document.querySelector(".btn_submit");
+  btnEnviar.addEventListener("click", (event) => {
+
+   if(form.checkValidity()){
+    event.preventDefault();
+    agregarCitasPendientes();
+    limpiarInfo(inputs,selects)
+    
+
+    btnClose.click()
+
+   }
+  });
+}
+
+export function validarInputs(inputs){
+  console.log("entro");
+  inputs.forEach((input) => {
+    switch (input.type) {
+      case "date":
+        // Validacion input tipo date
+        let fechaActual = new Date();
+        let dia = fechaActual.getDate() + 1;
+        let mes = fechaActual.getMonth() + 1;
+        let año = fechaActual.getFullYear();
+
+        dia = dia < 10 ? "0" + dia.toString() : dia;
+        mes = mes < 10 ? "0" + mes.toString() : mes;
+
+        input.setAttribute("min", `${año}-${mes}-${dia}`);
+        input.setAttribute("max", `${año + 1}-${mes}-${dia}`);
+
+        break;
+    }
+
+    if(input.id == "hora"){
+      console.log("hay una hora");
+    }
+
+
+
+  });
+
+  
+
+}
+
+export function validarSelects(selects,selectContent,horaInicio,horaFinal){
+  selects.forEach(select=>{
+    if(select.id == "hora"){
+      let contPm = 1
+
+      while(horaInicio <= horaFinal){
+        let option = document.createElement("option")
+        console.log(horaInicio);
+      
+        if(horaInicio < 12){
+          option.value = `${horaInicio}:00 a.m`;
+          option.textContent = option.value;
+          
+
+          console.log(option.value);
+
+        }else if(horaInicio == 12){
+          option.value = `${horaInicio}:00 p.m`;
+          option.textContent = option.value;
+
+          console.log(option.value);
+
+        }else{
+          option.value = `${contPm}:00 p.m`;
+          option.textContent = option.value;
+
+          contPm++
+
+        }
+
+        selectContent.appendChild(option)
+        
+        horaInicio++
+      }
+
+
+
+    }
+  })
+
+}
+
+async function agregarCitasPendientes() {
+
+  const seviciosPendientes = {
+    propietario: {
+      nombre: document.querySelector("#nombre_propietario").value,
+      telefono: document.querySelector("#telefono").value,
+    },
+    mascota: {
+      nombre: document.querySelector("#nombre_mascota").value,
+      especie: document.querySelector("#especie").value,
+    },
+    fecha: document.querySelector("#fecha").value,
+    hora_llegada: document.querySelector("#hora").value,
+    servicio: document.querySelector("#servicio").value,
+  };
+
+  try {
+    const URL = "http://localhost:3000/serviciosPendientes"
+    console.log("vamos bien");
+     await fetch(URL,{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(seviciosPendientes),
+     })
+    
+     alertaCorrecto("Tu cita se ha agregado exitosamente, en unos momentos nos contactaremos contigo")
+
+
+  } catch (error) {
+    console.log("ERROR:",error);
+    alertaError("Ha ocurrido un error")
+  }
+  
+  console.log(seviciosPendientes);
+}
+
+export function limpiarInfo(inputs,slects){
+  inputs.forEach(input =>{
+    input.value = ""
+  })
+
+  slects.forEach(slect =>{
+    slect.value = ""
+  })
+}
+
+
+export function alertaCorrecto(msg){
+  Swal.fire({
+    // position: "top-end",
+    icon: "success",
+    title: msg,
+    showConfirmButton: true,
+
+  });
+}
+
+export function alertaError(msg){
+  Swal.fire({
+    icon: "error",
+    title: "Oops...",
+    text: msg,
+    footer: 'Intentalo nuevamente',
+    showConfirmButton: true,
+  });
+}
+
+export function boostrapvalidator(){
+  (function () {
+    'use strict'
+  
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+  
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+  
+          
+          form.classList.add('was-validated')
+          
+        }, false)
+      })
+  })()
 }
 
 export function generatorFooter(content) {
