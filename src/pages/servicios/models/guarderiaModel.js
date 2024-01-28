@@ -1,4 +1,4 @@
 //===== Importaciones =====
-import * as baseModel from "./baseModel.js";
+import baseModel from "../models/baseModel.js";
 
 //===== Funciones =====

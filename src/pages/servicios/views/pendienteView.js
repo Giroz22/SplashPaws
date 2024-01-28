@@ -1,27 +1,27 @@
 // =====Importaciones =====
-import { traerTodosServiciosPendientes } from "../models/pendientesModel.js";
-import { tabla, mostrarDatosTbl } from "./serviciosView.js";
+import * as baseModel from "../models/baseModel.js";
+import * as pendientesModel from "../models/pendientesModel.js";
+import * as serviciosView from "./serviciosView.js";
 
 // ===== Selectores =====
 const btnPendientes = document.querySelector("#btnPendientes");
-const titulo = document.querySelector(".titulo-container .titulo");
-const divOpcServicio = document.querySelector(".opcs-servicio-container");
-const ulPendientes = divOpcServicio.querySelector("ul");
 
 // =====Eventos =====
-document.addEventListener("DOMContentLoaded", () => {
-  btnPendientes.click();
-});
-
-btnPendientes.addEventListener("click", () => {
-  ulPendientes.innerHTML = "";
-  titulo.textContent = "Pendientes";
-  traerTodosServiciosPendientes().then((datos) =>
-    mostrarDatosTbl(datos, handleBtnsDetalle)
-  );
+btnPendientes.addEventListener("click", async () => {
+  baseModel.actualizarURL("serviciosPendientes");
+  serviciosView.ulPendientes.innerHTML = "";
+  serviciosView.titulo.textContent = "Pendientes";
+  mostrarDtosPendientes();
 });
 
 //===== Funciones =====
-function handleBtnsDetalle(evento) {
-  console.log(evento.target);
+async function mostrarDtosPendientes() {
+  const datos = await baseModel.obtenerDatos();
+  serviciosView.mostrarDatosTbl(datos, handleBtnsDetalle);
+}
+
+async function handleBtnsDetalle(evento) {
+  const id = evento.target.dataset.id;
+  const obj = await baseModel.obtenerID(id);
+  console.log(obj);
 }
