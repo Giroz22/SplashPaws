@@ -1,7 +1,7 @@
 import { URL_DB } from "../config/config.js";
 
 //=====Variables=====
-let URL = URL_DB;
+export let URL = URL_DB;
 
 //=====Funciones=====
 /**
@@ -108,4 +108,17 @@ export async function eliminar(id) {
     .catch((error) => {
       console.error("Error al eliminar el dato", error);
     });
+}
+
+/**
+ * Trae todos los datos existentes en base a un atributo y su valor
+ *
+ * @param {Atributo por el cual desea consultar} atributo
+ * @param {Valor del atributo por el que se buscara} valor
+ * @returns
+ */
+export async function obtenerDatosAtributo(atributo, valor) {
+  return fetch(`${URL}?${atributo}=${valor}`)
+    .then((respuesta) => respuesta.json())
+    .then((data) => data);
 }

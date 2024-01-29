@@ -1,4 +1,5 @@
 //===== Importaciones =====
+import * as baseModel from "../models/baseModel.js";
 import * as pendientes from "./pendienteView.js";
 import * as bannios from "./banniosView.js";
 import * as guarderia from "./guarderiaView.js";
@@ -29,9 +30,7 @@ export function llenarUlServicio(listaOpc) {
     const li = document.createElement("li");
     li.style.cursor = "pointer";
     li.textContent = opc.descripcion;
-    li.addEventListener("click", () => {
-      opc.handler();
-    });
+    li.addEventListener("click", opc.handler);
     ulPendientes.appendChild(li);
   });
 }
@@ -40,9 +39,9 @@ export function llenarUlServicio(listaOpc) {
  *  Muestra en la tabla de datos de servicio los datos enviados como parametro
  * @param {Array de Datos que se a mostrar en el tbody de la tabla} listaDatos
  */
-export function mostrarDatosTbl(listaDatos, eventoBtn) {
+export function mostrarDatosTbl(listaDatos) {
   mostrarDatosThead(listaDatos);
-  mostrarDatosTbody(listaDatos, eventoBtn);
+  mostrarDatosTbody(listaDatos);
 }
 
 function mostrarDatosThead(listaDatos) {
@@ -71,7 +70,7 @@ function mostrarDatosThead(listaDatos) {
   thead.appendChild(tdTitulo);
 }
 
-function mostrarDatosTbody(listaDatos, eventoBtn) {
+function mostrarDatosTbody(listaDatos) {
   const tbody = tabla.querySelector("tbody");
 
   //Limpiar tbody
@@ -106,7 +105,7 @@ function mostrarDatosTbody(listaDatos, eventoBtn) {
     btnDetalle.classList.add("btn-masInfo");
     btnDetalle.textContent = "Detalles";
     btnDetalle.setAttribute("data-id", elemento["id"]);
-    btnDetalle.addEventListener("click", eventoBtn);
+    btnDetalle.addEventListener("click", handleBtnsDetalle);
 
     td.appendChild(btnDetalle);
     tr.appendChild(td);
@@ -114,4 +113,19 @@ function mostrarDatosTbody(listaDatos, eventoBtn) {
     //Agregamos la informacion a la tabla
     tbody.appendChild(tr);
   });
+}
+
+async function handleBtnsDetalle(evento) {
+  const id = evento.target.dataset.id;
+  const obj = await baseModel.obtenerID(id);
+
+  //==Lo que quiera hacer con los btons detalles
+  console.log(obj);
+  console.log(obj.servicio);
+}
+
+export async function mostrarPorEstado(vrEstado) {
+  const dato = await baseModel.obtenerDatosAtributo("estado", vrEstado);
+
+  mostrarDatosTbl(dato);
 }

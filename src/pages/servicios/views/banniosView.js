@@ -1,5 +1,6 @@
 // =====Importaciones =====
 import * as baseModel from "../models/baseModel.js";
+import * as banniosModel from "../models/banniosModel.js";
 import * as serviciosView from "./serviciosView.js";
 
 //===== Selectores =====
@@ -12,23 +13,29 @@ btnBannios.addEventListener("click", () => {
   serviciosView.titulo.textContent = "Baños";
 
   const listaOpc = [
-    { descripcion: "Todos", handler: mostrarDtosBannios },
+    { descripcion: "Todo", handler: mostrarDtosBannios },
     {
-      descripcion: "Pendientes",
+      descripcion: "Pendiente",
       handler: () => {
-        console.log("Pendientes");
+        serviciosView.mostrarPorEstado("pendiente");
       },
     },
     {
       descripcion: "Proceso",
       handler: () => {
-        console.log("Proceso");
+        serviciosView.mostrarPorEstado("proceso");
       },
     },
     {
-      descripcion: "Cancelados",
+      descripcion: "Finalizado",
       handler: () => {
-        console.log("Cancelados");
+        serviciosView.mostrarPorEstado("finalizado");
+      },
+    },
+    {
+      descripcion: "Cancelado",
+      handler: () => {
+        serviciosView.mostrarPorEstado("cancelado");
       },
     },
   ];
