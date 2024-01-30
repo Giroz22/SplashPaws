@@ -1,0 +1,225 @@
+@import url(../../../../normalize.css);
+
+:root {
+  --pendiente: #ffa031;
+  --bannios: #77dcff;
+  --guarderia: #83ff7e;
+}
+
+main {
+  width: 100%;
+  height: 100vh;
+  padding: 2% 0%;
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  height: 100%;
+  padding: 5px 10px;
+  border: 1px solid var(--darkPurple);
+  border-radius: 10px;
+  color: var(--darkPurple);
+  background: transparent;
+  cursor: pointer;
+  transition: 0.5s;
+
+  &:hover {
+    color: var(--white);
+    background-color: var(--darkPurple);
+  }
+}
+
+/* ===== Herramientas =====  */
+.herramientas-container {
+  display: grid;
+  grid-template-areas:
+    "servicios ."
+    "titulo opciones"
+    "acciones acciones";
+  grid-template-columns: 25% auto;
+  grid-template-rows: repeat(3, auto);
+}
+
+.servicios-container {
+  grid-area: servicios;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  padding: 0 2%;
+}
+
+.servicios-container button {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-style: none;
+
+  &:hover {
+    color: var(--darkPurple);
+  }
+
+  &:nth-child(1):hover {
+    background-color: var(--pendiente);
+  }
+  &:nth-child(2):hover {
+    background-color: var(--bannios);
+  }
+  &:nth-child(3):hover {
+    background-color: var(--guarderia);
+  }
+}
+
+.titulo-container {
+  grid-area: titulo;
+  text-align: center;
+  margin-right: 5px;
+  padding: 0 8%;
+}
+.opcs-servicio-container {
+  grid-area: opciones;
+  text-align: center;
+}
+.titulo-container,
+.opcs-servicio-container {
+  background-color: var(--darkPurple);
+  color: var(--white);
+}
+
+.opcs-servicio-container ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  list-style: none;
+  height: 100%;
+  text-wrap: nowrap;
+  margin: 0 10px;
+}
+
+.opcs-servicio-container ul li {
+  flex: 1;
+  border-bottom: 2px solid transparent;
+  transition: 0.5s;
+  &:hover {
+    font-weight: bold;
+    border-bottom-color: var(--white);
+  }
+}
+
+.acciones-servicios-container {
+  grid-area: acciones;
+  display: flex;
+
+  margin: 5px 2%;
+  gap: 5px;
+  background-color: var(--darkPurple);
+  border-radius: 10px 10px 0 0;
+  padding: 5px 10px;
+}
+
+.acciones-servicios-container button {
+  border-color: var(--white);
+  color: var(--white);
+  transition: 0.5s;
+}
+
+.acciones-servicios-container button:hover {
+  border-color: var(--white);
+  background-color: var(--white);
+  color: var(--darkPurple);
+}
+/* =====Tabla datos===== */
+.dtos-container {
+  overflow: auto;
+  margin: 5px 2%;
+
+  width: 95%;
+  height: 80%;
+}
+
+#tbl-dtos {
+  width: 100%;
+  color: var(--darkPurple);
+  border-collapse: collapse;
+  text-align: center;
+}
+
+#tbl-dtos td {
+  padding: 10px;
+  border: 2px solid white;
+}
+
+#tbl-dtos tr:nth-child(even) {
+  background-color: var(--white);
+}
+
+/* thead */
+#tbl-dtos thead {
+  font-weight: bold;
+}
+
+#row-info {
+  transition: 0.5s;
+  background-color: var(--white);
+
+  position: sticky;
+  top: 0;
+}
+
+#row-servicios td {
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+#row-servicios td:hover {
+  color: var(--black);
+
+  &:nth-child(1) {
+    background-color: var(--pendiente);
+    border-color: var(--pendiente);
+  }
+  &:nth-child(2) {
+    background-color: var(--bannios);
+    border-color: var(--bannios);
+  }
+  &:nth-child(3) {
+    background-color: var(--guarderia);
+    border-color: var(--guarderia);
+  }
+}
+
+#row-opc {
+  transition: 0.5s;
+}
+
+/* ===== Botones =====*/
+#tbl-dtos tbody tr td .btn {
+  border-style: solid;
+  border-width: 1px;
+  padding: 3px 8px;
+  border-radius: 10px;
+  transition: 0.5s;
+}
+
+#tbl-dtos tbody tr td .btn:hover {
+  cursor: pointer;
+  color: var(--white);
+}
+
+#btn-confirmar {
+  border-color: #008f39;
+  color: #008f39;
+  &:hover {
+    background: #008f39;
+    /* box-shadow: 0px 0px 5px 1px #008f39; */
+  }
+}
+
+#btn-cancelar {
+  border-color: #cb3234;
+  color: #cb3234;
+  &:hover {
+    background: #cb3234;
+    /* box-shadow: 0px 0px 5px 1px #cb3234; */
+  }
+}
