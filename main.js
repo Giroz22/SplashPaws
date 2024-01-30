@@ -1,19 +1,20 @@
-/**
- *
- * @param {Valor minimo a generar} min
- * @param {Valor maximo a generar} max
- * @returns Número aleatorio entre el rango de parametros ingrezados
- */
-export function generarNumRandom(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
+//Traduccion
+const URLBase = "https://api.mymemory.translated.net/";
+
+async function traduccionAEspañol(palabraIngles) {
+  const URL = `${URLBase}?langpair=en|es&q=${palabraIngles}`;
+  const respuesta = await fetch(URL);
+  const data = await respuesta.json();
+  const traduccion = data.responseData.translatedText;
+  return traduccion;
 }
 
-/**
- *
- * @returns Número de identificacion unico en formato de texto
- */
-export function generarID() {
-  return String(Date.now() + generarNumRandom(1, 100));
+async function traduccionAIngles(palabraEspañol) {
+  const URL = `${URLBase}?langpair=es|en&q=${palabraEspañol}`;
+  const respuesta = await fetch(URL);
+  const data = await respuesta.json();
+  const traduccion = data.responseData.translatedText;
+  return traduccion;
 }
 
 /** 
@@ -154,12 +155,11 @@ export function generatorHeaderModal(
         </div>
       </nav>
   `;
-  const navegation = document.querySelector(".navegation")
-  generarModal(navegation)
-  
+  const navegation = document.querySelector(".navegation");
+  generarModal(navegation);
 }
 
-export function validarInputs(inputs){
+export function validarInputs(inputs) {
   console.log("entro");
   inputs.forEach((input) => {
     switch (input.type) {
@@ -179,21 +179,13 @@ export function validarInputs(inputs){
         break;
     }
 
-    if(input.id == "hora"){
+    if (input.id == "hora") {
       console.log("hay una hora");
     }
-
-
-
   });
-
-  
-
 }
 
-
-export function generarModal(content){
-
+export function generarModal(content) {
   content.innerHTML += `
   <!-- Modal -->
   <div
@@ -303,86 +295,64 @@ export function generarModal(content){
   </div>
   `;
 
-
   const form = document.querySelector("form");
   const inputs = form.querySelectorAll("input");
-  const selects = document.querySelectorAll("select")
-  const selectContentHora = document.querySelector("#hora")
-  const btnClose = document.querySelector(".btn-close")
+  const selects = document.querySelectorAll("select");
+  const selectContentHora = document.querySelector("#hora");
+  const btnClose = document.querySelector(".btn-close");
 
+  validarInputs(inputs);
+  validarSelects(selects, selectContentHora, 8, 16);
 
-  validarInputs(inputs)
-  validarSelects(selects,selectContentHora,8,16)
-
-  
-
-  boostrapvalidator()
-  
+  boostrapvalidator();
 
   const btnEnviar = document.querySelector(".btn_submit");
   btnEnviar.addEventListener("click", (event) => {
+    if (form.checkValidity()) {
+      event.preventDefault();
+      agregarCitasPendientes();
+      limpiarInfo(inputs, selects);
 
-   if(form.checkValidity()){
-    event.preventDefault();
-    agregarCitasPendientes();
-    limpiarInfo(inputs,selects)
-    
-
-    btnClose.click()
-
-   }
+      btnClose.click();
+    }
   });
-
-
-
 }
 
+export function validarSelects(selects, selectContent, horaInicio, horaFinal) {
+  selects.forEach((select) => {
+    if (select.id == "hora") {
+      let contPm = 1;
 
-
-export function validarSelects(selects,selectContent,horaInicio,horaFinal){
-  selects.forEach(select=>{
-    if(select.id == "hora"){
-      let contPm = 1
-
-      while(horaInicio <= horaFinal){
-        let option = document.createElement("option")
+      while (horaInicio <= horaFinal) {
+        let option = document.createElement("option");
         console.log(horaInicio);
-      
-        if(horaInicio < 12){
+
+        if (horaInicio < 12) {
           option.value = `${horaInicio}:00 a.m`;
           option.textContent = option.value;
-          
 
           console.log(option.value);
-
-        }else if(horaInicio == 12){
+        } else if (horaInicio == 12) {
           option.value = `${horaInicio}:00 p.m`;
           option.textContent = option.value;
 
           console.log(option.value);
-
-        }else{
+        } else {
           option.value = `${contPm}:00 p.m`;
           option.textContent = option.value;
 
-          contPm++
-
+          contPm++;
         }
 
-        selectContent.appendChild(option)
-        
-        horaInicio++
+        selectContent.appendChild(option);
+
+        horaInicio++;
       }
-
-
-
     }
-  })
-
+  });
 }
 
 async function agregarCitasPendientes() {
-
   const seviciosPendientes = {
     propietario: {
       nombre: document.querySelector("#nombre_propietario").value,
@@ -398,83 +368,79 @@ async function agregarCitasPendientes() {
   };
 
   try {
-    const URL = "http://localhost:3000/serviciosPendientes"
+    const URL = "http://localhost:3000/serviciosPendientes";
     console.log("vamos bien");
-     await fetch(URL,{
+    await fetch(URL, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(seviciosPendientes),
-     })
-    
-     alertaCorrecto("Tu cita se ha agregado exitosamente, en unos momentos nos contactaremos contigo")
+    });
 
-
+    alertaCorrecto(
+      "Tu cita se ha agregado exitosamente, en unos momentos nos contactaremos contigo"
+    );
   } catch (error) {
-    console.log("ERROR:",error);
-    alertaError("Ha ocurrido un error")
+    console.log("ERROR:", error);
+    alertaError("Ha ocurrido un error");
   }
-  
+
   console.log(seviciosPendientes);
 }
 
-export function limpiarInfo(inputs,slects){
-  inputs.forEach(input =>{
-    input.value = ""
-  })
+export function limpiarInfo(inputs, slects) {
+  inputs.forEach((input) => {
+    input.value = "";
+  });
 
-  slects.forEach(slect =>{
-    slect.value = ""
-  })
+  slects.forEach((slect) => {
+    slect.value = "";
+  });
 }
 
-
-export function alertaCorrecto(msg){
+export function alertaCorrecto(msg) {
   Swal.fire({
     // position: "top-end",
     icon: "success",
     title: msg,
     showConfirmButton: true,
-
   });
 }
 
-export function alertaError(msg){
-
-    Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: msg,
-      footer: 'Intentalo nuevamente',
-      showConfirmButton: true,
-    });
-
-
+export function alertaError(msg) {
+  Swal.fire({
+    icon: "error",
+    title: "Oops...",
+    text: msg,
+    footer: "Intentalo nuevamente",
+    showConfirmButton: true,
+  });
 }
 
-export function boostrapvalidator(){
+export function boostrapvalidator() {
   (function () {
-    'use strict'
-  
+    "use strict";
+
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.querySelectorAll('.needs-validation')
-  
+    var forms = document.querySelectorAll(".needs-validation");
+
     // Loop over them and prevent submission
-    Array.prototype.slice.call(forms)
-      .forEach(function (form) {
-        form.addEventListener('submit', function (event) {
+    Array.prototype.slice.call(forms).forEach(function (form) {
+      form.addEventListener(
+        "submit",
+        function (event) {
           if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
+            event.preventDefault();
+            event.stopPropagation();
           }
-  
-          
-          form.classList.add('was-validated')
-          
-        }, false)
-      })
-  })()
+
+          form.classList.add("was-validated");
+        },
+        false
+      );
+    });
+  })();
 }
 
 export function generatorFooter(content) {
@@ -551,5 +517,3 @@ export function generatorFooter(content) {
 </div>
   `;
 }
-
-
