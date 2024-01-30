@@ -40,11 +40,23 @@ export function llenarUlServicio(listaOpc) {
  * @param {Array de Datos que se a mostrar en el tbody de la tabla} listaDatos
  */
 export function mostrarDatosTbl(listaDatos) {
-  mostrarDatosThead(listaDatos);
+  // mostrarDatosThead(listaDatos);
   mostrarDatosTbody(listaDatos);
 }
 
-function mostrarDatosThead(listaDatos) {
+export function mostrarDatosThead(datosThead) {
+  const thead = tabla.querySelector("#row-info");
+  thead.innerText = "";
+  datosThead.forEach((elemento) => {
+    let celda = document.createElement("td");
+    celda.textContent = elemento.toUpperCase();
+    thead.appendChild(celda);
+  });
+}
+
+//Muestra las llaves de un objeto como cabezera
+//Borrar
+function mostrarDatosTheadObj(listaDatos) {
   const thead = tabla.querySelector("#row-info");
   thead.innerText = "";
   const elemento = listaDatos[0];
@@ -70,7 +82,7 @@ function mostrarDatosThead(listaDatos) {
   thead.appendChild(tdTitulo);
 }
 
-function mostrarDatosTbody(listaDatos) {
+export function mostrarDatosTbody(listaDatos) {
   const tbody = tabla.querySelector("tbody");
 
   //Limpiar tbody
@@ -85,13 +97,13 @@ function mostrarDatosTbody(listaDatos) {
        Sino se recorre nuevamente ya que es un objeto que contiene otros elementos*/
       if (typeof elemento[dato] != "object") {
         const td = document.createElement("td");
-        td.textContent = elemento[dato];
+        td.textContent = elemento[dato].toUpperCase();
         tr.appendChild(td);
       } else {
         for (let datoObj in elemento[dato]) {
           const td = document.createElement("td");
 
-          td.textContent = elemento[dato][datoObj];
+          td.textContent = elemento[dato][datoObj].toUpperCase();
 
           tr.appendChild(td);
         }
@@ -125,7 +137,10 @@ async function handleBtnsDetalle(evento) {
 }
 
 export async function mostrarPorEstado(vrEstado) {
-  const dato = await baseModel.obtenerDatosAtributo("estado", vrEstado);
+  const dato = await baseModel.obtenerDatosAtributo(
+    "estado",
+    vrEstado.toLowerCase()
+  );
 
-  mostrarDatosTbl(dato);
+  mostrarDatosTbody(dato);
 }

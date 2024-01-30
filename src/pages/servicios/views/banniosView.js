@@ -43,6 +43,21 @@ btnBannios.addEventListener("click", () => {
 });
 //===== Funciones =====
 async function mostrarDtosBannios() {
+  serviciosView.mostrarDatosThead([
+    "ID",
+    "Nombre Mascota",
+    "Especie",
+    "Tamaño",
+    "Pelaje",
+    "Propietario",
+    "Telefono",
+    "Fecha",
+    "Hora llegada",
+    "Hora salida",
+    "Servicio",
+    "Estado",
+    "Detella",
+  ]);
   const datos = await baseModel.obtenerDatos();
-  serviciosView.mostrarDatosTbl(datos);
+  serviciosView.mostrarDatosTbody(datos);
 }

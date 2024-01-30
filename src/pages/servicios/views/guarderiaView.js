@@ -20,13 +20,19 @@ btnGuarderia.addEventListener("click", () => {
     {
       descripcion: "En Guarderia",
       handler: () => {
-        console.log("guarderia");
+        serviciosView.mostrarPorEstado("guarderia");
+      },
+    },
+    {
+      descripcion: "Finalizados",
+      handler: () => {
+        serviciosView.mostrarPorEstado("finalizado");
       },
     },
     {
       descripcion: "Cancelados",
       handler: () => {
-        console.log("cancelados");
+        serviciosView.mostrarPorEstado("cancelado");
       },
     },
   ];
@@ -35,6 +41,21 @@ btnGuarderia.addEventListener("click", () => {
 
 //===== Funciones =====
 async function mostrarDtosGuarderia() {
+  serviciosView.mostrarDatosThead([
+    "ID",
+    "Nombre Mascota",
+    "Especie",
+    "Tamaño",
+    "Pelaje",
+    "Propietario",
+    "Telefono",
+    "Fecha",
+    "Hora llegada",
+    "Hora salida",
+    "Servicio",
+    "Estado",
+    "Detalle",
+  ]);
   const datos = await baseModel.obtenerDatos();
-  serviciosView.mostrarDatosTbl(datos);
+  serviciosView.mostrarDatosTbody(datos);
 }

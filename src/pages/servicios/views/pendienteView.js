@@ -15,6 +15,17 @@ btnPendientes.addEventListener("click", async () => {
 
 //===== Funciones =====
 async function mostrarDtosPendientes() {
+  serviciosView.mostrarDatosThead([
+    "ID",
+    "Nombre Mascota",
+    "Especie",
+    "Propietario",
+    "Telefono",
+    "Fecha",
+    "Hora llegada",
+    "Servicio",
+    "Detalle",
+  ]);
   const datos = await baseModel.obtenerDatos();
   serviciosView.mostrarDatosTbl(datos);
 }
