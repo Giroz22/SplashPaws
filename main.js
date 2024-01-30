@@ -1,6 +1,11 @@
 //Traduccion
 const URLBase = "https://api.mymemory.translated.net/";
 
+/**
+ *  Traduce una palabra ingresada en Ingles y la retorna en español
+ * @param {Palabra que sera traducida} palabraIngles
+ * @returns La palabra ingresada en Español
+ */
 async function traducirEspañol(palabraIngles) {
   const URL = `${URLBase}?langpair=en|es&q=${palabraIngles}`;
   const respuesta = await fetch(URL);
@@ -9,6 +14,11 @@ async function traducirEspañol(palabraIngles) {
   return traduccion;
 }
 
+/**
+ *  Traduce una palabra ingresada en español y la retorna en ingles
+ * @param {Palabra que sera traducida} palabraEspañol
+ * @returns La palabra ingresada en Ingles
+ */
 async function traducirIngles(palabraEspañol) {
   const URL = `${URLBase}?langpair=es|en&q=${palabraEspañol}`;
   const respuesta = await fetch(URL);
