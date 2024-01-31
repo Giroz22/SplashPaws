@@ -1,15 +1,15 @@
-let isEnglish = localStorage.getItem("isEnglish");
-
-//Traduccion
+//variables
 const URLBase = "https://api.mymemory.translated.net/";
 
 /**
- *  Traduce una palabra ingresada en Ingles y la retorna en español
- * @param {Palabra que sera traducida} palabraIngles
- * @returns La palabra ingresada en Español
+ * Traduce un texto en base al idioma en el que esta el texto y al que lo desea traducir
+ * @param {Texto que se va a traducir} texto
+ * @param {Idioma actual del texto} idiomaTexto
+ * @param {Idioma en el que desea traducir el texto} idiomaTraducir
+ * @returns
  */
-async function traducirEspañol(palabraIngles) {
-  const URL = `${URLBase}?q=${palabraIngles}&langpair=en-GB|es`;
+async function traducir(texto, idiomaTexto, idiomaTraducir) {
+  const URL = `${URLBase}?q=${texto}&langpair=${idiomaTexto}|${idiomaTraducir}`;
   try {
     const respuesta = await fetch(URL);
     const data = await respuesta.json();
@@ -27,68 +27,45 @@ async function traducirEspañol(palabraIngles) {
 }
 
 /**
- *  Traduce una palabra ingresada en español y la retorna en ingles
- * @param {Palabra que sera traducida} palabraEspañol
- * @returns La palabra ingresada en Ingles
+ * Traduce una lista de elementos HTML especificada en la funcion
+ * @param {Idioma actual del texto} idiomaTexto
+ * @param {Idioma en el que desea traducir el texto} idiomaTraducir
  */
-async function traducirIngles(palabraEspañol) {
-  const URL = `${URLBase}?q=${palabraEspañol}&langpair=es|en-ES`;
-  try {
-    const respuesta = await fetch(URL);
-    const data = await respuesta.json();
+async function traducirElementos(idiomaTexto, idiomaTraducir) {
+  const textoTraducir = Array.from(
+    document.querySelectorAll("h1,h2,button,td")
+  );
 
-    if (!respuesta.ok) {
-      console.error("Error al traducir:", data.responseDetails);
-      return false;
-    }
-
-    const traduccion = data.responseData.translatedText;
-    return traduccion;
-  } catch (error) {
-    console.log("Error al traducir:", error);
+  //Recorre todos los elementos que se van a traducir
+  for (let element of textoTraducir) {
+    const texto = await traducir(
+      element.textContent,
+      idiomaTexto,
+      idiomaTraducir
+    );
+    //Si la funciono la traduccion deja de traducir  la pagina
+    if (!texto) break;
+    element.textContent = texto;
   }
 }
 
+/**
+ * En base al elemento("isEnglish") del local storage, el idioma de la pagina se traduce a ingles o español
+ */
 export function TraducirPagina() {
-  const textoTraducir = document.querySelectorAll("h1,h2,button,td");
-  isEnglish = localStorage.getItem("isEnglish");
-
-  if (isEnglish) {
-    textoTraducir.forEach((element) => {
-      if (traduccionTexto) {
-        traducirEspañol(element.textContent).then((texto) => {
-          element.textContent = texto;
-        });
-      }
-    });
+  if (localStorage.getItem("isEnglish")) {
+    traducirElementos("en-GB", "es-ES");
     localStorage.removeItem("isEnglish");
   } else {
-    textoTraducir.forEach((element) => {
-      if (traduccionTexto) {
-        traducirIngles(element.textContent).then((texto) => {
-          element.textContent = texto;
-        });
-      }
-    });
+    traducirElementos("es-ES", "en-GB");
     localStorage.setItem("isEnglish", true);
   }
 }
 
-export function UtilizarIdiomaActual() {
-  const textoTraducir = document.querySelectorAll("h1,h2,button,td");
-  isEnglish = localStorage.getItem("isEnglish");
-
-  if (isEnglish) {
-    textoTraducir.forEach((element) => {
-      traducirIngles(element.textContent).then((texto) => {
-        if (texto) {
-          element.textContent = texto;
-        }
-      });
-    });
-  }
-}
-
-function parsearTexto(texto) {
-  return texto.replace(" ", "%20");
+/**
+ * Traduce la pagina en base al idioma que tiene actualmente el elemento("isEnglish") del local storage,
+ */
+export async function UtilizarIdiomaActual() {
+  //Si la pagina es en español no hace nada
+  localStorage.getItem("isEnglish") && traducirElementos("es-ES", "en-GB");
 }
