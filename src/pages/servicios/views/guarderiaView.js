@@ -43,7 +43,7 @@ btnGuarderia.addEventListener("click", () => {
 async function mostrarDtosGuarderia() {
   serviciosView.mostrarDatosThead([
     "ID",
-    "Nombre Mascota",
+    "Nombre de la Mascota",
     "Especie",
     "Tamaño",
     "Pelaje",

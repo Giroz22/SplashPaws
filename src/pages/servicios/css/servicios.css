@@ -34,7 +34,7 @@ button {
 .herramientas-container {
   display: grid;
   grid-template-areas:
-    "servicios ."
+    "servicios servicios"
     "titulo opciones"
     "acciones acciones";
   grid-template-columns: 25% auto;
@@ -44,7 +44,7 @@ button {
 .servicios-container {
   grid-area: servicios;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   gap: 5px;
   padding: 0 2%;
 }
@@ -72,7 +72,7 @@ button {
 .titulo-container {
   grid-area: titulo;
   text-align: center;
-  margin-right: 5px;
+  /* margin-right: 5px; */
   padding: 0 8%;
 }
 .opcs-servicio-container {
@@ -145,8 +145,9 @@ button {
 }
 
 #tbl-dtos td {
-  padding: 10px;
+  padding: 0 10px;
   border: 2px solid white;
+  font-size: 14px;
 }
 
 #tbl-dtos tr:nth-child(even) {
@@ -155,37 +156,19 @@ button {
 
 /* thead */
 #tbl-dtos thead {
-  font-weight: bold;
+  height: 40px;
 }
 
-#row-info {
+#tbl-dtos thead #row-info {
+  font-weight: 800;
+
   transition: 0.5s;
-  background-color: var(--white);
+  background-color: #c2dbfd;
+
+  color: var(--darkBlue);
 
   position: sticky;
   top: 0;
-}
-
-#row-servicios td {
-  cursor: pointer;
-  transition: 0.5s;
-}
-
-#row-servicios td:hover {
-  color: var(--black);
-
-  &:nth-child(1) {
-    background-color: var(--pendiente);
-    border-color: var(--pendiente);
-  }
-  &:nth-child(2) {
-    background-color: var(--bannios);
-    border-color: var(--bannios);
-  }
-  &:nth-child(3) {
-    background-color: var(--guarderia);
-    border-color: var(--guarderia);
-  }
 }
 
 #row-opc {

@@ -17,7 +17,7 @@ btnPendientes.addEventListener("click", async () => {
 async function mostrarDtosPendientes() {
   serviciosView.mostrarDatosThead([
     "ID",
-    "Nombre Mascota",
+    "Nombre de la Mascota",
     "Especie",
     "Propietario",
     "Telefono",

@@ -59,7 +59,7 @@ h3 {
   border: 1.5px solid var(--darkPurple);
   &:hover {
     background-color: #e0e0e0;
-    border: 1.5px solid var(--darkPurple);
+    /* border: 1.5px solid var(--darkPurple); */
     color: var(--darkPurple);
   }
 }
@@ -168,7 +168,7 @@ header .navbar .navegation .modal-content {
     font-weight: 800;
   }
 }
-header .navbar .navegation .modal-content .contenedor_buttom{
+header .navbar .navegation .modal-content .contenedor_buttom {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -360,17 +360,16 @@ footer .footer_content .map_content iframe {
     align-items: flex-start;
   }
 
-  header .navbar .navegation .form_modal  {
+  header .navbar .navegation .form_modal {
     width: 100%;
   }
 
-  header .navbar .navegation .form_modal  input,
-  header .navbar .navegation .form_modal  select {
+  header .navbar .navegation .form_modal input,
+  header .navbar .navegation .form_modal select {
     width: 90%;
   }
-  header .navbar .navegation .form_modal .btn_submit{
+  header .navbar .navegation .form_modal .btn_submit {
     width: 100%;
-    
   }
 
   header .navbar .login {

@@ -3,6 +3,7 @@ import * as baseModel from "../models/baseModel.js";
 import * as pendientes from "./pendienteView.js";
 import * as bannios from "./banniosView.js";
 import * as guarderia from "./guarderiaView.js";
+import * as traductor from "../../../js/traductor.js";
 
 //===== Selectores =====
 //Barra herramientas
@@ -17,7 +18,10 @@ export const tabla = document.querySelector("#tbl-dtos");
 //===== Eventos =====
 document.addEventListener("DOMContentLoaded", () => {
   btnPendientes.click();
+  traductor.UtilizarIdiomaActual();
 });
+
+document.addEventListener("click", (evento) => {});
 
 //===== Funciones =====
 export function llenarUlServicio(listaOpc) {

@@ -45,7 +45,7 @@ btnBannios.addEventListener("click", () => {
 async function mostrarDtosBannios() {
   serviciosView.mostrarDatosThead([
     "ID",
-    "Nombre Mascota",
+    "Nombre de la Mascota",
     "Especie",
     "Tamaño",
     "Pelaje",
@@ -56,7 +56,7 @@ async function mostrarDtosBannios() {
     "Hora salida",
     "Servicio",
     "Estado",
-    "Detella",
+    "Detalle",
   ]);
   const datos = await baseModel.obtenerDatos();
   serviciosView.mostrarDatosTbody(datos);
