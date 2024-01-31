@@ -1,3 +1,32 @@
+//Traduccion
+const URLBase = "https://api.mymemory.translated.net/";
+
+/**
+ *  Traduce una palabra ingresada en Ingles y la retorna en español
+ * @param {Palabra que sera traducida} palabraIngles
+ * @returns La palabra ingresada en Español
+ */
+async function traducirEspañol(palabraIngles) {
+  const URL = `${URLBase}?langpair=en|es&q=${palabraIngles}`;
+  const respuesta = await fetch(URL);
+  const data = await respuesta.json();
+  const traduccion = data.responseData.translatedText;
+  return traduccion;
+}
+
+/**
+ *  Traduce una palabra ingresada en español y la retorna en ingles
+ * @param {Palabra que sera traducida} palabraEspañol
+ * @returns La palabra ingresada en Ingles
+ */
+async function traducirIngles(palabraEspañol) {
+  const URL = `${URLBase}?langpair=es|en&q=${palabraEspañol}`;
+  const respuesta = await fetch(URL);
+  const data = await respuesta.json();
+  const traduccion = data.responseData.translatedText;
+  return traduccion;
+}
+
 /** 
 ====== Funcion para generar el header ====== 
   
@@ -20,42 +49,20 @@
 export function generatorHeader(
   content,
   link1,
-  link2,
-  link3,
   url1,
-  url2,
-  url3,
   nameLogin,
   urlLogin
 ) {
   content.innerHTML = `
-    <nav class="navbar">
+    <nav class="navbar navSolo">
     <a href="../main/html/main.html">
-      <img src="../../media/imgs/logo_Splash_Paws.png" alt="" />
+      <img src="../../../media/imgs/logo_Splash_Paws.png" alt="" />
     </a>
 
     <label for="hamburguer"><i class="bi bi-list"></i></label>
     <input type="checkbox" id="hamburguer"/>
 
-    <div class="navegation">
-      <a href=${url1}>${link1}</a>
-      <a href=${url2}>${link2}</a>
-      <a href=${url3}>${link3}</a>
-      <div class="login login_responsive">
-            <a href=${urlLogin}>${nameLogin}</a>
-            <div class="line"></div>
-            <button id="btn btn_leguage">
-              <img
-                src="https://cdn-icons-png.flaticon.com/128/197/197593.png"
-                alt="spain_lenguage"
-                id="spain_lenguage"
-              />
-              Español
-            </button>
-          </div>
-    </div>
-
-    <div class="login">
+    <div class="login loginSolo">
       <a href=${urlLogin}>${nameLogin}</a>
       <div class="line"></div>
       <button id="btn btn_leguage">
@@ -335,14 +342,16 @@ export function validarSelects(selects, selectContent, horaInicio, horaFinal) {
 
 async function agregarCitasPendientes() {
   const seviciosPendientes = {
-    propietario: {
-      nombre: document.querySelector("#nombre_propietario").value,
-      telefono: document.querySelector("#telefono").value,
-    },
     mascota: {
       nombre: document.querySelector("#nombre_mascota").value,
       especie: document.querySelector("#especie").value,
     },
+    
+    propietario: {
+      nombre: document.querySelector("#nombre_propietario").value,
+      telefono: document.querySelector("#telefono").value,
+    },
+   
     fecha: document.querySelector("#fecha").value,
     hora_llegada: document.querySelector("#hora").value,
     servicio: document.querySelector("#servicio").value,
