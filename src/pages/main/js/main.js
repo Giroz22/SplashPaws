@@ -29,3 +29,14 @@ const footer = document.querySelector("footer")
 generatorHeaderModal(header,"Tienda","Contactos","#","#","Ingresar","#")
 
 generatorFooter(footer)
+
+
+// -------------------------
+
+import texto, { consumirAPI } from "./funciones.js"
+
+
+//Eventos
+document.addEventListener("DOMContentLoaded", () => {
+    consumirAPI(texto)
+})
