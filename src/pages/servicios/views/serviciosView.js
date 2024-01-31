@@ -138,6 +138,17 @@ async function handleBtnsDetalle(evento) {
   //==Lo que quiera hacer con los btons detalles
   console.log(obj);
   console.log(obj.servicio);
+
+  const header = document.querySelector("header");
+
+  switch (obj.servicio) {
+    case "baño":
+      header.innerHTML = bannios.generarFormBannios();
+      break;
+
+    default:
+      break;
+  }
 }
 
 export async function mostrarPorEstado(vrEstado) {

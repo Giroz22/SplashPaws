@@ -61,3 +61,7 @@ async function mostrarDtosBannios() {
   const datos = await baseModel.obtenerDatos();
   serviciosView.mostrarDatosTbody(datos);
 }
+
+export function generarFormBannios() {
+  return "<h1>Hola Lis</h1>";
+}
