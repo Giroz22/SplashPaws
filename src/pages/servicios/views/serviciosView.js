@@ -5,11 +5,15 @@ import * as bannios from "./banniosView.js";
 import * as guarderia from "./guarderiaView.js";
 import * as traductor from "../../../js/traductor.js";
 
+//=====Variables=====
+let servicioActual = "";
+
 //===== Selectores =====
 //Barra herramientas
-const btnPendientes = document.querySelector("#btnPendientes");
 const containerServices = document.querySelector(".servicios-container");
+const btnPendientes = document.querySelector("#btnPendientes");
 const btnGuarderia = document.querySelector("#btnGuarderia");
+const btnBannios = document.querySelector("#btnBannios");
 export const titulo = document.querySelector(".titulo-container .titulo");
 export const divOpcServicio = document.querySelector(
   ".opcs-servicio-container"
@@ -163,4 +167,9 @@ export async function mostrarPorEstado(vrEstado) {
   );
 
   mostrarDatosTbody(dato);
+}
+
+export function actualizarServicioActual(servicio) {
+  servicioActual = servicio;
+  console.log(servicioActual);
 }

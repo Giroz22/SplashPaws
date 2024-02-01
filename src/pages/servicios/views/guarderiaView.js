@@ -7,6 +7,8 @@ import * as serviciosView from "./serviciosView.js";
 //===== Eventos =====
 btnGuarderia.addEventListener("click", () => {
   baseModel.actualizarURL("serviciosGuarderia");
+  serviciosView.actualizarServicioActual("guarderia");
+
   mostrarDtosGuarderia();
   serviciosView.titulo.textContent = "Guarderia";
 

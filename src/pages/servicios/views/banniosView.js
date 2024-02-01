@@ -8,6 +8,8 @@ import * as serviciosView from "./serviciosView.js";
 //===== Eventos =====
 btnBannios.addEventListener("click", () => {
   baseModel.actualizarURL("serviciosBannios");
+  serviciosView.actualizarServicioActual("bannios");
+
   mostrarDtosBannios();
 
   serviciosView.titulo.textContent = "Baños";

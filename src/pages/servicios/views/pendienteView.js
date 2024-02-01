@@ -8,6 +8,7 @@ const btnPendientes = document.querySelector("#btnPendientes");
 // =====Eventos =====
 btnPendientes.addEventListener("click", async () => {
   baseModel.actualizarURL("serviciosPendientes");
+  serviciosView.actualizarServicioActual("pendiente");
   serviciosView.ulPendientes.innerHTML = "";
   serviciosView.titulo.textContent = "Pendientes";
   mostrarDtosPendientes();
