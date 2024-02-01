@@ -8,6 +8,8 @@ import * as traductor from "../../../js/traductor.js";
 //===== Selectores =====
 //Barra herramientas
 const btnPendientes = document.querySelector("#btnPendientes");
+const containerServices = document.querySelector(".servicios-container");
+const btnGuarderia = document.querySelector("#btnGuarderia");
 export const titulo = document.querySelector(".titulo-container .titulo");
 export const divOpcServicio = document.querySelector(
   ".opcs-servicio-container"
@@ -18,10 +20,13 @@ export const tabla = document.querySelector("#tbl-dtos");
 //===== Eventos =====
 document.addEventListener("DOMContentLoaded", () => {
   btnPendientes.click();
-  traductor.UtilizarIdiomaActual();
 });
 
-document.addEventListener("click", (evento) => {});
+containerServices.querySelectorAll("button").forEach((boton) => {
+  boton.addEventListener("click", (evento) => {
+    traductor.UtilizarIdiomaActual();
+  });
+});
 
 //===== Funciones =====
 export function llenarUlServicio(listaOpc) {

@@ -4,8 +4,6 @@ import * as serviciosView from "./serviciosView.js";
 
 //===== Selectores =====
 
-const btnPendientes = document.querySelector("#btnPendientes");
-
 //===== Eventos =====
 btnGuarderia.addEventListener("click", () => {
   baseModel.actualizarURL("serviciosGuarderia");
