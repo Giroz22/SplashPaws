@@ -54,7 +54,7 @@ export async function obtenerID(id) {
  * @returns Status de la solicitud (200 OK)
  */
 export async function guardar(obj) {
-  myInit = {
+  const myInit = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -76,7 +76,7 @@ export async function guardar(obj) {
  * @returns
  */
 export async function modificar(id, obj) {
-  myInit = {
+  const myInit = {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -97,7 +97,7 @@ export async function modificar(id, obj) {
  * @returns Status de la eliminacion (200 OK)
  */
 export async function eliminar(id) {
-  myInit = {
+  const myInit = {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

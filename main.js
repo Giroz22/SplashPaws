@@ -1,32 +1,3 @@
-//Traduccion
-const URLBase = "https://api.mymemory.translated.net/";
-
-/**
- *  Traduce una palabra ingresada en Ingles y la retorna en español
- * @param {Palabra que sera traducida} palabraIngles
- * @returns La palabra ingresada en Español
- */
-async function traducirEspañol(palabraIngles) {
-  const URL = `${URLBase}?langpair=en|es&q=${palabraIngles}`;
-  const respuesta = await fetch(URL);
-  const data = await respuesta.json();
-  const traduccion = data.responseData.translatedText;
-  return traduccion;
-}
-
-/**
- *  Traduce una palabra ingresada en español y la retorna en ingles
- * @param {Palabra que sera traducida} palabraEspañol
- * @returns La palabra ingresada en Ingles
- */
-async function traducirIngles(palabraEspañol) {
-  const URL = `${URLBase}?langpair=es|en&q=${palabraEspañol}`;
-  const respuesta = await fetch(URL);
-  const data = await respuesta.json();
-  const traduccion = data.responseData.translatedText;
-  return traduccion;
-}
-
 /** 
 ====== Funcion para generar el header ====== 
   
@@ -46,13 +17,7 @@ async function traducirIngles(palabraEspañol) {
   Ejemplo:
     generatorHeaderModal(header,"Tienda","Contactos","#","#","Ingresar","#")
 */
-export function generatorHeader(
-  content,
-  link1,
-  url1,
-  nameLogin,
-  urlLogin
-) {
+export function generatorHeader(content, link1, url1, nameLogin, urlLogin) {
   content.innerHTML = `
     <nav class="navbar navSolo">
     <a href="../main/html/main.html">
@@ -148,7 +113,6 @@ export function generatorHeaderModal(
 }
 
 export function validarInputs(inputs) {
-  console.log("entro");
   inputs.forEach((input) => {
     switch (input.type) {
       case "date":
@@ -165,10 +129,6 @@ export function validarInputs(inputs) {
         input.setAttribute("max", `${año + 1}-${mes}-${dia}`);
 
         break;
-    }
-
-    if (input.id == "hora") {
-      console.log("hay una hora");
     }
   });
 }
@@ -313,18 +273,13 @@ export function validarSelects(selects, selectContent, horaInicio, horaFinal) {
 
       while (horaInicio <= horaFinal) {
         let option = document.createElement("option");
-        console.log(horaInicio);
 
         if (horaInicio < 12) {
           option.value = `${horaInicio}:00 a.m`;
           option.textContent = option.value;
-
-          console.log(option.value);
         } else if (horaInicio == 12) {
           option.value = `${horaInicio}:00 p.m`;
           option.textContent = option.value;
-
-          console.log(option.value);
         } else {
           option.value = `${contPm}:00 p.m`;
           option.textContent = option.value;
@@ -340,18 +295,18 @@ export function validarSelects(selects, selectContent, horaInicio, horaFinal) {
   });
 }
 
-async function agregarCitasPendientes() {
+export async function agregarCitasPendientes() {
   const seviciosPendientes = {
     mascota: {
       nombre: document.querySelector("#nombre_mascota").value,
       especie: document.querySelector("#especie").value,
     },
-    
+
     propietario: {
       nombre: document.querySelector("#nombre_propietario").value,
       telefono: document.querySelector("#telefono").value,
     },
-   
+
     fecha: document.querySelector("#fecha").value,
     hora_llegada: document.querySelector("#hora").value,
     servicio: document.querySelector("#servicio").value,
@@ -359,7 +314,6 @@ async function agregarCitasPendientes() {
 
   try {
     const URL = "http://localhost:3000/serviciosPendientes";
-    console.log("vamos bien");
     await fetch(URL, {
       method: "POST",
       headers: {
@@ -368,9 +322,7 @@ async function agregarCitasPendientes() {
       body: JSON.stringify(seviciosPendientes),
     });
 
-    alertaCorrecto(
-      "Tu cita se ha agregado exitosamente, en unos momentos nos contactaremos contigo"
-    );
+    alertaCorrecto("Tu cita se ha agregado exitosamente");
   } catch (error) {
     console.log("ERROR:", error);
     alertaError("Ha ocurrido un error");

@@ -4,6 +4,7 @@ import * as pendientes from "./pendienteView.js";
 import * as bannios from "./banniosView.js";
 import * as guarderia from "./guarderiaView.js";
 import * as traductor from "../../../js/traductor.js";
+import * as modalGeneral from "./functionModal.js";
 
 //=====Variables=====
 let servicioActual = "";
@@ -20,6 +21,8 @@ export const divOpcServicio = document.querySelector(
 );
 export const ulPendientes = divOpcServicio.querySelector("ul");
 export const tabla = document.querySelector("#tbl-dtos");
+//Contenedor modal
+const modalBody = document.querySelector(".modal-body");
 
 //===== Eventos =====
 document.addEventListener("DOMContentLoaded", () => {
@@ -130,6 +133,8 @@ export function mostrarDatosTbody(listaDatos) {
     btnDetalle.classList.add("btn-masInfo");
     btnDetalle.textContent = "Detalles";
     btnDetalle.setAttribute("data-id", elemento["id"]);
+    btnDetalle.setAttribute("data-bs-toggle", "modal");
+    btnDetalle.setAttribute("data-bs-target", "#staticBackdrop");
     btnDetalle.addEventListener("click", handleBtnsDetalle);
 
     td.appendChild(btnDetalle);
@@ -150,12 +155,14 @@ async function handleBtnsDetalle(evento) {
 
   const header = document.querySelector("header");
 
-  switch (obj.servicio) {
+  switch (obj.servicio.toLowerCase()) {
     case "baño":
-      header.innerHTML = bannios.generarFormBannios();
+      bannios.generarFormBannios(modalBody, obj);
+
       break;
 
-    default:
+    case "guarderia":
+      guarderia.generarFormGuarderia(modalBody, obj);
       break;
   }
 }
@@ -172,4 +179,31 @@ export async function mostrarPorEstado(vrEstado) {
 export function actualizarServicioActual(servicio) {
   servicioActual = servicio;
   console.log(servicioActual);
+}
+
+//Lis
+const btnInfo = document.querySelector(".btn-masInfo");
+btnInfo.setAttribute("data-bs-toggle", "modal");
+btnInfo.setAttribute("data-bs-target", "#staticBackdrop");
+btnInfo.addEventListener("click", () => {
+  clean(modalBody);
+  modalGeneral.modalGeneral(modalBody);
+});
+
+export function valorSelects(obj, options) {
+  options.forEach((option) => {
+    if (
+      obj.servicio.toLowerCase() == option.value ||
+      obj.mascota.especie.toLowerCase() == option.value ||
+      obj.hora_llegada.toLowerCase() == option.value
+    ) {
+      option.setAttribute("selected", true);
+    }
+  });
+}
+
+export function clean(modalBody) {
+  while (modalBody.firstChild) {
+    modalBody.removeChild(modalBody.firstChild);
+  }
 }

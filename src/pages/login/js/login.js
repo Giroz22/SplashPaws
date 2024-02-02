@@ -39,6 +39,7 @@ async function employesData(){
 function validateUser(documentNumber,password,data){
     const verificacion = data.some(employe => documentNumber == employe.documento && password == employe.contraseña)
     console.log(verificacion);
+    sessionStorage.setItem("verificacion", verificacion)    
 
     if(verificacion === true){
         alertaCorrecto("Ingresando al sistema")

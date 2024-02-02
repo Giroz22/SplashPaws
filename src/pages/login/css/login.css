@@ -70,12 +70,12 @@ main .login_container .form_content{
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    gap: 10%;
+    gap: 20%;
     color: var(--darkPurple);
     background-color: #f0f0f0;
     border: 1px solid var(--darkPurple);
 
-    padding-top: 50px;
+    padding-top: 5%;
 
 }
 main .login_container .form_content form{
