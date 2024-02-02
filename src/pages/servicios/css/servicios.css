@@ -32,6 +32,8 @@ button {
 
 /* ===== Herramientas =====  */
 .herramientas-container {
+  margin-top: 8%;
+
   display: grid;
   grid-template-areas:
     "servicios servicios"
@@ -215,7 +217,7 @@ button {
 }
 
 .contenedor_buttom .btn {
-  width: 20%;
+  width: 25%;
   font-weight: 500;
 }
 
@@ -229,9 +231,30 @@ button {
   }
 }
 
+.form_modal{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+
+
 /* Media query */
 @media (max-width: 768px) {
+  header .navbar #hamburguer,
+  header .navbar label {
+    display: none;
+  }
+  header .navbar .login {
+    all: unset;
+  }
+
   .herramientas-container {
+  margin-top: 20%;
+
     display: grid;
     grid-template-areas:
       "servicios servicios"

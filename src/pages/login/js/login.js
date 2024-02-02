@@ -7,7 +7,10 @@ const btnValidate = document.querySelector(".btn_login")
 const documentNumber = document.querySelector("#document_number");
 const password = document.querySelector("#password");
 
-generatorHeaderModal(header, "Tienda", "Contactos", "#", "#", "Ingresar", "#");
+generatorHeaderModal(header, "Ingresar", "#");
+
+let verificacion;    
+
 
 btnValidate.addEventListener("click",(event)=>{
     event.preventDefault();
@@ -37,7 +40,7 @@ async function employesData(){
 
 
 function validateUser(documentNumber,password,data){
-    const verificacion = data.some(employe => documentNumber == employe.documento && password == employe.contraseña)
+    verificacion = data.some(employe => documentNumber == employe.documento && password == employe.contraseña)
     console.log(verificacion);
     sessionStorage.setItem("verificacion", verificacion)    
 

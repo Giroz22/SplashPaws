@@ -67,7 +67,7 @@ export function generarFormBannios(modalBody, objectData) {
   console.log(objectData);
   // console.log((objectData.fecha.split("/").reverse().join("/")).replace("/", "-").replace("/", "-"));
 
-  modalBody.innerHTML = `<form class="row g-3 needs-validation .form_modal" novalidate>
+  modalBody.innerHTML = `<form class="needs-validation .form_modal" novalidate>
         <!--  Fila 1 -->
         <div class="col-md-4">
           <span for="nombre_propietario" class="form-label"
@@ -198,7 +198,7 @@ export function generarFormBannios(modalBody, objectData) {
 
         <div class="contenedor_buttom">
           <button class="btn btn_submit" type="submit">
-            Agendar cita
+            Agendar cita baño
           </button>
           <button class="btn btn_cancel" type="button">
             Cancelar cita
@@ -268,3 +268,5 @@ export function generarFormBannios(modalBody, objectData) {
     window.location.reload();
   });
 }
+
+

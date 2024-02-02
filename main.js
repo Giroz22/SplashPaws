@@ -48,16 +48,12 @@ export function generatorHeader(content, link1, url1, nameLogin, urlLogin) {
 //Lo mismo que la funcion anterior solo que omiti el agendar cita y lo queme directamente
 export function generatorHeaderModal(
   content,
-  link1,
-  link2,
-  url1,
-  url2,
   nameLogin,
   urlLogin
 ) {
   content.innerHTML = `
   <nav class="navbar">
-        <a href="../main/html/main.html">
+        <a href="../../main/html/main.html">
           <img src="../../../media/imgs/logo_Splash_Paws.png" alt="Logo SplashPaws" />
         </a>
       
@@ -65,7 +61,7 @@ export function generatorHeaderModal(
         <input type="checkbox" id="hamburguer" />
       
         <div class="navegation">
-          <a href=${url1}>${link1}</a>
+          <a href="../../main/html/main.html">Tienda</a>
           <!-- Button trigger modal -->
           <a
             href="#"
@@ -78,7 +74,7 @@ export function generatorHeaderModal(
       
           
     
-          <a href=${url2}>${link2}</a>
+          <a href="../../login/html/login.html">Ingresar</a>
           <div class="login login_responsive">
             <a href=${urlLogin}>${nameLogin}</a>
             <div class="line"></div>

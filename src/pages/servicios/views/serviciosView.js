@@ -5,6 +5,11 @@ import * as bannios from "./banniosView.js";
 import * as guarderia from "./guarderiaView.js";
 import * as traductor from "../../../js/traductor.js";
 import * as modalGeneral from "./functionModal.js";
+import * as main from "../../../../main.js"
+
+
+//=====Header=====
+
 
 //=====Variables=====
 let servicioActual = "";
@@ -24,6 +29,9 @@ export const tabla = document.querySelector("#tbl-dtos");
 //Contenedor modal
 const modalBody = document.querySelector(".modal-body");
 
+//Header 
+const header = document.querySelector("header");
+
 //===== Eventos =====
 document.addEventListener("DOMContentLoaded", () => {
   btnPendientes.click();
@@ -36,6 +44,11 @@ containerServices.querySelectorAll("button").forEach((boton) => {
 });
 
 //===== Funciones =====
+//Header
+main.generatorHeader(header, "#", "#", "Salir", "#")
+
+
+
 export function llenarUlServicio(listaOpc) {
   //Se limpia la lista de opciones
   ulPendientes.innerHTML = "";
@@ -50,6 +63,7 @@ export function llenarUlServicio(listaOpc) {
     ulPendientes.appendChild(li);
   });
 }
+
 
 /**
  *  Muestra en la tabla de datos de servicio los datos enviados como parametro
@@ -179,6 +193,10 @@ export async function mostrarPorEstado(vrEstado) {
 export function actualizarServicioActual(servicio) {
   servicioActual = servicio;
   console.log(servicioActual);
+  if(servicioActual == "bannios"){
+    console.log("estamos en baños");
+  }
+
 }
 
 //Lis
@@ -195,7 +213,8 @@ export function valorSelects(obj, options) {
     if (
       obj.servicio.toLowerCase() == option.value ||
       obj.mascota.especie.toLowerCase() == option.value ||
-      obj.hora_llegada.toLowerCase() == option.value
+      obj.hora_llegada.toLowerCase() == option.value 
+    
     ) {
       option.setAttribute("selected", true);
     }
