@@ -1,10 +1,14 @@
+import {generatorHeaderModal} from '../../../../main.js'
+import {generatorFooter} from '../../../../main.js'
+
+
 // import Swiper from 'swiper';
 
-swiper = new Swiper(".mySwiper", {
+let swiper = new Swiper(".mySwiper", {
   spaceBetween: 30,
   centeredSlides: true,
   autoplay: {
-    delay: 2500,
+    delay: 3000,
     disableOnInteraction: false,
   },
   pagination: {
@@ -16,3 +20,24 @@ swiper = new Swiper(".mySwiper", {
     prevEl: ".swiper-button-prev",
   },
 });
+
+
+const header = document.querySelector("header")
+const footer = document.querySelector("footer")
+
+
+generatorHeaderModal(header,"Tienda","Contactos","#","#","Ingresar","#")
+
+generatorFooter(footer)
+
+
+// -------------------------
+
+import texto, { consumirAPI } from "./funciones.js"
+
+
+//Eventos
+document.addEventListener("DOMContentLoaded", () => {
+  consumirAPI(texto)
+})
+

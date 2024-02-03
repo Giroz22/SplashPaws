@@ -1,28 +1,436 @@
-/* @import url('../../../../normalize.css'); */
+@import url("../../../../normalize.css");
 /* Styles banner */
-body {
-    position: relative;
-    max-width: 100vw;
-    max-height: 100vh;
-}
 
 .swiper {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100vh;
 }
 
 .swiper-slide {
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.swiper-slide img {
+.swiper-button-next {
+  color: var(--darkPurple);
+  font-weight: 800;
+  margin-right: 3%;
+}
+
+.swiper-button-prev {
+  color: var(--darkPurple);
+  font-weight: 800;
+  margin-left: 3%;
+}
+
+.swiper-pagination {
+  margin-bottom: 3%;
+}
+
+/* .swiper-slide img {
     width: 100%;
     height: 100vh;
     object-fit: cover;
+} */
+
+/* filters */
+
+.catalogue .containerGeneral .filter {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+aside {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  color: var(--darkPurple);
+  padding: 5px;
+}
+
+aside select{
+  border: 1px solid #01074476;
+  color: #010744;
+}
+
+.catalogue .containerGeneral .filter aside .inputBox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.catalogue .containerGeneral .filter aside .inputBox i{
+  position: absolute;
+  transform: translateX(-110px) translateY(9px);
+  transition: .3s;
+}
+
+.catalogue .containerGeneral .filter aside .inputBox span {
+  position: absolute;
+  padding: 8px;
+  pointer-events: none;
+  font-size: 10px;
+  display: none;
+}
+
+
+.catalogue .containerGeneral .filter aside .inputBox input {
+  all: unset;
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
+  text-align: center;
+  color: var(--darkPurple);
+  background-color: #25014135;
+  padding: 7px 30px;
+  &::placeholder{
+  color: #25014183;
+  }
+
+}
+
+.catalogue .containerGeneral .filter aside .inputBox input:hover {
+  box-shadow: 1px 1px 1px #222;
+}
+
+.catalogue .containerGeneral .filter aside .inputBox input:focus {
+  outline: none;
+  box-shadow: 1px 1px 1px #222;
+}
+
+.catalogue .containerGeneral .filter aside .inputBox input:focus + span {
+  color: #250141a6;
+  display: inline;
+  transform: translateX(0px) translateY(-20px);
+  padding: 2px 8px;
+  font-size: 14px;
+  font-weight: bolder;
+  /* background-color: var(--white); */
+  border-radius: 20px;
+}
+
+.catalogue .containerGeneral .filter aside .filtros {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  & select {
+    transition: .3s;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  & select:hover{
+    scale: 1.2;
+  }
+}
+
+
+aside button {
+  padding-left: 20px;
+  padding-right: 20px;
+  border: none;
+  color: var(--darkBlue);
+  border-radius: 20px;
+}
+
+aside button:hover {
+  cursor: pointer;
+  scale: 1.2;
+}
+
+/* Styles Catalogue */
+
+.catalogue {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+}
+
+.catalogue .containerGeneral {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  padding-top: 70px;
+  padding-bottom: 100px;
+  padding-left: 150px;
+  padding-right: 150px;
+  gap: 50px;
+}
+
+.catalogue .containerGeneral .products {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 50px;
+  height: 100%;
+}
+
+.catalogue .containerGeneral .products .card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--white);
+  border: none;
+  box-shadow: 2px 2px 15px 2px #250141b5;
+}
+
+.catalogue .containerGeneral .products .card .card-body {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  line-height: 12px;
+  color: var(--darkPurple);
+}
+
+.catalogue .containerGeneral .products .card .card-body .card-text{
+  font-size: 16px;
+  color: var(--darkPurple);
+}
+
+/* ---------------------------------------------- */
+
+.btn {
+  font-weight: 600;
+  margin-top: 7%;
+}
+
+.btn_blue {
+  margin-top: 2%;
+  background-color: var(--darkBlue);
+  border: 1px solid var(--darkBlue);
+
+  &:hover {
+    border: 1px solid var(--darkBlue);
+    background-color: #e0e0e0;
+    color: var(--darkBlue);
+  }
+}
+
+/* ================ Styles Banners ================*/
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  /* height: auto; */
+}
+
+/* ========= BANNER 1 ========= */
+
+main h2,
+main h3 {
+  font-family: var(--fontBanners);
+}
+
+main p {
+  color: var(--white);
+  font-size: 1.1rem;
+  font-weight: 100;
+  text-shadow: 1px 1px 1px var(--darkBlue);
+}
+
+main .banner_1 {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../../../media/imgs/background_banner_1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.banner_content {
+  width: 90%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.banner_content .banner_info {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.banner_content .banner_info h3 {
+  font-size: 30px;
+  color: var(--white);
+}
+
+.banner_content .banner_info h2 {
+  font-size: 50px;
+  color: var(--darkPurple);
+}
+
+/* ========= BANNER 2 ========= */
+.login button {
+  background-color: aqua;
+}
+
+main .banner_2 {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+
+  align-items: center;
+  background-image: url("../../../media/imgs/background_banner_2.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.banner_2 .banner_content_2 {
+  width: 50%;
+  margin-right: 6%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.banner_2 .banner_content_2 h3 {
+  font-size: 40px;
+  color: var(--white);
+  margin-left: -3%;
+}
+
+.banner_2 .banner_content_2 h2 {
+  font-size: 60px;
+  color: var(--blueLight);
+}
+
+.banner_2 .banner_content_2 p {
+  margin-left: 20px;
+}
+
+/* ========= BANNER 3 ========= */
+
+main .banner_3 {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+
+  align-items: center;
+  background-image: url("../../../media/imgs/background_banner_3.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.banner_3 .banner_content .banner_info h3 {
+  font-size: 50px;
+  font-family: var(--fontDefault);
+  font-weight: 100;
+}
+
+.banner_3 .banner_content .banner_info h2 {
+  color: var(--white);
+  font-size: 50px;
+}
+
+/* ========== RESPONSIVE ========== */
+
+@media (max-width: 768px) {
+  /* ========= Banner 1 ========= */
+  main .banner_1 {
+    flex-direction: column;
+    background-size: cover;
+
+    background-attachment: fixed;
+  }
+
+  .banner_content {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 10rem;
+  }
+
+  .banner_content img {
+    width: 350px;
+  }
+
+  .banner_content p {
+    text-align: justify;
+  }
+
+  .banner_content a {
+    margin: auto;
+  }
+
+  /* ========= Banner 2 ========= */
+
+  main .banner_2 {
+    height: 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-size: cover;
+    background-position: 70% 20%;
+    background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 79, 0.725),
+        rgba(0, 0, 79, 0.725)
+      ),
+      url("https://img.freepik.com/foto-gratis/perro-lindo-alto-angulo-banera_52683-92732.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+
+  .banner_2 .banner_content_2 {
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    padding: auto 70px;
+  }
+
+  .banner_2 .banner_content_2 p {
+    text-align: left;
+  }
+
+  /* ========= Banner 2 ========= */
+
+  main .banner_3 {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: aqua;
+  }
+
+  main .banner_3 .banner_content {
+    width: 90%;
+  }
 }
 
 

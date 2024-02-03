@@ -1,62 +1,175 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="../css/main.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="../css/main.css" />
 
-    <title>SplashPaws</title>
+  <title>SplashPaws</title>
 </head>
 <a href="../../login/html/login.html"></a>
 <body>
-    <header>
+  <header id="header" class="z-3"></header>
+  <main id="main">
+    <!-- banners -->
 
-    </header>
-
-    <main>
-
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <img src="https://img.freepik.com/vector-premium/tienda-mascotas-muchos-animales-lindos_1639-15092.jpg" alt="">
-                    <!-- Slide 1 -->
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://img.freepik.com/vector-premium/tienda-mascotas-muchos-animales-lindos_1639-15092.jpg" alt="">
-                    <!-- Slide 2 -->
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://img.freepik.com/vector-premium/tienda-mascotas-muchos-animales-lindos_1639-15092.jpg" alt="">
-                    <!-- Slide 3 -->
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://img.freepik.com/vector-premium/tienda-mascotas-muchos-animales-lindos_1639-15092.jpg" alt="">
-                    <!-- Slide 4 -->
-                </div>
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="banner_1">
+            <div class="banner_content">
+              <div class="banner_info">
+                <h3>Tu mejor amigo</h3>
+                <h2>Merece lo mejor</h2>
+                <p>
+                  Aquí encontrarás los mejores productos de calidad que tu
+                  mascota se merece.
+                </p>
+                <a href="#" class="btn">Ir a la tienda</a>
+              </div>
+              <div class="banner_img">
+                <img src="../../../media/imgs/dog.png" alt="Image dog" />
+              </div>
             </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="banner_2">
+            <div class="banner_content_2">
+              <h3>Donde tu mascota se baña</h3>
+              <h2>En amor y calidad</h2>
+              <p>
+                Agenda tu cita y te llamaremos para brindarle a tu peludito la
+                mejor experiencia a la hora del baño.
+              </p>
+              <a href="#" class="btn btn_blue">Agenda tu cita</a>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="banner_3">
+            <div class="banner_content">
+              <div class="banner_info">
+                <h3>Mascotas felices</h3>
+                <h2>Dueños tranquilos</h2>
+                <p>
+                  Garantiza el bienestar de tu mascota y disfruta de tu tiempo
+                  libre con nuestro servicio de guardería profesional.
+                </p>
+                <a href="#" class="btn btn_blue">Agenda tu cita</a>
+              </div>
+              <div class="banner_img">
+                <img src="../../../media/imgs/cat.png" alt="Image dog" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+
+    <!--catalogue  -->
+
+    <div class="catalogue">
+      <div class="containerGeneral">
+        <div class="filter">
+          <aside>
+            <!-- buscar por nombre -->
+
+            <div class="inputBox">
+              <i class="bi bi-search"></i>
+              <input type="text" id="search" placeholder="Nombre del producto" />
+              <span>Buscar producto en el catalogo </span>
+            </div>
+
+            <!-- filtro -->
+
+            <div class="filtros">
+
+              <div class="cont-select">
+                <label for="minimo"></label>
+                <select id="minimo">
+                  <option value="">Precio Min</option>
+                  <option value="20000">20.000</option>
+                  <option value="30000">30.000</option>
+                  <option value="40000">40.000</option>
+                  <option value="50000">50.000</option>
+                  <option value="60000">60.000</option>
+                  <option value="70000">70.000</option>
+                  <option value="80000">80.000</option>
+                  <option value="90000">90.000</option>
+                </select>
+              </div>
+
+              <div class="cont-select">
+                <label for="maximo"></label>
+                <select id="maximo">
+                  <option value="">Precio Max</option>
+                  <option value="20000">20.000</option>
+                  <option value="30000">30.000</option>
+                  <option value="40000">40.000</option>
+                  <option value="50000">50.000</option>
+                  <option value="60000">60.000</option>
+                  <option value="70000">70.000</option>
+                  <option value="80000">80.000</option>
+                  <option value="90000">90.000</option>
+                </select>
+              </div>
+
+
+              <div class="cont-select  especie">
+                <label for="especie"></label>
+                <select id="especie">
+                  <option value="">Especie</option>
+                  <option value="perro">Perro</option>
+                  <option value="gato">Gato</option>
+                </select>
+              </div>
+
+              <div class="cont-select categoria">
+                <label for="categoria"></label>
+                <select id="categoria">
+                  <option value="">Categoria</option>
+                  <option value="Accesorios">Accesorios</option>
+                  <option value="Alimentos">Alimentos</option>
+                  <option value="Juguetes">Juguetes</option>
+                  <option value="Higiene">Higiene</option>
+                  <option value="Salud">Salud</option>
+                  <option value="Ropita">Ropita</option>
+                </select>
+              </div>
+            </div>
+
+          </aside>
+
         </div>
 
+        <div class="products">
+          <!-- <div class="card" style="width: 15rem;">
+            <img src="https://petcol.co/cdn/shop/products/AgilityGoldPequenosCachorros_600x.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </main>
 
+  <footer id="footer"></footer>
 
-    </main>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-    <footer>
-
-    </footer>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="../js/main.js"></script>
+  <script src="../js/main.js" type="module"></script>
 </body>
 
 </html>
