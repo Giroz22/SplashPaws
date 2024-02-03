@@ -4,7 +4,6 @@ import * as pendientes from "./pendienteView.js";
 import * as bannios from "./banniosView.js";
 import * as guarderia from "./guarderiaView.js";
 import * as traductor from "../../../js/traductor.js";
-import * as modalGeneral from "./functionModal.js";
 
 //=====Variables=====
 let servicioActual = "";
@@ -12,17 +11,15 @@ let servicioActual = "";
 //===== Selectores =====
 //Barra herramientas
 const containerServices = document.querySelector(".servicios-container");
-const btnPendientes = document.querySelector("#btnPendientes");
 const btnGuarderia = document.querySelector("#btnGuarderia");
 const btnBannios = document.querySelector("#btnBannios");
+const btnAgregar = document.querySelector("#btnAgregar");
 export const titulo = document.querySelector(".titulo-container .titulo");
 export const divOpcServicio = document.querySelector(
   ".opcs-servicio-container"
 );
 export const ulPendientes = divOpcServicio.querySelector("ul");
 export const tabla = document.querySelector("#tbl-dtos");
-//Contenedor modal
-const modalBody = document.querySelector(".modal-body");
 
 //===== Eventos =====
 document.addEventListener("DOMContentLoaded", () => {
@@ -33,6 +30,17 @@ containerServices.querySelectorAll("button").forEach((boton) => {
   boton.addEventListener("click", (evento) => {
     traductor.UtilizarIdiomaActual();
   });
+});
+
+btnAgregar.addEventListener("click", () => {
+  switch (servicioActual) {
+    case "pendiente":
+      pendientes.generarFormAgregar();
+      break;
+
+    default:
+      break;
+  }
 });
 
 //===== Funciones =====
@@ -150,8 +158,6 @@ async function handleBtnsDetalle(evento) {
   const obj = await baseModel.obtenerID(id);
 
   //==Lo que quiera hacer con los btons detalles
-  console.log(obj);
-  console.log(obj.servicio);
 
   const header = document.querySelector("header");
 
@@ -181,6 +187,7 @@ export function actualizarServicioActual(servicio) {
   console.log(servicioActual);
 }
 
+/*
 //Lis
 const btnInfo = document.querySelector(".btn-masInfo");
 btnInfo.setAttribute("data-bs-toggle", "modal");
@@ -207,3 +214,4 @@ export function clean(modalBody) {
     modalBody.removeChild(modalBody.firstChild);
   }
 }
+*/

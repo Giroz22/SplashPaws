@@ -59,6 +59,7 @@ async function mostrarDtosGuarderia() {
   serviciosView.mostrarDatosTbody(datos);
 }
 
+//===>
 export function generarFormGuarderia(modalBody, objectData) {
   console.log(objectData);
   // console.log((objectData.fecha.split("/").reverse().join("/")).replace("/", "-").replace("/", "-"));
