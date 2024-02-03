@@ -13,10 +13,7 @@
 </head>
 
 <body>
-
-  <header id="header" class="z-3">
-
-  </header>
+  <header id="header" class="z-3"></header>
   <main id="main">
     <!-- banners -->
 
@@ -71,9 +68,8 @@
             </div>
           </div>
         </div>
-
       </div>
-      <div class="swiper-button-next "></div>
+      <div class="swiper-button-next"></div>
       <div class="swiper-button-prev"></div>
       <div class="swiper-pagination"></div>
     </div>
@@ -84,9 +80,76 @@
       <div class="containerGeneral">
         <div class="filter">
           <aside>
-            filtros
+            <!-- buscar por nombre -->
+
+            <div class="inputBox">
+              <i class="bi bi-search"></i>
+              <input type="text" id="search" placeholder="Nombre del producto" />
+              <span>Buscar producto en el catalogo </span>
+            </div>
+
+            <!-- filtro -->
+
+            <div class="filtros">
+
+              <div class="cont-select">
+                <label for="minimo"></label>
+                <select id="minimo">
+                  <option value="">Precio Min</option>
+                  <option value="20000">20.000</option>
+                  <option value="30000">30.000</option>
+                  <option value="40000">40.000</option>
+                  <option value="50000">50.000</option>
+                  <option value="60000">60.000</option>
+                  <option value="70000">70.000</option>
+                  <option value="80000">80.000</option>
+                  <option value="90000">90.000</option>
+                </select>
+              </div>
+
+              <div class="cont-select">
+                <label for="maximo"></label>
+                <select id="maximo">
+                  <option value="">Precio Max</option>
+                  <option value="20000">20.000</option>
+                  <option value="30000">30.000</option>
+                  <option value="40000">40.000</option>
+                  <option value="50000">50.000</option>
+                  <option value="60000">60.000</option>
+                  <option value="70000">70.000</option>
+                  <option value="80000">80.000</option>
+                  <option value="90000">90.000</option>
+                </select>
+              </div>
+
+
+              <div class="cont-select  especie">
+                <label for="especie"></label>
+                <select id="especie">
+                  <option value="">Especie</option>
+                  <option value="perro">Perro</option>
+                  <option value="gato">Gato</option>
+                </select>
+              </div>
+
+              <div class="cont-select categoria">
+                <label for="categoria"></label>
+                <select id="categoria">
+                  <option value="">Categoria</option>
+                  <option value="Accesorios">Accesorios</option>
+                  <option value="Alimentos">Alimentos</option>
+                  <option value="Juguetes">Juguetes</option>
+                  <option value="Higiene">Higiene</option>
+                  <option value="Salud">Salud</option>
+                  <option value="Ropita">Ropita</option>
+                </select>
+              </div>
+            </div>
+
           </aside>
+
         </div>
+
         <div class="products">
           <!-- <div class="card" style="width: 15rem;">
             <img src="https://petcol.co/cdn/shop/products/AgilityGoldPequenosCachorros_600x.jpg" class="card-img-top" alt="...">
@@ -95,12 +158,8 @@
             </div>
           </div> -->
         </div>
-
       </div>
-      
     </div>
-
-
   </main>
 
   <footer id="footer"></footer>
