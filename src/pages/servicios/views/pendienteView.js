@@ -31,30 +31,108 @@ async function mostrarDtosPendientes() {
     "Detalle",
   ]);
   const datos = await baseModel.obtenerDatos();
-  serviciosView.mostrarDatosTbl(datos);
+  serviciosView.mostrarDatosTbl(datos, handleBtnsDetalle);
 }
 
 export function generarFormAgregar() {
-  const btnAceptar = crearBotonAceptar();
-  functionModal.crearBaseFormServicio("Formulario Pendiente", [], [btnAceptar]);
+  const btnCrear = crearBotonCrear();
+  functionModal.crearBaseFormServicio("Crear Cita Pendiente", [], [btnCrear]);
 }
 
 //=====Botones=====
-//Boton Aceptar
-function crearBotonAceptar() {
-  const btnAceptar = document.createElement("button");
+//-----Boton detalle-----
+async function handleBtnsDetalle(event) {
+  const idPendiente = event.target.dataset.id;
+  const objPendiente = await baseModel.obtenerID(idPendiente);
+  const btnConfirmar = crearBtnConfirmar(objPendiente.id);
+  const btnCancelar = crearBtnCancelar(objPendiente.id);
 
-  btnAceptar.textContent = "Aceptar";
+  functionModal.crearBaseFormServicio(
+    `${objPendiente.mascota.nombre} esta esperando a corfirmar su cita!!`,
+    crearInputs(),
+    [btnConfirmar, btnCancelar]
+  );
 
-  btnAceptar.classList.add("btn", "btn-success");
-  btnAceptar.setAttribute("type", "submit");
-
-  btnAceptar.addEventListener("click", handlerBtnAgregar);
-
-  return btnAceptar;
+  formBase.AsignarDatos(objPendiente);
 }
 
-function handlerBtnAgregar(event) {
+//-----Boton Confirmar Cita-----
+function crearBtnConfirmar(id) {
+  const btnConfirmar = functionModal.crearBotonBase(
+    "Confirmar",
+    ["btn-success"],
+    handlerBtnConfirmar
+  );
+
+  btnConfirmar.setAttribute("data-id", id);
+  btnConfirmar.setAttribute("type", "submit");
+
+  return btnConfirmar;
+}
+
+function handlerBtnConfirmar(event) {
+  const objDatos = obtenerDatosPendiente();
+  const idPendiente = event.target.dataset.id;
+
+  if (!objDatos) {
+    return;
+  }
+  event.preventDefault();
+
+  switch (objDatos.servicio) {
+    case "baño":
+      baseModel.actualizarURL("serviciosBannios");
+      break;
+
+    case "guarderia":
+      baseModel.actualizarURL("serviciosGuarderia");
+      break;
+    default:
+      console.log(`Error el servicio ${objDatos.servicio} no existe`);
+      return;
+  }
+
+  //Agregamos la informacio al nuevo servicio
+  baseModel.guardar(objDatos);
+
+  //Eliminamos el Servicio pendiente
+  baseModel.actualizarURL("serviciosPendientes");
+  baseModel.eliminar(idPendiente);
+
+  mostrarDtosPendientes();
+  functionModal.cerrarFormBase();
+}
+
+//-----Boton Borrar-----
+function crearBtnCancelar(id) {
+  const btnCancelar = functionModal.crearBotonBase(
+    "Cancelar",
+    ["btn-danger"],
+    handlerBtnCancelar
+  );
+
+  btnCancelar.setAttribute("data-id", id);
+
+  return btnCancelar;
+}
+
+function handlerBtnCancelar(event) {
+  event.preventDefault();
+  functionModal.cerrarFormBase();
+}
+
+//-----Boton Crear-----
+function crearBotonCrear() {
+  const btnCrear = functionModal.crearBotonBase(
+    "Crear",
+    ["btn-success"],
+    handlerBtnCrear
+  );
+  btnCrear.setAttribute("type", "submit");
+  return btnCrear;
+}
+
+function handlerBtnCrear(event) {
   const datos = formBase.obtenerDatos();
   if (!datos) {
     return;
@@ -65,17 +143,49 @@ function handlerBtnAgregar(event) {
   functionModal.cerrarFormBase();
 }
 
-//Boton Borrar
-function crearBotonBorrar() {
-  const btnBorrar = document.createElement("button");
+//=====inputs=====
+function crearInputs() {
+  return `
 
-  btnBorrar.textContent = "Borrar";
+      <div class="">
+      <span for="tamannio" class="form-label">Tamaño</span>
+      <select class="form-select" id="tamannio" required>
+          <option selected disabled value="">
+            Selecciona un tamaño
+          </option>
+          <option value="gigante">Gigante</option>
+          <option value="grande">Grande</option>
+          <option value="mediano">Mediano</option>
+          <option value="pequeño">Pequeño</option>
+        </select>
+        <div class="invalid-feedback">Selecciona un tamaño</div>
+    </div>
 
-  btnBorrar.classList.add("btn", "btn-danger");
-
-  btnBorrar.addEventListener("click", handlerBtnBorrar);
-
-  return btnBorrar;
+    <div class="">
+      <span for="pelaje" class="form-label">Pelaje</span>
+      <input
+        type="text"
+        class="form-control"
+        id="pelaje"
+        placeholder= "Ingresa el pelaje"
+        required
+      />
+      <div class="invalid-feedback">Selecciona una pelaje</div>
+    </div>
+  `;
 }
 
-function handlerBtnBorrar() {}
+// ====Obtener Datos====
+function obtenerDatosPendiente() {
+  if (!formBase.form.checkValidity()) {
+    return;
+  }
+
+  const objDatos = formBase.obtenerDatos();
+  objDatos["mascota"]["tamanio"] = document.querySelector("#tamannio").value;
+  objDatos["mascota"]["pelaje"] = document.querySelector("#pelaje").value;
+  objDatos["hora_salida"] = "";
+  objDatos["estado"] = "pendiente";
+
+  return objDatos;
+}

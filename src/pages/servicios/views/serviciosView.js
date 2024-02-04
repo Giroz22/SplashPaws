@@ -63,50 +63,7 @@ export function llenarUlServicio(listaOpc) {
  *  Muestra en la tabla de datos de servicio los datos enviados como parametro
  * @param {Array de Datos que se a mostrar en el tbody de la tabla} listaDatos
  */
-export function mostrarDatosTbl(listaDatos) {
-  // mostrarDatosThead(listaDatos);
-  mostrarDatosTbody(listaDatos);
-}
-
-export function mostrarDatosThead(datosThead) {
-  const thead = tabla.querySelector("#row-info");
-  thead.innerText = "";
-  datosThead.forEach((elemento) => {
-    let celda = document.createElement("td");
-    celda.textContent = elemento.toUpperCase();
-    thead.appendChild(celda);
-  });
-}
-
-//Muestra las llaves de un objeto como cabezera
-//Borrar
-function mostrarDatosTheadObj(listaDatos) {
-  const thead = tabla.querySelector("#row-info");
-  thead.innerText = "";
-  const elemento = listaDatos[0];
-
-  for (let key in elemento) {
-    /*Si el key es diferente a un object se imprime normal
-       Sino se recorre nuevamente ya que es un objeto que contiene otros elementos*/
-    if (typeof elemento[key] != "object") {
-      const tdTitulo = document.createElement("td");
-      tdTitulo.innerText = key.replace("_", " ").toUpperCase();
-      thead.appendChild(tdTitulo);
-    } else {
-      for (let keyObj in elemento[key]) {
-        const tdTitulo = document.createElement("td");
-        tdTitulo.innerText = keyObj.replace("_", " ").toUpperCase();
-        thead.appendChild(tdTitulo);
-      }
-    }
-  }
-  //Agregamos el titulo al boton detalle
-  const tdTitulo = document.createElement("td");
-  tdTitulo.innerText = "DETALLE";
-  thead.appendChild(tdTitulo);
-}
-
-export function mostrarDatosTbody(listaDatos) {
+export function mostrarDatosTbl(listaDatos, handleBtnsDetalle) {
   const tbody = tabla.querySelector("tbody");
 
   //Limpiar tbody
@@ -142,7 +99,7 @@ export function mostrarDatosTbody(listaDatos) {
     btnDetalle.textContent = "Detalles";
     btnDetalle.setAttribute("data-id", elemento["id"]);
     btnDetalle.setAttribute("data-bs-toggle", "modal");
-    btnDetalle.setAttribute("data-bs-target", "#staticBackdrop");
+    btnDetalle.setAttribute("data-bs-target", "#servicioModal");
     btnDetalle.addEventListener("click", handleBtnsDetalle);
 
     td.appendChild(btnDetalle);
@@ -153,24 +110,14 @@ export function mostrarDatosTbody(listaDatos) {
   });
 }
 
-async function handleBtnsDetalle(evento) {
-  const id = evento.target.dataset.id;
-  const obj = await baseModel.obtenerID(id);
-
-  //==Lo que quiera hacer con los btons detalles
-
-  const header = document.querySelector("header");
-
-  switch (obj.servicio.toLowerCase()) {
-    case "baño":
-      bannios.generarFormBannios(modalBody, obj);
-
-      break;
-
-    case "guarderia":
-      guarderia.generarFormGuarderia(modalBody, obj);
-      break;
-  }
+export function mostrarDatosThead(datosThead) {
+  const thead = tabla.querySelector("#row-info");
+  thead.innerText = "";
+  datosThead.forEach((elemento) => {
+    let celda = document.createElement("td");
+    celda.textContent = elemento.toUpperCase();
+    thead.appendChild(celda);
+  });
 }
 
 export async function mostrarPorEstado(vrEstado) {
@@ -179,7 +126,7 @@ export async function mostrarPorEstado(vrEstado) {
     vrEstado.toLowerCase()
   );
 
-  mostrarDatosTbody(dato);
+  mostrarDatosTbl(dato);
 }
 
 export function actualizarServicioActual(servicio) {

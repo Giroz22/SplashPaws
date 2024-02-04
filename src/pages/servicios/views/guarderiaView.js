@@ -56,7 +56,7 @@ async function mostrarDtosGuarderia() {
     "Detalle",
   ]);
   const datos = await baseModel.obtenerDatos();
-  serviciosView.mostrarDatosTbody(datos);
+  serviciosView.mostrarDatosTbl(datos);
 }
 
 //===>

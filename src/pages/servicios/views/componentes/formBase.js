@@ -2,7 +2,7 @@ import * as main from "../../../../../main.js";
 
 //Contenedor modal
 const modal = document.getElementById("servicioModal");
-const form = document.getElementById("formServicio");
+export const form = document.getElementById("formServicio");
 
 export function crearFormBase() {
   const modalBody = modal.querySelector(".modal-body");
@@ -135,4 +135,14 @@ export function obtenerDatos() {
   };
 
   return seviciosPendientes;
+}
+
+export function AsignarDatos(obj) {
+  document.querySelector("#nombre_mascota").value = obj.mascota.nombre;
+  document.querySelector("#especie").value = obj.mascota.especie;
+  document.querySelector("#nombre_propietario").value = obj.propietario.nombre;
+  document.querySelector("#telefono").value = obj.propietario.telefono;
+  document.querySelector("#fecha").value = obj.fecha;
+  document.querySelector("#hora").value = obj.hora_llegada;
+  document.querySelector("#servicio").value = obj.servicio;
 }

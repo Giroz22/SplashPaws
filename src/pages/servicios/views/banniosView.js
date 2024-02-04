@@ -60,7 +60,7 @@ async function mostrarDtosBannios() {
     "Detalle",
   ]);
   const datos = await baseModel.obtenerDatos();
-  serviciosView.mostrarDatosTbody(datos);
+  serviciosView.mostrarDatosTbl(datos);
 }
 
 export function generarFormBannios(modalBody, objectData) {
