@@ -1,5 +1,9 @@
 @import url("../../../../normalize.css");
 /* Styles banner */
+body{
+  background-color: #f2f2f2;
+}
+
 
 .swiper {
   width: 100%;
@@ -188,9 +192,9 @@ aside button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var(--white);
+  background: #f6f6f6;
   border: none;
-  box-shadow: 2px 2px 15px 2px #250141b5;
+  box-shadow: 2px 2px 10px #3f006e6c;
 }
 
 .catalogue .containerGeneral .products .card .card-body {
@@ -202,10 +206,14 @@ aside button:hover {
   line-height: 12px;
   color: var(--darkPurple);
 }
-
+.catalogue .containerGeneral .products .card .card-body h5{
+  font-weight: 700;
+} 
 .catalogue .containerGeneral .products .card .card-body .card-text{
-  font-size: 16px;
+  all: unset;
   color: var(--darkPurple);
+  /* text-shadow: .5px .5px rgba(34, 34, 34, 0.478) */
+  
 }
 
 /* ---------------------------------------------- */
@@ -228,6 +236,8 @@ aside button:hover {
 }
 
 /* ================ Styles Banners ================*/
+
+
 
 main {
   display: flex;
@@ -270,6 +280,10 @@ main .banner_1 {
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+
+.banner_1 .banner_content .banner_info{
+  margin-left: 20px;
 }
 
 .banner_content .banner_info {
@@ -359,6 +373,12 @@ main .banner_3 {
 /* ========== RESPONSIVE ========== */
 
 @media (max-width: 768px) {
+
+  .swiper{
+    height: 50rem;
+  }
+  
+
   /* ========= Banner 1 ========= */
   main .banner_1 {
     flex-direction: column;

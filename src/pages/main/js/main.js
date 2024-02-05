@@ -26,7 +26,7 @@ const header = document.querySelector("header")
 const footer = document.querySelector("footer")
 
 
-generatorHeaderModal(header,"Tienda","Contactos","#","#","Ingresar","#")
+generatorHeaderModal(header,"Ingresar","../../login/html/login.html")
 
 generatorFooter(footer)
 

@@ -19,15 +19,12 @@
 */
 export function generatorHeader(content, link1, url1, nameLogin, urlLogin) {
   content.innerHTML = `
-    <nav class="navbar navSolo">
-    <a href="../main/html/main.html">
+    <nav class="navbar ">
+    <a href="../../main/html/main.html">
       <img src="../../../media/imgs/logo_Splash_Paws.png" alt="" />
     </a>
 
-    <label for="hamburguer"><i class="bi bi-list"></i></label>
-    <input type="checkbox" id="hamburguer"/>
-
-    <div class="login loginSolo">
+    <div class="login">
       <a href=${urlLogin}>${nameLogin}</a>
       <div class="line"></div>
       <button id="btn btn_leguage">
@@ -74,19 +71,8 @@ export function generatorHeaderModal(
       
           
     
-          <a href="../../login/html/login.html">Ingresar</a>
-          <div class="login login_responsive">
-            <a href=${urlLogin}>${nameLogin}</a>
-            <div class="line"></div>
-            <button id="btn btn_leguage">
-              <img
-                src="https://cdn-icons-png.flaticon.com/128/197/197593.png"
-                alt="spain_lenguage"
-                id="spain_lenguage"
-              />
-              Español
-            </button>
-          </div>
+          <a href="#contactos">Contactos</a>
+        
 
         </div>
       
@@ -403,7 +389,7 @@ export function generatorFooter(content) {
   </div>
 
   <!-- Social Media -->
-  <div class="social">
+  <div class="social" id= "contactos">
     <div class="social_media">
       <h3>Redes sociales</h3>
       <div class="social_content">

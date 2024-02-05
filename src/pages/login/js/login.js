@@ -45,7 +45,7 @@ function validateUser(documentNumber,password,data){
     sessionStorage.setItem("verificacion", verificacion)    
 
     if(verificacion === true){
-        alertaCorrecto("Ingresando al sistema")
+        window.location.href ="../../servicios/html/servicios.html"
     }else{
         alertaError("Número de documento o contraseña no son validos")
         return
