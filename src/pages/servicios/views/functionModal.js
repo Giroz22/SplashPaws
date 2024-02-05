@@ -59,4 +59,18 @@ export function crearBotonBase(textoBtn, boostrapEstilo, handlerBtn) {
   return btnBase;
 }
 
-export function crearinputBase() {}
+//------ Boton cerrar ------
+export function generarBtnCerrar() {
+  const btnCerrar = crearBotonBase(
+    "Cerrar",
+    ["btn-secondary"],
+    handleBtnCerrar
+  );
+
+  return btnCerrar;
+}
+
+function handleBtnCerrar(event) {
+  event.preventDefault();
+  cerrarFormBase();
+}

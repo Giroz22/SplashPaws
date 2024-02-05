@@ -19,6 +19,22 @@ btnPendientes.addEventListener("click", async () => {
 });
 
 //===== Funciones =====
+function generarInputsHtml() {
+  return `
+    <div class="">
+    <span for="servicio" class="form-label">Servicio</span>
+    <select class="form-select" id="servicio" required>
+        <option selected disabled value="">
+        Selecciona un servicio
+        </option>
+        <option value="baño">Baño</option>
+        <option value="guarderia">Guarderia</option>
+    </select>
+    <div class="invalid-feedback">Selecciona un servicio</div>
+    </div>
+  `;
+}
+
 async function mostrarDtosPendientes() {
   serviciosView.mostrarDatosThead([
     "ID",
@@ -35,44 +51,85 @@ async function mostrarDtosPendientes() {
   serviciosView.mostrarDatosTbl(datos, handleBtnsDetalle);
 }
 
-function actualizarDtosPendientes() {
+function actualizarTbl() {
   setTimeout(() => {
     mostrarDtosPendientes();
   }, 1000);
 }
 
+function obtenerDatos() {
+  if (!formBase.form.checkValidity()) {
+    return;
+  }
+
+  const objDatos = formBase.obtenerDatos();
+  objDatos["mascota"]["tamanio"] = document.querySelector("#tamannio").value;
+  objDatos["mascota"]["pelaje"] = document.querySelector("#pelaje").value;
+  objDatos["hora_salida"] = "";
+  objDatos["estado"] = "pendiente";
+  objDatos["servicio"] = document.querySelector("#servicio").value;
+
+  return objDatos;
+}
+
+function asignarDatos(objDatos) {
+  document.querySelector("#servicio").value = objDatos["servicio"];
+}
+
 export function generarFormAgregar() {
   const btnCrear = generarBtnCrear();
+  const btnCerrar = functionModal.generarBtnCerrar();
+
   functionModal.crearBaseFormServicio(
     "Crear Cita Pendiente",
     generarInputsHtml(),
-    [btnCrear]
+    [btnCrear, btnCerrar]
   );
 }
 
-function asignarDatos(obj) {
-  document.querySelector("#servicio").value = obj["servicio"];
-}
-
-//=====Botones=====
-//-----Boton detalle-----
 async function handleBtnsDetalle(event) {
   const idPendiente = event.target.dataset.id;
   const objPendiente = await baseModel.obtenerID(idPendiente);
   const btnConfirmar = generarBtnConfirmar(objPendiente.id);
   const btnCancelar = crearBtnCancelar(objPendiente.id);
+  const btnCerrar = functionModal.generarBtnCerrar();
 
   functionModal.crearBaseFormServicio(
     `${objPendiente.mascota.nombre} esta esperando a corfirmar su cita!!`,
     generarInputsHtml() + banniosView.generarInputsHtml(),
-    [btnConfirmar, btnCancelar]
+    [btnConfirmar, btnCancelar, btnCerrar]
   );
 
   formBase.AsignarDatos(objPendiente);
   asignarDatos(objPendiente);
 }
 
-//-----Boton Confirmar Cita-----
+//=====Botones=====
+//-----Boton Crear-----
+function generarBtnCrear() {
+  const btnCrear = functionModal.crearBotonBase(
+    "Crear",
+    ["btn-success"],
+    handlerBtnCrear
+  );
+  btnCrear.setAttribute("type", "submit");
+  return btnCrear;
+}
+
+function handlerBtnCrear(event) {
+  const datos = formBase.obtenerDatos();
+  if (!datos) {
+    return;
+  }
+  event.preventDefault();
+
+  datos["servicio"] = document.querySelector("#servicio").value;
+  baseModel.guardar(datos);
+  actualizarTbl();
+  functionModal.cerrarFormBase();
+}
+
+//-----Boton Confirmar-----
 function generarBtnConfirmar(id) {
   const btnConfirmar = functionModal.crearBotonBase(
     "Confirmar",
@@ -87,7 +144,7 @@ function generarBtnConfirmar(id) {
 }
 
 function handlerBtnConfirmar(event) {
-  const objDatos = obtenerDatosPendiente();
+  const objDatos = obtenerDatos();
   const idPendiente = event.target.dataset.id;
 
   if (!objDatos) {
@@ -117,7 +174,7 @@ function handlerBtnConfirmar(event) {
 
   functionModal.cerrarFormBase();
 
-  actualizarDtosPendientes();
+  actualizarTbl();
 }
 
 //-----Boton Borrar-----
@@ -139,63 +196,6 @@ function handlerBtnCancelar(event) {
   const idPendiente = event.target.dataset.id;
   baseModel.eliminar(idPendiente);
 
-  actualizarDtosPendientes();
+  actualizarTbl();
   functionModal.cerrarFormBase();
-}
-
-//-----Boton Crear-----
-function generarBtnCrear() {
-  const btnCrear = functionModal.crearBotonBase(
-    "Crear",
-    ["btn-success"],
-    handlerBtnCrear
-  );
-  btnCrear.setAttribute("type", "submit");
-  return btnCrear;
-}
-
-function handlerBtnCrear(event) {
-  const datos = formBase.obtenerDatos();
-  if (!datos) {
-    return;
-  }
-  event.preventDefault();
-
-  datos["servicio"] = document.querySelector("#servicio").value;
-  baseModel.guardar(datos);
-  actualizarDtosPendientes();
-  functionModal.cerrarFormBase();
-}
-
-//=====inputs=====
-function generarInputsHtml() {
-  return `
-    <div class="">
-    <span for="servicio" class="form-label">Servicio</span>
-    <select class="form-select" id="servicio" required>
-        <option selected disabled value="">
-        Selecciona un servicio
-        </option>
-        <option value="baño">Baño</option>
-        <option value="guarderia">Guarderia</option>
-    </select>
-    <div class="invalid-feedback">Selecciona un servicio</div>
-    </div>
-  `;
-}
-
-// ====Obtener Datos====
-function obtenerDatosPendiente() {
-  if (!formBase.form.checkValidity()) {
-    return;
-  }
-
-  const objDatos = formBase.obtenerDatos();
-  objDatos["mascota"]["tamanio"] = document.querySelector("#tamannio").value;
-  objDatos["mascota"]["pelaje"] = document.querySelector("#pelaje").value;
-  objDatos["hora_salida"] = "";
-  objDatos["estado"] = "pendiente";
-  objDatos["servicio"] = document.querySelector("#servicio").value;
-
-  return objDatos;
 }

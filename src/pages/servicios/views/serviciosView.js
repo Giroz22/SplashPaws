@@ -126,13 +126,13 @@ export function mostrarDatosThead(datosThead) {
   });
 }
 
-export async function mostrarPorEstado(vrEstado) {
+export async function mostrarPorEstado(vrEstado, handleBtnsDetalle) {
   const dato = await baseModel.obtenerDatosAtributo(
     "estado",
     vrEstado.toLowerCase()
   );
 
-  mostrarDatosTbl(dato);
+  mostrarDatosTbl(dato, handleBtnsDetalle);
 }
 
 export function actualizarServicioActual(servicio) {

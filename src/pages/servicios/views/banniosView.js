@@ -1,6 +1,7 @@
 // =====Importaciones =====
 import * as baseModel from "../models/baseModel.js";
 import * as banniosModel from "../models/banniosModel.js";
+import * as banniosController from "../controllers/banniosController.js";
 import * as serviciosView from "./serviciosView.js";
 import * as main from "../../../../main.js";
 import * as functionModal from "./functionModal.js";
@@ -20,25 +21,25 @@ btnBannios.addEventListener("click", () => {
     {
       descripcion: "Pendiente",
       handler: () => {
-        serviciosView.mostrarPorEstado("pendiente");
+        serviciosView.mostrarPorEstado("pendiente", handleBtnsDetalle);
       },
     },
     {
       descripcion: "Proceso",
       handler: () => {
-        serviciosView.mostrarPorEstado("proceso");
+        serviciosView.mostrarPorEstado("proceso", handleBtnsDetalle);
       },
     },
     {
       descripcion: "Finalizado",
       handler: () => {
-        serviciosView.mostrarPorEstado("finalizado");
+        serviciosView.mostrarPorEstado("finalizado", handleBtnsDetalle);
       },
     },
     {
       descripcion: "Cancelado",
       handler: () => {
-        serviciosView.mostrarPorEstado("cancelado");
+        serviciosView.mostrarPorEstado("cancelado", handleBtnsDetalle);
       },
     },
   ];
@@ -46,32 +47,6 @@ btnBannios.addEventListener("click", () => {
 });
 
 //===== Funciones =====
-async function mostrarDtosBannios() {
-  serviciosView.mostrarDatosThead([
-    "ID",
-    "Nombre de la Mascota",
-    "Especie",
-    "Tamaño",
-    "Pelaje",
-    "Propietario",
-    "Telefono",
-    "Fecha",
-    "Hora llegada",
-    "Hora salida",
-    "Estado",
-    "Servicio",
-    "Detalle",
-  ]);
-  const datos = await baseModel.obtenerDatos();
-  serviciosView.mostrarDatosTbl(datos, handleBtnsDetalle);
-}
-
-function actualizarTbl() {
-  setTimeout(() => {
-    mostrarDtosBannios();
-  }, 1000);
-}
-
 export function generarInputsHtml() {
   return `
 
@@ -103,12 +78,30 @@ export function generarInputsHtml() {
   `;
 }
 
-export function generarFormAgregar() {
-  const btnCrear = generarBotonCrear();
-
-  functionModal.crearBaseFormServicio(`Formulario Baños`, generarInputsHtml(), [
-    btnCrear,
+async function mostrarDtosBannios() {
+  serviciosView.mostrarDatosThead([
+    "ID",
+    "Nombre de la Mascota",
+    "Especie",
+    "Tamaño",
+    "Pelaje",
+    "Propietario",
+    "Telefono",
+    "Fecha",
+    "Hora llegada",
+    "Hora salida",
+    "Estado",
+    "Servicio",
+    "Detalle",
   ]);
+  const datos = await baseModel.obtenerDatos();
+  serviciosView.mostrarDatosTbl(datos, handleBtnsDetalle);
+}
+
+function actualizarTbl() {
+  setTimeout(() => {
+    mostrarDtosBannios();
+  }, 1000);
 }
 
 function obtenerDatos() {
@@ -131,14 +124,47 @@ function asignarDatos(objDatos) {
   document.querySelector("#pelaje").value = objDatos["mascota"]["pelaje"];
 }
 
+export function generarFormAgregar() {
+  const btnCrear = generarBotonCrear();
+
+  functionModal.crearBaseFormServicio(`Formulario Baños`, generarInputsHtml(), [
+    btnCrear,
+  ]);
+}
+
 async function handleBtnsDetalle(event) {
   const id = event.target.dataset.id;
   const objDatos = await baseModel.obtenerID(id);
+  const listaBtns = [];
+  const btnIniciar = generarBtnIniciar(id);
+  const btnCancelarCita = generarBtnCancelar(id);
+  const btnFinalizar = generarBtnFinalizar(id);
+  const btnBorrar = generarBtnBorrar(id);
+  const btnCerrar = functionModal.generarBtnCerrar();
+
+  switch (objDatos["estado"]) {
+    case "pendiente":
+      listaBtns.push(btnIniciar, btnCancelarCita, btnCerrar);
+      break;
+
+    case "proceso":
+      listaBtns.push(btnFinalizar, btnCancelarCita, btnCerrar);
+      break;
+
+    case "finalizado":
+    case "cancelado":
+      listaBtns.push(btnBorrar, btnCerrar, btnCerrar);
+      break;
+
+    default:
+      console.error("Error al asignar los botones");
+      return;
+  }
 
   functionModal.crearBaseFormServicio(
     `Detalles de la mascota ${objDatos.mascota.nombre}`,
     generarInputsHtml(),
-    []
+    listaBtns
   );
 
   formBase.AsignarDatos(objDatos);
@@ -169,16 +195,106 @@ function handlerBtnCrear(event) {
 }
 
 //---- Boton iniciar -----
-function generarBtnIniciar() {}
+function generarBtnIniciar(id) {
+  const btnIniciar = functionModal.crearBotonBase(
+    "Iniciar",
+    ["btn-primary"],
+    handleBtnIniciar
+  );
+  btnIniciar.dataset.id = id;
 
-function handleBtnIniciar() {}
+  return btnIniciar;
+}
+
+function handleBtnIniciar(event) {
+  const id = event.target.dataset.id;
+  const objDtos = { id, ...obtenerDatos() };
+
+  if (!objDtos) {
+    return;
+  }
+  event.preventDefault();
+
+  banniosController.iniciarBannio(objDtos);
+
+  functionModal.cerrarFormBase();
+  actualizarTbl();
+}
 
 //----- Boton Finalizar -----
-function generarBtnFinalizar() {}
+function generarBtnFinalizar(id) {
+  const btnFinalizar = functionModal.crearBotonBase(
+    "Finalizar",
+    ["btn-success"],
+    handleBtnFinalizar
+  );
+  btnFinalizar.dataset.id = id;
 
-function handleBtnFinalizar() {}
+  return btnFinalizar;
+}
+
+function handleBtnFinalizar(event) {
+  const id = event.target.dataset.id;
+  const objDtos = { id, ...obtenerDatos() };
+
+  if (!objDtos) {
+    return;
+  }
+  event.preventDefault();
+
+  banniosController.finalizarBannio(objDtos);
+
+  functionModal.cerrarFormBase();
+  actualizarTbl();
+}
 
 //------ Boton Cancelar -----
-function generarBtnCancelar() {}
+function generarBtnCancelar(id) {
+  const btnCancelar = functionModal.crearBotonBase(
+    "Cancelar",
+    ["btn-danger"],
+    handleBtnCancelar
+  );
+  btnCancelar.dataset.id = id;
 
-function handleBtnCancelar() {}
+  return btnCancelar;
+}
+
+function handleBtnCancelar(event) {
+  const id = event.target.dataset.id;
+  const objDtos = { id, ...obtenerDatos() };
+
+  if (!objDtos) {
+    return;
+  }
+  event.preventDefault();
+
+  banniosController.cancelarBannio(objDtos);
+  functionModal.cerrarFormBase();
+  actualizarTbl();
+}
+
+//------ Boton Borrar  ------
+function generarBtnBorrar(id) {
+  const btnBorrar = functionModal.crearBotonBase(
+    "Borrar",
+    ["btn-danger"],
+    handleBtnBorrar
+  );
+  btnBorrar.dataset.id = id;
+
+  return btnBorrar;
+}
+
+function handleBtnBorrar(event) {
+  const id = event.target.dataset.id;
+
+  if (!id) {
+    return;
+  }
+  event.preventDefault();
+
+  baseModel.eliminar(id);
+  functionModal.cerrarFormBase();
+  actualizarTbl();
+}
