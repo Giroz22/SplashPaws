@@ -42,7 +42,7 @@ btnAgregar.addEventListener("click", () => {
       bannios.generarFormAgregar();
       break;
     case "guarderia":
-      console.log("Hola desde servicios view");
+      guarderia.generarFormAgregar();
       break;
     default:
       break;

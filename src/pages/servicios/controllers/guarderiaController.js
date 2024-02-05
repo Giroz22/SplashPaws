@@ -1,21 +1,21 @@
 import * as baseModel from "../models/baseModel.js";
 import * as baseController from "./baseController.js";
 
-//Iniciar
-export function iniciarBannio(objDtos) {
-  objDtos["estado"] = "proceso";
+//Ingresar
+export function ingresarGuarderia(objDtos) {
+  objDtos["estado"] = "guarderia";
   baseModel.modificar(objDtos["id"], objDtos);
 }
 
-//Finalizar
-export function finalizarBannio(objDtos) {
-  objDtos["estado"] = "finalizado";
+//Entregar
+export function entregarGuarderia(objDtos) {
+  objDtos["estado"] = "entregado";
   objDtos["hora_salida"] = baseController.obtenerHoraActual();
   baseModel.modificar(objDtos["id"], objDtos);
 }
 
 //Cancelar
-export function cancelarBannio(objDtos) {
+export function cancelarGuarderia(objDtos) {
   objDtos["estado"] = "cancelado";
   baseModel.modificar(objDtos["id"], objDtos);
 }

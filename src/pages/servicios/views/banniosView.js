@@ -49,7 +49,6 @@ btnBannios.addEventListener("click", () => {
 //===== Funciones =====
 export function generarInputsHtml() {
   return `
-
       <div class="">
       <span for="tamannio" class="form-label">Tamaño</span>
       <select class="form-select" id="tamannio" required>
@@ -126,9 +125,11 @@ function asignarDatos(objDatos) {
 
 export function generarFormAgregar() {
   const btnCrear = generarBotonCrear();
+  const btnCerrar = functionModal.generarBtnCerrar();
 
   functionModal.crearBaseFormServicio(`Formulario Baños`, generarInputsHtml(), [
     btnCrear,
+    btnCerrar,
   ]);
 }
 
