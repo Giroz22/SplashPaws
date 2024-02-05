@@ -38,6 +38,12 @@ btnAgregar.addEventListener("click", () => {
       pendientes.generarFormAgregar();
       break;
 
+    case "bannios":
+      bannios.generarFormAgregar();
+      break;
+    case "guarderia":
+      console.log("Hola desde servicios view");
+      break;
     default:
       break;
   }

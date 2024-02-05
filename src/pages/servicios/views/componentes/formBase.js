@@ -88,18 +88,6 @@ function generarForm() {
         </select>
         <div class="invalid-feedback">Selecciona una hora</div>
         </div>
-
-        <div class="">
-        <span for="servicio" class="form-label">Servicio</span>
-        <select class="form-select" id="servicio" required>
-            <option selected disabled value="">
-            Selecciona un servicio
-            </option>
-            <option value="baño">Baño</option>
-            <option value="guarderia">Guarderia</option>
-        </select>
-        <div class="invalid-feedback">Selecciona un servicio</div>
-        </div>
     `;
 }
 
@@ -128,21 +116,19 @@ export function obtenerDatos() {
       nombre: document.querySelector("#nombre_propietario").value,
       telefono: document.querySelector("#telefono").value,
     },
-
     fecha: document.querySelector("#fecha").value,
     hora_llegada: document.querySelector("#hora").value,
-    servicio: document.querySelector("#servicio").value,
   };
 
   return seviciosPendientes;
 }
 
 export function AsignarDatos(obj) {
-  document.querySelector("#nombre_mascota").value = obj.mascota.nombre;
-  document.querySelector("#especie").value = obj.mascota.especie;
-  document.querySelector("#nombre_propietario").value = obj.propietario.nombre;
-  document.querySelector("#telefono").value = obj.propietario.telefono;
-  document.querySelector("#fecha").value = obj.fecha;
-  document.querySelector("#hora").value = obj.hora_llegada;
-  document.querySelector("#servicio").value = obj.servicio;
+  document.querySelector("#nombre_mascota").value = obj["mascota"]["nombre"];
+  document.querySelector("#especie").value = obj["mascota"]["especie"];
+  document.querySelector("#nombre_propietario").value =
+    obj["propietario"]["nombre"];
+  document.querySelector("#telefono").value = obj["propietario"]["telefono"];
+  document.querySelector("#fecha").value = obj["fecha"];
+  document.querySelector("#hora").value = obj["hora_llegada"];
 }

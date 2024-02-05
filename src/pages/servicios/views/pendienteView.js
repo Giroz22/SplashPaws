@@ -3,6 +3,7 @@ import * as baseModel from "../models/baseModel.js";
 import * as serviciosView from "./serviciosView.js";
 import * as formBase from "./componentes/formBase.js";
 import * as functionModal from "./functionModal.js";
+import * as banniosView from "./banniosView.js";
 
 // ===== Selectores =====
 const btnPendientes = document.querySelector("#btnPendientes");
@@ -27,16 +28,30 @@ async function mostrarDtosPendientes() {
     "Telefono",
     "Fecha",
     "Hora llegada",
-    "Servicio",
     "Detalle",
+    "Servicio",
   ]);
   const datos = await baseModel.obtenerDatos();
   serviciosView.mostrarDatosTbl(datos, handleBtnsDetalle);
 }
 
+function actualizarDtosPendientes() {
+  setTimeout(() => {
+    mostrarDtosPendientes();
+  }, 1000);
+}
+
 export function generarFormAgregar() {
-  const btnCrear = crearBotonCrear();
-  functionModal.crearBaseFormServicio("Crear Cita Pendiente", [], [btnCrear]);
+  const btnCrear = generarBtnCrear();
+  functionModal.crearBaseFormServicio(
+    "Crear Cita Pendiente",
+    generarInputsHtml(),
+    [btnCrear]
+  );
+}
+
+function asignarDatos(obj) {
+  document.querySelector("#servicio").value = obj["servicio"];
 }
 
 //=====Botones=====
@@ -44,20 +59,21 @@ export function generarFormAgregar() {
 async function handleBtnsDetalle(event) {
   const idPendiente = event.target.dataset.id;
   const objPendiente = await baseModel.obtenerID(idPendiente);
-  const btnConfirmar = crearBtnConfirmar(objPendiente.id);
+  const btnConfirmar = generarBtnConfirmar(objPendiente.id);
   const btnCancelar = crearBtnCancelar(objPendiente.id);
 
   functionModal.crearBaseFormServicio(
     `${objPendiente.mascota.nombre} esta esperando a corfirmar su cita!!`,
-    crearInputs(),
+    generarInputsHtml() + banniosView.generarInputsHtml(),
     [btnConfirmar, btnCancelar]
   );
 
   formBase.AsignarDatos(objPendiente);
+  asignarDatos(objPendiente);
 }
 
 //-----Boton Confirmar Cita-----
-function crearBtnConfirmar(id) {
+function generarBtnConfirmar(id) {
   const btnConfirmar = functionModal.crearBotonBase(
     "Confirmar",
     ["btn-success"],
@@ -99,8 +115,9 @@ function handlerBtnConfirmar(event) {
   baseModel.actualizarURL("serviciosPendientes");
   baseModel.eliminar(idPendiente);
 
-  mostrarDtosPendientes();
   functionModal.cerrarFormBase();
+
+  actualizarDtosPendientes();
 }
 
 //-----Boton Borrar-----
@@ -118,11 +135,16 @@ function crearBtnCancelar(id) {
 
 function handlerBtnCancelar(event) {
   event.preventDefault();
+
+  const idPendiente = event.target.dataset.id;
+  baseModel.eliminar(idPendiente);
+
+  actualizarDtosPendientes();
   functionModal.cerrarFormBase();
 }
 
 //-----Boton Crear-----
-function crearBotonCrear() {
+function generarBtnCrear() {
   const btnCrear = functionModal.crearBotonBase(
     "Crear",
     ["btn-success"],
@@ -138,39 +160,26 @@ function handlerBtnCrear(event) {
     return;
   }
   event.preventDefault();
+
+  datos["servicio"] = document.querySelector("#servicio").value;
   baseModel.guardar(datos);
-  mostrarDtosPendientes();
+  actualizarDtosPendientes();
   functionModal.cerrarFormBase();
 }
 
 //=====inputs=====
-function crearInputs() {
+function generarInputsHtml() {
   return `
-
-      <div class="">
-      <span for="tamannio" class="form-label">Tamaño</span>
-      <select class="form-select" id="tamannio" required>
-          <option selected disabled value="">
-            Selecciona un tamaño
-          </option>
-          <option value="gigante">Gigante</option>
-          <option value="grande">Grande</option>
-          <option value="mediano">Mediano</option>
-          <option value="pequeño">Pequeño</option>
-        </select>
-        <div class="invalid-feedback">Selecciona un tamaño</div>
-    </div>
-
     <div class="">
-      <span for="pelaje" class="form-label">Pelaje</span>
-      <input
-        type="text"
-        class="form-control"
-        id="pelaje"
-        placeholder= "Ingresa el pelaje"
-        required
-      />
-      <div class="invalid-feedback">Selecciona una pelaje</div>
+    <span for="servicio" class="form-label">Servicio</span>
+    <select class="form-select" id="servicio" required>
+        <option selected disabled value="">
+        Selecciona un servicio
+        </option>
+        <option value="baño">Baño</option>
+        <option value="guarderia">Guarderia</option>
+    </select>
+    <div class="invalid-feedback">Selecciona un servicio</div>
     </div>
   `;
 }
@@ -186,6 +195,7 @@ function obtenerDatosPendiente() {
   objDatos["mascota"]["pelaje"] = document.querySelector("#pelaje").value;
   objDatos["hora_salida"] = "";
   objDatos["estado"] = "pendiente";
+  objDatos["servicio"] = document.querySelector("#servicio").value;
 
   return objDatos;
 }

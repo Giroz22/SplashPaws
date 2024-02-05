@@ -51,8 +51,8 @@ async function mostrarDtosGuarderia() {
     "Fecha",
     "Hora llegada",
     "Hora salida",
-    "Servicio",
     "Estado",
+    "Servicio",
     "Detalle",
   ]);
   const datos = await baseModel.obtenerDatos();
