@@ -36,8 +36,10 @@ export function generatorHeader(content, link1, url1, nameLogin, urlLogin) {
           alt="spain_lenguage"
           id="spain_lenguage"
         />
-        Español
-      </button>
+        <span>
+              Español
+            
+            </span>
     </div>
   </nav>
 
@@ -69,12 +71,20 @@ export function generatorHeaderModal(
             data-bs-toggle="modal"
             data-bs-target="#staticBackdrop"
           >
+            <span>
             Agendar cita
+            
+            </span>
           </a>
       
           
     
-          <a href="#contactos">Contactos</a>
+          <a href="#contactos">
+          <span>
+          Contactos
+          
+          </span>
+          </a>
         
 
         </div>
@@ -88,7 +98,10 @@ export function generatorHeaderModal(
               alt="spain_lenguage"
               id="spain_lenguage"
             />
-            Español
+            <span>
+              Español
+            
+            </span>
           </button>
         </div>
       </nav>
@@ -160,7 +173,10 @@ export function generarModal(content) {
           <span for="nombre_propietario" class="form-label">Nombre del propietario</span>
           <input type="text" class="form-control" placeholder="Ingresa el nombre" id="nombre_propietario" required>
           <div class="invalid-feedback">
+          <span>
             Ingresa un nombre
+
+          </span>
           </div>
         </div>
 
@@ -168,7 +184,9 @@ export function generarModal(content) {
           <span for="nombre_mascota" class="form-label">Nombre de la mascota</span>
           <input type="text" class="form-control" placeholder="Ingresa el nombre" id="nombre_mascota" required>
           <div class="invalid-feedback">
+          <span>
             Ingresa un nombre
+          </span>
           </div>
 
         </div>
@@ -180,7 +198,9 @@ export function generarModal(content) {
             <option value="perro">Perro</option>
           </select>
           <div class="invalid-feedback">
-            Selecciona una especie
+          <span>
+          Selecciona una especie
+          </span>
           </div>
         </div>
         <!--  Fila 2 -->
@@ -190,14 +210,18 @@ export function generarModal(content) {
           <span for="telefono" class="form-label">Teléfono del propietario</span>
           <input type="tel" maxlength="15" minlength="10" class="form-control" id="telefono" placeholder="Ingresa un número de teléfono" required>
           <div class="invalid-feedback">
-            Ingresa un teléfono
+          <span>
+          Ingresa un teléfono
+          </span>
           </div>
         </div>
         <div class="col-md-4">
           <span for="fecha" class="form-label">Fecha</span>
           <input type="date" class="form-control" id="fecha" required>
           <div class="invalid-feedback">
-            Selecciona una fecha
+          <span>
+          Selecciona una fecha
+          </span>
           </div>
         </div>
   
@@ -210,7 +234,9 @@ export function generarModal(content) {
                              
           </select>
           <div class="invalid-feedback">
-            Selecciona una hora
+          <span>
+          Selecciona una hora
+          </span>
           </div>
         </div>
         
@@ -222,12 +248,18 @@ export function generarModal(content) {
             <option value="guarderia">Guarderia</option>
           </select>
           <div class="invalid-feedback">
-            Selecciona un servicio
+          <span>
+          Selecciona un servicio
+          </span>
           </div>
         </div>
         
         <div class="contenedor_buttom ">
-          <button class="btn btn_submit" type="submit">Agendar cita</button>
+          <button class="btn btn_submit" type="submit">
+          <span>
+          Agendar cita
+          </span>
+          </button>
         </div>
       </form>
 

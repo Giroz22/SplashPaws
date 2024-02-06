@@ -33,7 +33,7 @@ async function traducir(texto, idiomaTexto, idiomaTraducir) {
  */
 async function traducirElementos(idiomaTexto, idiomaTraducir) {
   const textoTraducir = Array.from(
-    document.querySelectorAll("h1,h2,button,td,li,a,p")
+    document.querySelectorAll("h1,h2,h3,h5,button,td,li,p,label,span")
   );
 
   //Recorre todos los elementos que se van a traducir

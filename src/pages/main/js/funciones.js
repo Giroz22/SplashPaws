@@ -39,10 +39,10 @@ function imprimirDatos(datos) {
             <div class="card" style="width: 18rem; height: 28rem;">
                 <img src="${element.urlImagen}" class="card-img-top" alt="..." style="width: 18rem; height: 16rem;">
                 <div class="card-body">
-                    <h5 class="card-title">${element.nombre}</h5>
-                    <p class="card-text">${element.descripcion}</p>
-                    <p class="card-text">Categoria: ${element.categoria}</p>
-                    <p class="card-text">Especie: ${element.especie}</p> 
+                    <h5 class="card-title"><span> ${element.nombre}</span></h5>
+                    <p class="card-text"><span>${element.descripcion}</span></p>
+                    <p class="card-text">Categoria:<span> ${element.categoria}</span></p>
+                    <p class="card-text">Especie:<span> ${element.especie}</span></p> 
                     <span>${element.precio}</span>
                     <p class="card-text">Cantidad:<span>${element.stock}</span> </p>
                 </div>
@@ -129,7 +129,7 @@ async function getproducts(nombre) {
         printProducts(products);
         if (products.length === 0) {
             const container = document.querySelector(".products");
-            container.innerHTML = "<p>No se encontraron productos</p>";
+            container.innerHTML = "<p><span>No se encontraron productos</span></p>";
         }
     } catch (error) {
         console.error("Hubo un error al buscar el producto:", error);
@@ -145,10 +145,10 @@ function printProducts(products) {
         <div class="card" style="width: 18rem; height: 25rem;">
             <img src="${product.urlImagen}" class="card-img-top" alt="..." style="width: 18rem; height: 15rem;">
             <div class="card-body">
-                <h5 class="card-title">${product.nombre}</h5>
-                <p class="card-text">${product.descripcion}</p>
-                <p class="card-text">Categoria: ${product.categoria}</p>
-                <p class="card-text">Especie: ${product.especie}</p> 
+                <h5 class="card-title"><span>${product.nombre}</span></h5>
+                <p class="card-text"><span>${product.descripcion}</span></p>
+                <p class="card-text">Categoria: <span>${product.categoria}</span></p>
+                <p class="card-text">Especie: <span>${product.especie}</span></p> 
                 <span>${product.precio}</span>
                 <p class="card-text">Cantidad:<span>${product.stock}</span> </p>
             </div>
@@ -193,11 +193,13 @@ function printPrecioEspecieCategoria(datos) {
     });
 
     categoriaHTML.innerHTML = `
-        <option value="">Categoria</option>
+        <option value=""><span>Categoria</span></option>
     `;
     categoriaUnica.forEach((categoria) => {
         const optionSelect = document.createElement("option");
-        optionSelect.textContent = categoria;
+        const optionSpan = document.createElement("span");
+        optionSpan.textContent = categoria;
+        optionSelect.appendChild(optionSpan)
         categoriaHTML.appendChild(optionSelect);
         
     });
@@ -208,12 +210,13 @@ function printPrecioEspecieCategoria(datos) {
     });
 
     especieHTML.innerHTML = `
-        <option value="">Especie</option>
+        <option value=""><span>Especie</span></option>
     `;
     especieUnica.forEach((especie) => {
         const optionSelect = document.createElement("option");
-        optionSelect.textContent = especie;
+        const optionSpan = document.createElement("span");
+        optionSpan.textContent = especie;
+        optionSelect.appendChild(optionSpan)
         especieHTML.appendChild(optionSelect);
-        
     });
 }
