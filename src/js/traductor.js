@@ -33,7 +33,7 @@ async function traducir(texto, idiomaTexto, idiomaTraducir) {
  */
 async function traducirElementos(idiomaTexto, idiomaTraducir) {
   const textoTraducir = Array.from(
-    document.querySelectorAll("h1,h2,button,td,li")
+    document.querySelectorAll("h1,h2,button,td,li,a,p")
   );
 
   //Recorre todos los elementos que se van a traducir
@@ -53,13 +53,26 @@ async function traducirElementos(idiomaTexto, idiomaTraducir) {
  * En base al elemento("isEnglish") del local storage, el idioma de la pagina se traduce a ingles o español
  */
 export function TraducirPagina() {
-  if (localStorage.getItem("isEnglish")) {
-    traducirElementos("en-GB", "es-ES");
-    localStorage.removeItem("isEnglish");
-  } else {
-    traducirElementos("es-ES", "en-GB");
-    localStorage.setItem("isEnglish", true);
-  }
+  document.addEventListener("click", (event)=>{
+    const img = document.querySelector("#btn_leguage img")
+    if(event.target.id == "btn_leguage" && localStorage.getItem("isEnglish")){
+      traducirElementos("en-GB", "es-ES");
+      localStorage.removeItem("isEnglish");
+      img.src = "https://cdn-icons-png.flaticon.com/128/197/197484.png"
+     
+    }else{
+      traducirElementos("es-ES", "en-GB");
+      localStorage.setItem("isEnglish", true);
+      img.src = "https://cdn-icons-png.flaticon.com/128/197/197593.png"
+    }
+  })
+  // if (localStorage.getItem("isEnglish")) {
+  //   traducirElementos("en-GB", "es-ES");
+  //   localStorage.removeItem("isEnglish");
+  // } else {
+  //   traducirElementos("es-ES", "en-GB");
+  //   localStorage.setItem("isEnglish", true);
+  // }
 }
 
 /**

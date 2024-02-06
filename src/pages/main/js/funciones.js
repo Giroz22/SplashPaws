@@ -1,21 +1,39 @@
-export async function consumirAPI(mensaje) {
+export async function consumirAPI(mensaje, especie, categoria) {
     try {
-    const URL = "http://localhost:3000/productos";
-    const respuesta = await fetch(URL);
-    const datos = await respuesta.json();
-    imprimirDatos(datos);
+        const URL = "http://localhost:3000/productos";
+        const respuesta = await fetch(URL);
+        const datos = await respuesta.json();
+        imprimirDatos(datos);
     } catch (error) {
-        console.error('Hubo un error al obtener los productos:', error);
+        console.error("Hubo un error al obtener los productos:", error);
     }
 }
 
+//selectores
+
 const products = document.querySelector(".products");
+const preciominimo = document.querySelector("#minimo");
+const preciomaximo = document.querySelector(" #maximo");
+const especieHTML = document.querySelector("#especiecatalogo");
+const categoriaHTML = document.querySelector("#categoria");
+
+//listeners
+especieHTML.addEventListener("change", () => {
+    const nombre = inputSearch.value.trim();
+    getproducts(nombre);
+});
+categoriaHTML.addEventListener("change", () => {
+    const nombre = inputSearch.value.trim();
+    getproducts(nombre);
+});
+preciominimo.addEventListener("change", handlePriceRangeChange);
+preciomaximo.addEventListener("change", handlePriceRangeChange);
 
 function imprimirDatos(datos) {
-    cleanHTML(products)
+    cleanHTML(products);
 
     datos.forEach((element) => {
-        console.log(datos);
+        
         products.innerHTML += `
         <div class="products">
             <div class="card" style="width: 18rem; height: 28rem;">
@@ -32,16 +50,16 @@ function imprimirDatos(datos) {
         </div>
         `;
     });
+    printPrecioEspecieCategoria(datos);
 }
 
 const mensaje = "Hola";
 export default mensaje;
 
 // filters
+
 // buscador
 const inputSearch = document.querySelector("#search");
-let timer;
-
 
 inputSearch.addEventListener("input", (event) => {
     const nombre = event.target.value.trim();
@@ -50,35 +68,79 @@ inputSearch.addEventListener("input", (event) => {
     } else {
         getproducts(nombre);
     }
-
-    // clearTimeout(timer)
-    // timer = setTimeout(() => {
-    //     getproducts(event.target.value)
-    // }, 500);
-})
+});
+function handlePriceRangeChange() {
+    const nombre = inputSearch.value.trim();
+    getproducts(nombre);
+}
 
 async function getproducts(nombre) {
     try {
-        const URL = `http://localhost:3000/productos?nombre=${encodeURIComponent(nombre)}`;
-        const response = await fetch(URL);
-        const products = await response.json();
+        let URL = `http://localhost:3000/productos?nombre=${encodeURIComponent(
+            nombre
+        )}`;
 
-        console.log(products); 
-        printProducts(products)
+        const especieSelecionada = especieHTML.value;
+        const categoriaSelecionada = categoriaHTML.value;
+        const precioMinimoSeleccionado = parseFloat(
+            preciominimo.value.replace("$", "").replace(".", "").replace(",", ".")
+        );
+        const precioMaximoSeleccionado = parseFloat(
+            preciomaximo.value.replace("$", "").replace(".", "").replace(",", ".")
+        );
+
+        if (especieSelecionada) {
+            URL += `&especie=${encodeURIComponent(especieSelecionada)}`;
+        }
+        if (categoriaSelecionada) {
+            URL += `&categoria=${encodeURIComponent(categoriaSelecionada)}`;
+        }
+
+        const response = await fetch(URL);
+        let products = await response.json();
+
+        if (!isNaN(precioMinimoSeleccionado) && !isNaN(precioMaximoSeleccionado)) {
+            products = products.filter((producto) => {
+                const precioProducto = parseFloat(
+                    producto.precio.replace("$", "").replace(".", "").replace(",", ".")
+                );
+                return (
+                    precioProducto >= precioMinimoSeleccionado &&
+                    precioProducto <= precioMaximoSeleccionado
+                );
+            });
+        } else if (!isNaN(precioMinimoSeleccionado)) {
+            products = products.filter((producto) => {
+                const precioProducto = parseFloat(
+                    producto.precio.replace("$", "").replace(".", "").replace(",", ".")
+                );
+                return precioProducto >= precioMinimoSeleccionado;
+            });
+        } else if (!isNaN(precioMaximoSeleccionado)) {
+            products = products.filter((producto) => {
+                const precioProducto = parseFloat(
+                    producto.precio.replace("$", "").replace(".", "").replace(",", ".")
+                );
+                return precioProducto <= precioMaximoSeleccionado;
+            });
+        }
+
+        console.log(products);
+        printProducts(products);
         if (products.length === 0) {
             const container = document.querySelector(".products");
             container.innerHTML = "<p>No se encontraron productos</p>";
         }
-        } catch (error) {
-        console.error('Hubo un error al buscar el producto:', error);
+    } catch (error) {
+        console.error("Hubo un error al buscar el producto:", error);
     }
 }
 
 function printProducts(products) {
-    const container = document.querySelector(".products")
+    const container = document.querySelector(".products");
     cleanHTML(container);
 
-    products.forEach(product => {
+    products.forEach((product) => {
         container.innerHTML += `
         <div class="card" style="width: 18rem; height: 25rem;">
             <img src="${product.urlImagen}" class="card-img-top" alt="..." style="width: 18rem; height: 15rem;">
@@ -97,51 +159,61 @@ function printProducts(products) {
 
 function cleanHTML(container) {
     while (container.firstChild) {
-        container.removeChild(container.firstChild)
+        container.removeChild(container.firstChild);
     }
 }
 
 // demas filtros
-const precioMin = document.querySelector('.precio')
-const precioMax = document.querySelector('.precio')
 
-function filtroPrecioEspecieCategoria(){
-    
+function printPrecioEspecieCategoria(datos) {
+    const precioNumeros = datos.map((producto) => {
+        const precionSinSimblolo = producto.precio
+            .replace("$", "")
+            .replace(".", "");
+        return parseFloat(precionSinSimblolo);
+    });
+    const preciosUnicos = new Set(precioNumeros);
+    const precioOrdenados = Array.from(preciosUnicos).sort((a, b) => a - b);
+    console.log(precioOrdenados);
+    preciominimo.innerHTML += ``;
+    preciomaximo.innerHTML += ``;
+    precioOrdenados.forEach((precio) => {
+        const precioElemento = document.createElement(`option`);
+        precioElemento.textContent = `$${precio.toLocaleString("es-CO", {
+            minimumFractiosDigits: 2,
+        })}`;
+        preciominimo.appendChild(precioElemento.cloneNode(true));
+        preciomaximo.appendChild(precioElemento);
+       
+    });
+    const categoriaUnica = new Set();
+
+    datos.forEach((element) => {
+        categoriaUnica.add(element.categoria);
+    });
+
+    categoriaHTML.innerHTML = `
+        <option value="">Categoria</option>
+    `;
+    categoriaUnica.forEach((categoria) => {
+        const optionSelect = document.createElement("option");
+        optionSelect.textContent = categoria;
+        categoriaHTML.appendChild(optionSelect);
+        
+    });
+    const especieUnica = new Set();
+
+    datos.forEach((element) => {
+        especieUnica.add(element.especie);
+    });
+
+    especieHTML.innerHTML = `
+        <option value="">Especie</option>
+    `;
+    especieUnica.forEach((especie) => {
+        const optionSelect = document.createElement("option");
+        optionSelect.textContent = especie;
+        especieHTML.appendChild(optionSelect);
+        
+    });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//     /** PASOS:
-//     inputSearch.innerHTML += `
-//     `
-//    * 1. definir de que va a ser los filtros:
-//    *        R//= buscador por el nombre y precio, categoria, especie
-//    * 2. que va a hacer cada filtro:
-//    *        R//= -buscador va a mostrar solo lo que coincida con lo que se ingrese en base al nombre
-//    *             -precio va a mostrar productos entre rangos de precio
-//    *             -categoria va a mostrar solo los productos de la(s) categoria(s) seleccionada(s)
-//    *             -especie solo mostrara la especie seleccionada
-//    * 3. como va a desarrollarse:
-//    *        R//= -el buscador solo se ejecutara dentro del catalogo, solo buscara por nombres mediante un input y cuando 
-//    *              vaya copiando se este actualizando el catalogo con las coincidencias y si no hay que muestre en pantalla
-//    *             -el del precio se hara con dos selectores para definir precio minimo y maximo y mostrara todos los 
-//    *              productos que coincidan con el rango de precios
-//    *             -la categoria sera un tipo check para que pueda escoger una o mas opciones y mostrar solo las que 
-//    *              coincidan, o esta la posibilidad de hacerlo con un select y que solo escoja una
-//    *             -la especie solo mostrara una especie puede ser selector 
-//    *            * debe tener un boton para que se pueda buscar por los filtros que se han agregado y mostrar esos productos, ademas de que los filtros deben ser acumulativos y mostrar cuando no se encuentre nada
-//    * SE HARA EN EL APARTADO PARA LOS FILTROS O SEA QUE SE DEBE SELECCIONAR EL DIV PARA AGREGAR LO ANTERIOR Y TAMBIEN UN BOTON FLOTANTE PARA QUE LLEVE DIRECTO A LOS FILTRO EN CASO DE QUE HAYA TIEMPO PARA SER LA PAGINA MAS AMIGABLE WITH OF USERS
-//    *
-//    */

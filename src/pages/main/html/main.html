@@ -10,6 +10,9 @@
   <link rel="stylesheet" href="../css/main.css" />
 
   <title>SplashPaws</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../../../media/imgs/icon_logo.png" />
+  
 </head>
 <a href="../../login/html/login.html"></a>
 <body>
@@ -29,7 +32,7 @@
                   Aquí encontrarás los mejores productos de calidad que tu
                   mascota se merece.
                 </p>
-                <a href="#" class="btn">Ir a la tienda</a>
+                <a type="button" href="#catalogue" class="btn">Ver catálogo</a>
               </div>
               <div class="banner_img">
                 <img src="../../../media/imgs/dog.png" alt="Image dog" />
@@ -46,7 +49,7 @@
                 Agenda tu cita y te llamaremos para brindarle a tu peludito la
                 mejor experiencia a la hora del baño.
               </p>
-              <a href="#" class="btn btn_blue">Agenda tu cita</a>
+              <a href="#" class="btn btn_blue" id="btnShowBannios" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Agenda tu cita</a>
             </div>
           </div>
         </div>
@@ -60,7 +63,7 @@
                   Garantiza el bienestar de tu mascota y disfruta de tu tiempo
                   libre con nuestro servicio de guardería profesional.
                 </p>
-                <a href="#" class="btn btn_blue">Agenda tu cita</a>
+                <a href="#" class="btn btn_blue" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="">Agenda tu cita</a>
               </div>
               <div class="banner_img">
                 <img src="../../../media/imgs/cat.png" alt="Image dog" />
@@ -85,7 +88,7 @@
             <div class="inputBox">
               <i class="bi bi-search"></i>
               <input type="text" id="search" placeholder="Nombre del producto" />
-              <span>Buscar producto en el catalogo </span>
+              <span>Buscar producto en el catálogo </span>
             </div>
 
             <!-- filtro -->
@@ -96,14 +99,6 @@
                 <label for="minimo"></label>
                 <select id="minimo">
                   <option value="">Precio Min</option>
-                  <option value="20000">20.000</option>
-                  <option value="30000">30.000</option>
-                  <option value="40000">40.000</option>
-                  <option value="50000">50.000</option>
-                  <option value="60000">60.000</option>
-                  <option value="70000">70.000</option>
-                  <option value="80000">80.000</option>
-                  <option value="90000">90.000</option>
                 </select>
               </div>
 
@@ -111,24 +106,16 @@
                 <label for="maximo"></label>
                 <select id="maximo">
                   <option value="">Precio Max</option>
-                  <option value="20000">20.000</option>
-                  <option value="30000">30.000</option>
-                  <option value="40000">40.000</option>
-                  <option value="50000">50.000</option>
-                  <option value="60000">60.000</option>
-                  <option value="70000">70.000</option>
-                  <option value="80000">80.000</option>
-                  <option value="90000">90.000</option>
                 </select>
               </div>
 
 
               <div class="cont-select  especie">
                 <label for="especie"></label>
-                <select id="especie">
+                <select id="especiecatalogo">
                   <option value="">Especie</option>
-                  <option value="perro">Perro</option>
-                  <option value="gato">Gato</option>
+                  <!-- <option value="perro">Perro</option>
+                  <option value="gato">Gato</option> -->
                 </select>
               </div>
 
@@ -136,12 +123,12 @@
                 <label for="categoria"></label>
                 <select id="categoria">
                   <option value="">Categoria</option>
-                  <option value="Accesorios">Accesorios</option>
+                  <!-- <option value="Accesorios">Accesorios</option>
                   <option value="Alimentos">Alimentos</option>
                   <option value="Juguetes">Juguetes</option>
                   <option value="Higiene">Higiene</option>
                   <option value="Salud">Salud</option>
-                  <option value="Ropita">Ropita</option>
+                  <option value="Ropita">Ropita</option> -->
                 </select>
               </div>
             </div>

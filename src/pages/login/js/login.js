@@ -1,16 +1,19 @@
 import {generatorHeaderModal} from '../../../../main.js';
 import {alertaCorrecto} from '../../../../main.js';
 import {alertaError} from '../../../../main.js';
+import {generatorFooter} from '../../../../main.js';
 
 const header = document.querySelector("header")
+const footer = document.querySelector("footer")
 const btnValidate = document.querySelector(".btn_login")
 const documentNumber = document.querySelector("#document_number");
 const password = document.querySelector("#password");
 
 generatorHeaderModal(header, "Ingresar", "#");
+generatorFooter(footer)
 
 let verificacion;    
-
+verificaionEstado()
 
 btnValidate.addEventListener("click",(event)=>{
     event.preventDefault();
@@ -51,4 +54,12 @@ function validateUser(documentNumber,password,data){
         return
     }
     
+}
+
+
+function verificaionEstado(){
+ if(sessionStorage.getItem("verificacion")){
+    window.location.href ="../../servicios/html/servicios.html"
+
+ }
 }

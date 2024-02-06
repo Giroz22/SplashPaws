@@ -1,3 +1,6 @@
+import * as traducir from "/src/js/traductor.js";
+
+
 /** 
 ====== Funcion para generar el header ====== 
   
@@ -27,7 +30,7 @@ export function generatorHeader(content, link1, url1, nameLogin, urlLogin) {
     <div class="login">
       <a href=${urlLogin}>${nameLogin}</a>
       <div class="line"></div>
-      <button id="btn btn_leguage">
+      <button class="btn btn_leguage" id="btn_leguage">
         <img
           src="https://cdn-icons-png.flaticon.com/128/197/197593.png"
           alt="spain_lenguage"
@@ -58,7 +61,7 @@ export function generatorHeaderModal(
         <input type="checkbox" id="hamburguer" />
       
         <div class="navegation">
-          <a href="../../main/html/main.html">Tienda</a>
+          <a href="../../main/html/main.html">Catálogo</a>
           <!-- Button trigger modal -->
           <a
             href="#"
@@ -79,7 +82,7 @@ export function generatorHeaderModal(
         <div class="login">
         <a href=${urlLogin}>${nameLogin}</a>
           <div class="line"></div>
-          <button id="btn btn_leguage">
+          <button class="btn btn_leguage" id="btn_leguage">
             <img
               src="https://cdn-icons-png.flaticon.com/128/197/197593.png"
               alt="spain_lenguage"
@@ -91,7 +94,17 @@ export function generatorHeaderModal(
       </nav>
   `;
   const navegation = document.querySelector(".navegation");
+  const btnLenguage = document.querySelector("#btn_leguage")
+  const btnLenguageImg = document.querySelector("#spain_lenguage")
+  console.log(btnLenguage);
   generarModal(navegation);
+
+  btnLenguage.addEventListener("click", (event)=>{
+   
+    console.log("hasta qui funciona");
+
+    traducir.TraducirPagina()
+  })
 }
 
 export function validarInputs(inputs) {
@@ -420,8 +433,8 @@ export function generatorFooter(content) {
       </div>
 
       <div class="social_content">
-        <i class="bi bi-facebook"></i>
-        <a href="#">splashPaws@gmail.com</a>
+        <i class="bi bi-envelope-fill"></i>
+        <a href="https://www.google.com/intl/es-419/gmail/about/" target="_blank">splashPaws@gmail.com</a>
       </div>
     </div>
   </div>

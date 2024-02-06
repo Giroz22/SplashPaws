@@ -25,7 +25,6 @@ let swiper = new Swiper(".mySwiper", {
 const header = document.querySelector("header")
 const footer = document.querySelector("footer")
 
-
 generatorHeaderModal(header,"Ingresar","../../login/html/login.html")
 
 generatorFooter(footer)
@@ -40,4 +39,3 @@ import texto, { consumirAPI } from "./funciones.js"
 document.addEventListener("DOMContentLoaded", () => {
   consumirAPI(texto)
 })
-
