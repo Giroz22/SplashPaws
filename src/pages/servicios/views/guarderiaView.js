@@ -2,6 +2,9 @@
 import * as baseModel from "../models/baseModel.js";
 import * as serviciosView from "./serviciosView.js";
 import * as main from "../../../../main.js";
+import * as formBase from "./componentes/formBase.js";
+import * as functionModal from "./functionModal.js";
+import * as guarderiaController from "../controllers/guarderiaController.js";
 
 //===== Eventos =====
 btnGuarderia.addEventListener("click", () => {
@@ -17,21 +20,27 @@ btnGuarderia.addEventListener("click", () => {
       handler: mostrarDtosGuarderia,
     },
     {
-      descripcion: "En Guarderia",
+      descripcion: "Pendiente",
       handler: () => {
-        serviciosView.mostrarPorEstado("guarderia");
+        serviciosView.mostrarPorEstado("pendiente", handleBtnsDetalle);
       },
     },
     {
-      descripcion: "Finalizados",
+      descripcion: "En Guarderia",
       handler: () => {
-        serviciosView.mostrarPorEstado("finalizado");
+        serviciosView.mostrarPorEstado("guarderia", handleBtnsDetalle);
+      },
+    },
+    {
+      descripcion: "Salieron",
+      handler: () => {
+        serviciosView.mostrarPorEstado("salio", handleBtnsDetalle);
       },
     },
     {
       descripcion: "Cancelados",
       handler: () => {
-        serviciosView.mostrarPorEstado("cancelado");
+        serviciosView.mostrarPorEstado("cancelado", handleBtnsDetalle);
       },
     },
   ];
@@ -39,6 +48,11 @@ btnGuarderia.addEventListener("click", () => {
 });
 
 //===== Funciones =====
+export function generarInputsHtml() {
+  return `
+  `;
+}
+
 async function mostrarDtosGuarderia() {
   serviciosView.mostrarDatosThead([
     "ID",
@@ -49,189 +63,209 @@ async function mostrarDtosGuarderia() {
     "Fecha",
     "Hora llegada",
     "Hora salida",
-    "Servicio",
     "Estado",
+    "Servicio",
     "Detalle",
   ]);
   const datos = await baseModel.obtenerDatos();
-  serviciosView.mostrarDatosTbody(datos);
+  serviciosView.mostrarDatosTbl(datos, handleBtnsDetalle);
 }
 
-export function generarFormGuarderia(modalBody, objectData) {
-  console.log(objectData);
-  // console.log((objectData.fecha.split("/").reverse().join("/")).replace("/", "-").replace("/", "-"));
+function actualizarTbl() {
+  setTimeout(() => {
+    mostrarDtosGuarderia();
+  }, 1000);
+}
 
-  modalBody.innerHTML = `<form class="row g-3 needs-validation .form_modal" novalidate>
-        <!--  Fila 1 -->
-        <div class="col-md-4">
-          <span for="nombre_propietario" class="form-label"
-            >Nombre del propietario</span
-          >
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Ingresa el nombre"
-            id="nombre_propietario"
-            value = "${objectData.propietario.nombre}"
-            required
-          />
-          <div class="invalid-feedback">Ingresa un nombre</div>
-        </div>
+function obtenerDatos() {
+  if (!formBase.form.checkValidity()) {
+    return;
+  }
 
-        <div class="col-md-4">
-          <span for="nombre_mascota" class="form-label"
-            >Nombre de la mascota</span
-          >
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Ingresa el nombre"
-            id="nombre_mascota"
-            value = "${objectData.mascota.nombre}"
-            required
-          />
-          <div class="invalid-feedback">Ingresa un nombre</div>
-        </div>
-        <div class="col-md-4">
-          <span for="especie" class="form-label"
-            >Especie de la mascota</span
-          >
-          <select class="form-select" id="especie" required>
-            <option disabled value="">
-              Selecciona una especie
-            </option>
-            <option value="gato">Gato</option>
-            <option value="perro">Perro</option>
-          </select>
-          <div class="invalid-feedback">Selecciona una especie</div>
-        </div>
-        <!--  Fila 2 -->
+  const objDatos = formBase.obtenerDatos();
+  objDatos["hora_salida"] = "";
+  objDatos["estado"] = "pendiente";
+  objDatos["servicio"] = "guarderia";
 
-        <div class="col-md-4">
-          <span for="telefono" class="form-label"
-            >Teléfono del propietario</span
-          >
-          <input
-            type="tel"
-            maxlength="15"
-            minlength="10"
-            class="form-control"
-            id="telefono"
-            value = "${objectData.propietario.telefono}"
-            placeholder="Ingresa un número de teléfono"
-            required
-          />
-          <div class="invalid-feedback">Ingresa un teléfono</div>
-        </div>
-        <div class="col-md-4">
-          <span for="fecha" class="form-label">Fecha</span>
-          <input
-            type="date"
-            class="form-control"
-            id="fecha"
-            value = "${objectData.fecha
-              .split("/")
-              .reverse()
-              .join("/")
-              .replace("/", "-")
-              .replace("/", "-")}"
-            required
-          />
-          <div class="invalid-feedback">Selecciona una fecha</div>
-        </div>
+  return objDatos;
+}
 
-        <!--  Fila 3 -->
+function asignarDatos(objDatos) {}
 
-        <div class="col-md-4">
-          <span for="hora" class="form-label">Hora</span>
-          <select class="form-select" id="hora" required>
-            <option disabled value="">
-              Selecciona una hora
-            </option>
-          </select>
-          <div class="invalid-feedback">Selecciona una hora</div>
-        </div>
+export function generarFormAgregar() {
+  const btnCrear = generarBotonCrear();
+  const btnCerrar = functionModal.generarBtnCerrar();
 
-        <div class="col-md-4">
-          <span for="servicio" class="form-label">Servicio</span>
-          <select class="form-select" id="servicio" required>
-            <option disabled value="">
-              Selecciona un servicio
-            </option>
-            <option value="baño">Baño</option>
-            <option value="guarderia">Guarderia</option>
-          </select>
-          <div class="invalid-feedback">Selecciona un servicio</div>
-        </div>
+  functionModal.crearBaseFormServicio(
+    `Formulario Guarderia`,
+    generarInputsHtml(),
+    [btnCrear, btnCerrar]
+  );
+}
 
-       
+async function handleBtnsDetalle(event) {
+  const id = event.target.dataset.id;
+  const objDatos = await baseModel.obtenerID(id);
+  const listaBtns = [];
+  const btnIngresar = generarBtnIngresar(id);
+  const btnCancelarCita = generarBtnCancelar(id);
+  const btnBorrar = generarBtnBorrar(id);
+  const btnEntregar = generarBtnEntregar(id);
+  const btnCerrar = functionModal.generarBtnCerrar();
 
-        <div class="contenedor_buttom">
-          <button class="btn btn_submit" type="submit">
-            Agendar cita
-          </button>
-          <button class="btn btn_cancel" type="button">
-            Cancelar cita
-          </button>
-        </div>
-      </form>`;
+  switch (objDatos["estado"]) {
+    case "pendiente":
+      listaBtns.push(btnIngresar, btnCancelarCita, btnCerrar);
+      break;
 
-  const form = document.querySelector("form");
-  const inputs = form.querySelectorAll("input");
-  const selects = document.querySelectorAll("select");
-  const selectContentHora = document.querySelector("#hora");
-  const btnClose = document.querySelector(".btn-close");
-  const btnEnviar = document.querySelector(".btn_submit");
-  const btnCancelar = document.querySelector(".btn_cancel");
+    case "guarderia":
+      listaBtns.push(btnEntregar, btnCerrar);
+      break;
 
-  main.validarSelects(selects, selectContentHora, 8, 16);
+    case "entregado":
+    case "cancelado":
+      listaBtns.push(btnBorrar, btnCerrar);
+      break;
 
-  const options = document.querySelectorAll("option");
-  serviciosView.valorSelects(objectData, options);
-  main.validarInputs(inputs);
-  main.boostrapvalidator();
+    default:
+      console.error("Error al asignar los botones");
+      return;
+  }
 
-  console.log(selects);
+  functionModal.crearBaseFormServicio(
+    `Detalles de la mascota ${objDatos.mascota.nombre}`,
+    generarInputsHtml(),
+    listaBtns
+  );
 
-  btnEnviar.addEventListener("click", (event) => {
-    if (form.checkValidity()) {
-      event.preventDefault();
-      baseModel.actualizarURL("serviciosGuarderia");
+  formBase.AsignarDatos(objDatos);
+  asignarDatos(objDatos);
+}
 
-      const nuevaCitaBannios = {
-        id: objectData.id,
-        mascota: {
-          nombre: document.getElementById("nombre_mascota").value,
-          especie: document.getElementById("especie").value,
-        },
-        propietario: {
-          nombre: document.getElementById("nombre_propietario").value,
-          telefono: document.getElementById("telefono").value,
-        },
+//=====Botones=====
+//-----Boton Crear-----
+function generarBotonCrear() {
+  const btnCrear = functionModal.crearBotonBase(
+    "Crear",
+    ["btn-success"],
+    handlerBtnCrear
+  );
+  btnCrear.setAttribute("type", "submit");
+  return btnCrear;
+}
 
-        fecha: document.getElementById("fecha").value,
-        hora_llegada: document.getElementById("hora").value,
-        hora_salida: "",
-        servicio: document.getElementById("servicio").value,
-        estado: "pendiente",
-      };
+function handlerBtnCrear(event) {
+  const datos = obtenerDatos();
+  if (!datos) {
+    return;
+  }
+  event.preventDefault();
+  baseModel.guardar(datos);
+  functionModal.cerrarFormBase();
+  actualizarTbl();
+}
 
-      baseModel.guardar(nuevaCitaBannios);
+//---- Boton iniciar -----
+function generarBtnIngresar(id) {
+  const btnIngresar = functionModal.crearBotonBase(
+    "Ingresar",
+    ["btn-primary"],
+    handleBtnIngresar
+  );
+  btnIngresar.dataset.id = id;
 
-      baseModel.actualizarURL("serviciosPendientes");
-      baseModel.eliminar(objectData.id);
-      btnClose.click();
-      main.alertaCorrecto("Cita agendada correctamente");
-      window.location.reload();
-      banniosModel.mostrarDtosBannios();
-    }
-  });
+  return btnIngresar;
+}
 
-  btnCancelar.addEventListener("click", (event) => {
-    event.preventDefault();
-    baseModel.eliminar(objectData.id);
-    btnClose.click();
-    window.location.reload();
-  });
-  //mostrarDtosGuarderia();
+function handleBtnIngresar(event) {
+  const id = event.target.dataset.id;
+  const objDtos = { id, ...obtenerDatos() };
+
+  if (!objDtos) {
+    return;
+  }
+  event.preventDefault();
+
+  guarderiaController.ingresarGuarderia(objDtos);
+
+  functionModal.cerrarFormBase();
+  actualizarTbl();
+}
+
+//----- Boton Finalizar -----
+function generarBtnEntregar(id) {
+  const btnEntregar = functionModal.crearBotonBase(
+    "Entregar",
+    ["btn-success"],
+    handleBtnEntregar
+  );
+  btnEntregar.dataset.id = id;
+
+  return btnEntregar;
+}
+
+function handleBtnEntregar(event) {
+  const id = event.target.dataset.id;
+  const objDtos = { id, ...obtenerDatos() };
+
+  if (!objDtos) {
+    return;
+  }
+  event.preventDefault();
+
+  guarderiaController.entregarGuarderia(objDtos);
+
+  functionModal.cerrarFormBase();
+  actualizarTbl();
+}
+
+//------ Boton Cancelar -----
+function generarBtnCancelar(id) {
+  const btnCancelar = functionModal.crearBotonBase(
+    "Cancelar",
+    ["btn-danger"],
+    handleBtnCancelar
+  );
+  btnCancelar.dataset.id = id;
+
+  return btnCancelar;
+}
+
+function handleBtnCancelar(event) {
+  const id = event.target.dataset.id;
+  const objDtos = { id, ...obtenerDatos() };
+
+  if (!objDtos) {
+    return;
+  }
+  event.preventDefault();
+
+  guarderiaController.cancelarGuarderia(objDtos);
+  functionModal.cerrarFormBase();
+  actualizarTbl();
+}
+
+//------ Boton Borrar  ------
+function generarBtnBorrar(id) {
+  const btnBorrar = functionModal.crearBotonBase(
+    "Borrar",
+    ["btn-danger"],
+    handleBtnBorrar
+  );
+  btnBorrar.dataset.id = id;
+
+  return btnBorrar;
+}
+
+function handleBtnBorrar(event) {
+  const id = event.target.dataset.id;
+
+  if (!id) {
+    return;
+  }
+  event.preventDefault();
+
+  baseModel.eliminar(id);
+  functionModal.cerrarFormBase();
+  actualizarTbl();
 }
