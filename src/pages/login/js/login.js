@@ -58,8 +58,7 @@ function validateUser(documentNumber,password,data){
 
 
 function verificaionEstado(){
- if(sessionStorage.getItem("verificacion")){
+ if(sessionStorage.getItem("verificacion")== true){
     window.location.href ="../../servicios/html/servicios.html"
-
  }
 }

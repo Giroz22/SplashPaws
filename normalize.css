@@ -64,6 +64,8 @@ h3 {
   }
 }
 
+
+
 body {
   width: 100%;
   height: 100vh;
@@ -190,7 +192,10 @@ header .navbar .navegation .login_responsive {
     border: 1px solid #317f43;
   }
 }
+.modal-content .btn_submit span{
+  color: var(--white);
 
+}
 header .navbar .login {
   width: auto;
   height: auto;
@@ -349,8 +354,17 @@ footer .footer_content .map_content iframe {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 4rem;
+    gap: 4rem; 
   }
+
+  header .navbar #hamburguer:checked ~ .navegation .login_responsive button{
+    border-radius: 50px;
+  }
+
+  header .navbar #hamburguer:checked ~ .navegation .login_responsive img{
+    width: 30px;
+  }
+  
 
   header .navbar #hamburguer:checked ~ .navegation {
     display: flex;
@@ -382,6 +396,8 @@ footer .footer_content .map_content iframe {
   .form_modal .btn_submit {
     width: 100%;
   }
+
+ 
 
   header .navbar .login {
     position: absolute;

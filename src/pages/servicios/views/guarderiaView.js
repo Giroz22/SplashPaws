@@ -44,8 +44,6 @@ async function mostrarDtosGuarderia() {
     "ID",
     "Nombre de la Mascota",
     "Especie",
-    "Tamaño",
-    "Pelaje",
     "Propietario",
     "Telefono",
     "Fecha",

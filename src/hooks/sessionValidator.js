@@ -1,5 +1,5 @@
 (()=>{
-    const verificacion = sessionStorage.getItem("verificacion");
+    let verificacion = sessionStorage.getItem("verificacion");
     console.log("->",verificacion);
     const path = window.location.pathname;
     console.log(path);

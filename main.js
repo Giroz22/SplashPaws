@@ -28,7 +28,7 @@ export function generatorHeader(content, link1, url1, nameLogin, urlLogin) {
     </a>
 
     <div class="login">
-      <a href=${urlLogin}>${nameLogin}</a>
+      <a href=${urlLogin} id="btnExit">${nameLogin}</a>
       <div class="line"></div>
       <button class="btn btn_leguage" id="btn_leguage">
         <img
@@ -45,6 +45,17 @@ export function generatorHeader(content, link1, url1, nameLogin, urlLogin) {
 
     
     `;
+
+    let btnExit = document.querySelector("#btnExit")
+    console.log(btnExit);
+
+
+    btnExit.addEventListener("click",()=>{
+      let verificacion = sessionStorage.getItem("verificacion")
+      verificacion = false;
+      sessionStorage.setItem("verificacion", verificacion)
+      window.location.href = window.location.href = "http://127.0.0.1:5502/src/pages/main/html/main.html";
+    })
 }
 
 //Lo mismo que la funcion anterior solo que omiti el agendar cita y lo queme directamente
@@ -85,10 +96,22 @@ export function generatorHeaderModal(
           
           </span>
           </a>
-        
+          <div class="login login_responsive">
+          <a href=${urlLogin}>${nameLogin}</a>
+          <div class="line"></div>
+          <button id="btn btn_leguage">
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/197/197593.png"
+              alt="spain_lenguage"
+              id="spain_lenguage"
+            />
+            <span>
+              Español
+            </span>
+          </button>
+        </div>
 
         </div>
-      
         <div class="login">
         <a href=${urlLogin}>${nameLogin}</a>
           <div class="line"></div>
@@ -104,11 +127,12 @@ export function generatorHeaderModal(
             </span>
           </button>
         </div>
+        
       </nav>
   `;
   const navegation = document.querySelector(".navegation");
   const btnLenguage = document.querySelector("#btn_leguage")
-  const btnLenguageImg = document.querySelector("#spain_lenguage")
+ 
   console.log(btnLenguage);
   generarModal(navegation);
 
